@@ -1,23 +1,26 @@
 using UnityEngine;
 using UnityEngine.Events;
-using model;
+
 namespace controller
 {
     public class ShootController : MonoBehaviour// shootController handles all logic that involves shooting the lasers
     {
+        //controller elements
         [SerializeField] InputHandler inputHandler;
         [SerializeField] BallController ballController;
         [SerializeField] GameManager gameManager;
+        //data elements
+        [SerializeField] model.LaserData laserData;
+        [SerializeField] model.PlayerData playerData;
+        // view elements
+        [SerializeField] view.RobotAnimatorUpdater robotAnimatorUpdater;
+        //
         private float lastTimeShot;
         public UnityEvent onShot;
-        [SerializeField] LaserData laserData;
-        [SerializeField] PlayerData playerData;
-
-       // [SerializeField] RobotAnimatorUpdater robotAnimatorUpdater;
         private void Start()
         {
             inputHandler.onShoot.AddListener(Shoot);
-          //  shootEvent.AddListener(robotAnimatorUpdater.PlayShooting);
+            onShot.AddListener(robotAnimatorUpdater.PlayShooting);
             foreach (var laser in laserData.LaserPool.Pool)
             {
                 LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
@@ -39,7 +42,7 @@ namespace controller
             if (CheckShootCooldown())
             {
                 GameObject current = laserData.LaserPool.GetFromPool();
-               // current.transform.position = robotAnimatorUpdater.transform.position + Vector3.up;
+                current.transform.position = robotAnimatorUpdater.transform.position + Vector3.up;
                 onShot?.Invoke();
                 lastTimeShot = Time.time;
                 SoundManager.Play(SoundManager.Sound.playerShoot);

@@ -6,15 +6,18 @@ namespace controller
 {
     public class UpgradeHandler : MonoBehaviour// The Upgrade handler is responsible for all logic correlated with the upgrade panel
     {
+        //UI elements
         [SerializeField] GameObject UpgradePanel;
         [SerializeField] Button SpeedButton;
         [SerializeField] Button HealthButton;
         [SerializeField] Button LaserUpgradeButton;
-        [SerializeField] ShootController shootController;
+        // Data elements
         [SerializeField] LaserData laserData;
+        [SerializeField] UpgradesData upgradesData;
+        // controllers ellements
+        [SerializeField] ShootController shootController;
         [SerializeField] GameManager gameManagerRef;
         [SerializeField] LocoMotion robotControllerRef;
-        [SerializeField] UpgradesData upgradesData;
 
         private bool didChooseUpgrade;
 

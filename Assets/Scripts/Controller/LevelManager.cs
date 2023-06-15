@@ -6,14 +6,16 @@ namespace controller
     [DefaultExecutionOrder(1)]// delay script execution
     public class LevelManager : MonoBehaviour// LevelGenerator: Generates and manages the arrangement of game objects within each level.
     {
-        [SerializeField] private LevelConfig[] levelConfigs;
+        //data
+        [SerializeField] private model.LevelConfig[] levelConfigs;
+        //controllers
         [SerializeField] BallController ballsController;
         [SerializeField] UpgradeHandler upgradeHandler;
-        private float delayBetweenLevels;
-        public UnityEvent<int> OnAdvanceLevel;
-        public UnityEvent<bool> OnWin;
+        [SerializeField] GameManager gameManager;
 
+        private float delayBetweenLevels;
         internal int levelCount;
+        public UnityEvent<int> OnAdvanceLevel;
         private void Awake()
         {
             levelCount = 1;
@@ -58,7 +60,7 @@ namespace controller
 
             }
             // after all levels are done the player has won and an event is raised
-            OnWin?.Invoke(true);
+            gameManager.OnEnd?.Invoke(true);
 
         }
     }

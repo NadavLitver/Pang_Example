@@ -1,6 +1,6 @@
+using model;
 using System.Collections.Generic;
 using UnityEngine;
-using model;
 
 namespace controller
 {
@@ -10,7 +10,7 @@ namespace controller
 
         BallsDataHandler ballDataHandler;
 
-     
+
         //  method for ball creation
         internal void CreateBall()//default overload
         {
@@ -71,7 +71,7 @@ namespace controller
             float raycastSize = scale.x * 0.8f;
 
             // Perform raycast checks on the bottom-left, bottom-right, and bottom of the ball
-            bool isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize,ballDataHandler.collisionLayer);
+            bool isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize, ballDataHandler.collisionLayer);
             bool isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, ballDataHandler.collisionLayer);
             bool isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, ballDataHandler.collisionLayer);
 
@@ -91,8 +91,8 @@ namespace controller
             }
             else if (isBottomHit)
             {
-                
-                if(ball.velocity.x > 0)
+
+                if (ball.velocity.x > 0)
                 {
                     ball.velocity = new Vector2(1 * ballDataHandler.Speed, ballDataHandler.BounceForce);
                 }
@@ -100,7 +100,7 @@ namespace controller
                 {
                     ball.velocity = new Vector2(-1 * ballDataHandler.Speed, ballDataHandler.BounceForce);
                 }
-               
+
             }
         }
         private void Update()
@@ -126,13 +126,13 @@ namespace controller
 
             return randomDirection;
         }
-        public void SplitBall(LaserHandler laser,Rigidbody2D ball)
+        public void SplitBall(LaserHandler laser, Rigidbody2D ball)
         {
             float currentBallScale = ball.gameObject.transform.localScale.x;
             switch (currentBallScale)
             {
                 case 3:
-                    CreateTwoBalls(ball,2);
+                    CreateTwoBalls(ball, 2);
                     break;
                 case 2:
                     CreateTwoBalls(ball, 1);
@@ -141,7 +141,7 @@ namespace controller
                     CreateTwoBalls(ball, 0.5f);
                     break;
                 case 0.5f:
-                    CreateTwoBalls(ball, 0.25f);
+                    CreateTwoBalls(ball, 0.35f);
                     break;
                 case 0.35f:
                     break;
@@ -156,7 +156,7 @@ namespace controller
         {
             return ballDataHandler.ActiveBalls.Count == 0;
         }
-        private void CreateTwoBalls(Rigidbody2D ball,float size)
+        private void CreateTwoBalls(Rigidbody2D ball, float size)
         {
             CreateBall(ball.transform.position, Vector2.one * size, Vector2.right * ballDataHandler.Speed);
             CreateBall(ball.transform.position, Vector2.one * size, Vector2.left * ballDataHandler.Speed);
@@ -178,7 +178,7 @@ namespace controller
                 switch (currentBallScale)
                 {
                     case 3:
-                        CreateTwoBalls(ball,2);
+                        CreateTwoBalls(ball, 2);
                         break;
                     case 2:
                         CreateTwoBalls(ball, 1);
@@ -187,9 +187,9 @@ namespace controller
                         CreateTwoBalls(ball, 0.5f);
                         break;
                     case 0.5f:
-                        CreateTwoBalls(ball, 0.25f);
+                        CreateTwoBalls(ball, 0.35f);
                         break;
-                    case 0.25f:
+                    case 0.35f:
                         break;
                     default:
                         break;

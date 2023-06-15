@@ -16,6 +16,7 @@ namespace controller
 
 
         public UnityEvent OnLose;
+        public UnityEvent<bool> OnEnd;
 
         public float Score { get => score; }
         private void Awake()
@@ -48,8 +49,7 @@ namespace controller
             //update health in ui when hit
             playerHitHandler.healthReducedEvent.AddListener(UIHandlerRef.UpdateHealth);
             // On Finished All levels Call UI Handler
-            levelManager.OnWin.AddListener(UIHandlerRef.EnableEndingPanel);
-            // subscribe robot animator death anim to game lost
+            OnEnd.AddListener(UIHandlerRef.EnableEndingPanel);
         }
 
         public void CheckLose(int currentHealthPoints)
