@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BallsConfig
   m_EditorClassIdentifier: 
   speed: 3
-  BounceForce: 6
+  BounceForce: 11

@@ -10,6 +10,8 @@ namespace view
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer robotSR;
         [SerializeField] GameManager gameManager;
+
+        //hashes
         private int RunningHash;
         private int ShootingHash;
         private int DeadHash;
@@ -21,7 +23,6 @@ namespace view
             RunningHash = Animator.StringToHash("Running");
             ShootingHash = Animator.StringToHash("Shooting");
             DeadHash = Animator.StringToHash("Dead");
-
             if (animator == null) { animator = GetComponent<Animator>(); }
         }
         private void Update()

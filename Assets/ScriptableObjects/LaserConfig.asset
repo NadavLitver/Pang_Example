@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea7d659662eb0f438fdde59e00c1cb0, type: 3}
   m_Name: LaserConfig
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 5
   timeToLive: 5

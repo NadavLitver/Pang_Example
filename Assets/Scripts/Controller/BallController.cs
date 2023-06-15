@@ -1,14 +1,14 @@
 using model;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace controller
 {
+    [DefaultExecutionOrder(+1)]//delay execution
     public class BallController : MonoBehaviour // BallController: movement and collision logic for the balls.
     {
 
 
-        BallsDataHandler ballDataHandler;
+        [SerializeField]BallsDataHandler ballDataHandler;
 
 
         //  method for ball creation

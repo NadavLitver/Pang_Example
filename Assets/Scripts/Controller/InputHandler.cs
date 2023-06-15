@@ -46,26 +46,27 @@ namespace controller
             }
 
 #if UNITY_EDITOR
-            horInput = (int)Input.GetAxisRaw("Horizontal");
+            if (horInput == 0)
+                horInput = (int)Input.GetAxisRaw("Horizontal");
 #endif
         }
         public int GetHorInput() { return horInput; }
         public bool CheckTouch()
         {
             bool touchBegan = false;
-            if(Input.touchCount > 0)
+            if (Input.touchCount > 0)
             {
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     Touch touch = Input.GetTouch(i);
-                    if(touch.phase == TouchPhase.Began)
+                    if (touch.phase == TouchPhase.Began)
                     {
                         touchBegan = true;
                     }
                 }
             }
-         
-            if(Input.GetMouseButtonDown(0) || touchBegan)
+
+            if (Input.GetMouseButtonDown(0) || touchBegan)
             {
                 return true;
             }
@@ -87,5 +88,5 @@ namespace controller
             return false; // Pointer is not over the left or right arrow button
         }
     }
- 
+
 }

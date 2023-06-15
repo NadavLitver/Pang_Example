@@ -10,9 +10,11 @@ namespace controller
         public GameObject pauseMenuUI;
         [SerializeField] Button PauseButton;
         [SerializeField] Button StartButton;
+        [SerializeField] Button ResetButton;
+
         [SerializeField] TextMeshProUGUI StartText;
         bool isPaused;
-        bool didResume;
+        bool didResumeOnce;
         private void Start()
         {
             PauseButton.onClick.AddListener(TogglePauseMenu);
@@ -36,16 +38,20 @@ namespace controller
             {
                 Time.timeScale = 0f; // Pause the game by setting time scale to 0
                 pauseMenuUI.SetActive(true);
+               
+                
             }
             else
             {
                 Time.timeScale = 1f; // Resume the game by setting time scale back to 1
                 pauseMenuUI.SetActive(false);
-                if (!didResume)//make sure setting text once
+                if (!didResumeOnce)//make sure setting text once
                 {
                     StartText.text = "Resume";
-                    didResume = true;
+                    didResumeOnce = true;
+                    ResetButton.gameObject.SetActive(true);
                 }
+               
 
             }
         }

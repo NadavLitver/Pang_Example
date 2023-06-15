@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
+using model;
 namespace controller
 {
     public class LaserHandler : MonoBehaviour// the laser handler handels individual projectile logic
     {
         public UnityEvent<LaserHandler, Rigidbody2D> onHitBall;
-        [SerializeField] model.LaserData laserData;
+        public LaserData laserData;
         private float currentTimeAlive;
         private void OnEnable()
         {

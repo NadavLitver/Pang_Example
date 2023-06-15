@@ -1,4 +1,5 @@
 
+using controller;
 using UnityEngine;
 namespace model
 {
@@ -10,5 +11,13 @@ namespace model
         public float Speed { get => config.speed; }
         public float TTL { get => config.timeToLive; }
         public ObjectPool LaserPool { get => laserPool; }
+
+        public void Start()
+        {
+            foreach (var laser in LaserPool.Pool)
+            {
+                laser.GetComponent<LaserHandler>().laserData = this;
+            }
+        }
     }
 }
