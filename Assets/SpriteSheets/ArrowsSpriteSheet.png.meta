@@ -1,0 +1,384 @@
+fileFormatVersion: 2
+guid: a1edf6b91d4124545a7bb8fcd5d37f2c
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_0
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 408
+        width: 128
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c49f9d50758d834294c89561b23d644
+      internalID: -948979778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_1
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 420
+        width: 6
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65e3e0b94768914ba833000d565ed23
+      internalID: 112443791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_2
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 410
+        width: 136
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fda283c4fffa33c46943a479ff16b456
+      internalID: 1554608733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_4
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 406
+        width: 87
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 075c1de56928f414fa1214e7273691dd
+      internalID: 1401269439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_5
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 218
+        width: 116
+        height: 133
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c8db80d7f0c0bd478695fb51311a06f
+      internalID: 1695432026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_7
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 218
+        width: 106
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b49bd239f129e0449478d77082956e8
+      internalID: -848946426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_8
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 218
+        width: 139
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13216416944c5d6459008c53dd23d445
+      internalID: 582739104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_9
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 229
+        width: 6
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3310cf8659c44f44ea083b2a6bab23e2
+      internalID: -1923535086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_10
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 30
+        width: 106
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 160d1a3d433803844b9d6daf54bc89c0
+      internalID: 1487656760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_11
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 31
+        width: 128
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20b45b8abbef615419f6cc992578cadc
+      internalID: -2033915810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_12
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 44
+        width: 128
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c7a763456ac6a348bc1a5852e654e2d
+      internalID: -973821934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_0: -948979778
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_1: 112443791
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_10: 1487656760
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_11: -2033915810
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_12: -973821934
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_2: 1554608733
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_3: 2144013629
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_4: 1401269439
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_5: 1695432026
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_6: -1145458403
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_7: -848946426
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_8: 582739104
+      kisspng-computer-icons-clip-art-sprite-arrow-5b402619333d48.2191585415309307132099_9: -1923535086
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

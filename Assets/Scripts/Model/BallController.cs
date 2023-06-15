@@ -1,0 +1,209 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace model
+{
+    public class BallController : MonoBehaviour // BallController: movement and collision logic for the balls.
+    {
+        [SerializeField] ObjectPool ballPoolRef;
+        [SerializeField] float speed;
+        [SerializeField] float bounceForce;
+        [SerializeField] LayerMask collisionLayer;
+        [SerializeField] GameManager gameManager;
+        List<Rigidbody2D> activeBalls;
+       
+        internal float Speed { get => speed; }
+        internal List<Rigidbody2D> ActiveBalls { get => activeBalls; }
+
+        private void Awake()
+        {
+            activeBalls = new List<Rigidbody2D>();
+        }
+        private void Start()
+        {
+            foreach (var currentBall in ballPoolRef.Pool)
+            {
+                Ball currentBallRef = currentBall.GetComponent<Ball>();
+                currentBallRef.OnPlayerHit.AddListener(gameManager.PlayerHit);
+            }
+        }
+        //  method for ball creation
+        internal void CreateBall()//default overload
+        {
+            GameObject ball = ballPoolRef.GetFromPool();
+            ball.transform.position = Vector3.zero;
+            ball.transform.localScale = Vector3.one;
+            Rigidbody2D ballRB = ball.GetComponent<Rigidbody2D>();
+            ballRB.velocity = GetRandomRightOrLeft() * speed;
+            activeBalls.Add(ballRB);
+            // Set ball position, velocity, and any other necessary properties
+        }
+        internal void CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)//overloaded so I can have more controll than just default
+        {
+            GameObject ball = ballPoolRef.GetFromPool();
+            ball.transform.position = pos;
+            ball.transform.localScale = scale;
+            Rigidbody2D ballRB = ball.GetComponent<Rigidbody2D>();
+            ballRB.velocity = velocity;
+            activeBalls.Add(ballRB);
+            // Set ball position, velocity, and any other necessary properties
+        }
+        //  method for returning a ball to the pool(disabling it)
+        internal void ReturnBallToPool(Rigidbody2D ball)
+        {
+            RemoveFromActiveBalls(ball);
+
+            ballPoolRef.ReturnToPool(ball.gameObject);
+        }
+
+        private void RemoveFromActiveBalls(Rigidbody2D ball)
+        {
+            int index = activeBalls.IndexOf(ball);
+
+            if (index != -1)// if indexOf can't find it return -1 so incase it found something we continue to the rest of the logic
+            {
+                int lastIndex = activeBalls.Count - 1;
+
+                // Swap the ball to be removed with the last ball in the list
+                Rigidbody2D lastBall = activeBalls[lastIndex];
+                activeBalls[lastIndex] = ball;
+                activeBalls[index] = lastBall;
+                activeBalls.RemoveAt(lastIndex);
+            }
+        }
+
+
+        private void CheckCollisionForBall(Rigidbody2D ball)
+        {
+            Vector2 scale = ball.transform.localScale;
+
+            // Calculate the raycast size based on the ball's scale
+            float raycastSize = scale.x * 0.8f;
+
+            // Perform raycast checks on the bottom-left, bottom-right, and bottom of the ball
+            bool isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize, collisionLayer);
+            bool isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, collisionLayer);
+            bool isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, collisionLayer);
+
+            //Draw debugs
+            Debug.DrawRay(ball.transform.position, Vector2.left * raycastSize, Color.red);
+            Debug.DrawRay(ball.transform.position, Vector2.right * raycastSize, Color.green);
+            Debug.DrawRay(ball.transform.position, Vector2.down * raycastSize, Color.blue);
+
+            // Process collision results as needed
+            if (isLeftHit)
+            {
+                ball.velocity = new Vector2(1 * speed, ball.velocity.y);
+            }
+            else if (isRightHit)
+            {
+                ball.velocity = new Vector2(-1 * speed, ball.velocity.y);
+            }
+            else if (isBottomHit)
+            {
+                
+                if(ball.velocity.x > 0)
+                {
+                    ball.velocity = new Vector2(1 * speed, bounceForce);
+                }
+                else
+                {
+                    ball.velocity = new Vector2(-1 * speed, bounceForce);
+                }
+               
+            }
+        }
+        private void Update()
+        {
+            IterateOverBallsAndCheckCollision();
+        }
+
+        private void IterateOverBallsAndCheckCollision()
+        {
+            foreach (var ball in activeBalls)//while a for loop might have been slightly faster the differences are negligible and a foreach loop is more readable and I don't need the index
+            {
+                CheckCollisionForBall(ball);
+            }
+        }
+
+        internal Vector2 GetRandomRightOrLeft()
+        {
+            // Generate a random value (0 or 1) to determine the direction
+            int randomValue = Random.Range(0, 2);
+
+            // Conditionally assign the appropriate vector based on the random value
+            Vector2 randomDirection = (randomValue == 0) ? Vector2.right : Vector2.left;
+
+            return randomDirection;
+        }
+        public void SplitBall(LaserHandler laser,Rigidbody2D ball)
+        {
+            float currentBallScale = ball.gameObject.transform.localScale.x;
+            switch (currentBallScale)
+            {
+                case 3:
+                    CreateTwoBalls(ball,2);
+                    break;
+                case 2:
+                    CreateTwoBalls(ball, 1);
+                    break;
+                case 1:
+                    CreateTwoBalls(ball, 0.5f);
+                    break;
+                case 0.5f:
+                    CreateTwoBalls(ball, 0.25f);
+                    break;
+                case 0.35f:
+                    break;
+                default:
+                    break;
+            }
+            ReturnBallToPool(ball);
+            SoundManager.Play(SoundManager.Sound.ballHit);
+
+        }
+
+        private void CreateTwoBalls(Rigidbody2D ball,float size)
+        {
+            CreateBall(ball.transform.position, Vector2.one * size, Vector2.right * speed);
+            CreateBall(ball.transform.position, Vector2.one * size, Vector2.left * speed);
+        }
+
+        [ContextMenu("SplitBalls")]
+        private void SplitAllBalls()//just for testing in editor
+        {
+            List<Rigidbody2D> ballsToSplit = new List<Rigidbody2D>(); // Create a separate list to store the balls to be split
+
+            foreach (var ball in activeBalls)
+            {
+                ballsToSplit.Add(ball); // Add the ball to the separate list
+            }
+
+            foreach (var ball in ballsToSplit) // Iterate over the separate list
+            {
+                float currentBallScale = ball.gameObject.transform.localScale.x;
+                switch (currentBallScale)
+                {
+                    case 3:
+                        CreateTwoBalls(ball,2);
+                        break;
+                    case 2:
+                        CreateTwoBalls(ball, 1);
+                        break;
+                    case 1:
+                        CreateTwoBalls(ball, 0.5f);
+                        break;
+                    case 0.5f:
+                        CreateTwoBalls(ball, 0.25f);
+                        break;
+                    case 0.25f:
+                        break;
+                    default:
+                        break;
+                }
+                ReturnBallToPool(ball);
+            }
+        }
+
+    }
+}
