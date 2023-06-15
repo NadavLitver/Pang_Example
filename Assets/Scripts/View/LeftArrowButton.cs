@@ -6,8 +6,8 @@ namespace view
 {
     public class LeftArrowButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        private bool isPointerDown;
-        public UnityEvent<bool> LeftPressedUpdateEvent;
+        public bool isPointerDown;
+       
 
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -19,11 +19,7 @@ namespace view
             isPointerDown = false;
         }
 
-        private void Update()
-        {
-            LeftPressedUpdateEvent?.Invoke(isPointerDown);//update the input manager through an event to reduce dependency
-                                                          // inputHandler.isLeftPressed = isPointerDown;
-        }
+      
 
     }
 }
