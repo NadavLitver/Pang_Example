@@ -10,7 +10,9 @@ namespace view
         [SerializeField] TextMeshProUGUI levelText;
         [SerializeField] TextMeshProUGUI CountDownText;
         [SerializeField] TextMeshProUGUI EndingText;
-      
+        [SerializeField] TextMeshProUGUI StartText;
+
+
         [SerializeField] GameObject EndingPanel;
         public void UpdateScore(int score)
         {
@@ -38,6 +40,13 @@ namespace view
             if (EndingText != null)
             {
                 EndingText.text = isWon ? "You Won !" : "You Lost !";
+            }
+        }
+        public void UpdateStartText()
+        {
+            if (StartText != null)
+            {
+                StartText.text = "Resume";
             }
         }
         public void EnableEndingPanel(bool isWon)

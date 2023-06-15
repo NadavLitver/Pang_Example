@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using view;
+
 namespace controller
 {
     public class MenuPanel : MonoBehaviour//the menu panel is responsible for handling the pause menu logic which is also the main menu
@@ -12,7 +14,7 @@ namespace controller
         [SerializeField] Button StartButton;
         [SerializeField] Button ResetButton;
 
-        [SerializeField] TextMeshProUGUI StartText;
+        [SerializeField] UIHandler UI_handler;
         bool isPaused;
         bool didResumeOnce;
         private void Start()
@@ -47,7 +49,7 @@ namespace controller
                 pauseMenuUI.SetActive(false);
                 if (!didResumeOnce)//make sure setting text once
                 {
-                    StartText.text = "Resume";
+                    UI_handler.UpdateStartText();
                     didResumeOnce = true;
                     ResetButton.gameObject.SetActive(true);
                 }

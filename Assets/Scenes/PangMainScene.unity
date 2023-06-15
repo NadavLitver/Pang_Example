@@ -3113,6 +3113,7 @@ MonoBehaviour:
   levelText: {fileID: 1257413031}
   CountDownText: {fileID: 1820687299}
   EndingText: {fileID: 162721814}
+  StartText: {fileID: 797318681}
   EndingPanel: {fileID: 1239454551}
 --- !u!1 &883774677
 GameObject:
@@ -11951,7 +11952,7 @@ MonoBehaviour:
   PauseButton: {fileID: 437754790}
   StartButton: {fileID: 2048763980}
   ResetButton: {fileID: 2114336214}
-  StartText: {fileID: 797318681}
+  UI_handler: {fileID: 857067623}
 --- !u!1 &2114336212
 GameObject:
   m_ObjectHideFlags: 0
