@@ -1503,6 +1503,7 @@ Transform:
   - {fileID: 1839598512}
   - {fileID: 33495761}
   - {fileID: 1125248715}
+  - {fileID: 1159701554}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2222,7 +2223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fd0ea1074d83c498fd86520b406539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 2027051341}
+  RightPressedUpdateEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &568014993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3633,6 +3636,76 @@ MonoBehaviour:
   shootController: {fileID: 1580545033}
   gameManagerRef: {fileID: 33495762}
   robotControllerRef: {fileID: 592452997}
+--- !u!1 &1159701553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1159701554}
+  - component: {fileID: 1159701556}
+  - component: {fileID: 1159701555}
+  m_Layer: 0
+  m_Name: RobotAnimatorController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1159701554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159701553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 331177693}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1159701555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159701553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f00d8543638d284499333d9a1244978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputHandler: {fileID: 2027051341}
+  animator: {fileID: 1534649825}
+  robotSR: {fileID: 1534649824}
+  gameManager: {fileID: 33495762}
+--- !u!95 &1159701556
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159701553}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1188286687
 GameObject:
   m_ObjectHideFlags: 0
@@ -3902,7 +3975,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f48dd5657207244851fb9da68b77b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 2027051341}
+  LeftPressedUpdateEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &1233040309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1233040310}
+  m_Layer: 6
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1233040310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233040309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1534649823}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1239454551
 GameObject:
   m_ObjectHideFlags: 0
@@ -10566,7 +10672,6 @@ GameObject:
   - component: {fileID: 1534649823}
   - component: {fileID: 1534649824}
   - component: {fileID: 1534649825}
-  - component: {fileID: 1534649826}
   - component: {fileID: 1534649827}
   - component: {fileID: 1534649828}
   - component: {fileID: 1534649829}
@@ -10588,7 +10693,8 @@ Transform:
   m_LocalPosition: {x: 0.006, y: -4.36, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1233040310}
   m_Father: {fileID: 2044090751}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10665,22 +10771,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1534649826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534649822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f00d8543638d284499333d9a1244978, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputHandler: {fileID: 2027051341}
-  animator: {fileID: 1534649825}
-  robotSR: {fileID: 1534649824}
-  gameManager: {fileID: 33495762}
 --- !u!70 &1534649827
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -10728,7 +10818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b849a0dae3a2b9347b110a258f632849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: {fileID: 1839598511}
   robotSR: {fileID: 1534649824}
   blinkColor: {r: 1, g: 1, b: 1, a: 0.25}
 --- !u!81 &1534649829
@@ -10854,9 +10943,10 @@ MonoBehaviour:
   inputHandler: {fileID: 2027051341}
   ballController: {fileID: 1699095251}
   gameManager: {fileID: 33495762}
+  robotAnimatorUpdater: {fileID: 1159701555}
+  shootPoint: {fileID: 1233040310}
   laserData: {fileID: 541006447}
   playerData: {fileID: 1024599292}
-  robotAnimatorUpdater: {fileID: 1534649826}
   onShot:
     m_PersistentCalls:
       m_Calls: []
@@ -11520,6 +11610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 1024599292}
   gameManager: {fileID: 33495762}
+  blinkOnHit: {fileID: 1534649828}
   healthReducedEvent:
     m_PersistentCalls:
       m_Calls: []

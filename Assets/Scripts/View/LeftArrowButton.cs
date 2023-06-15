@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using controller;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 namespace view
 {
     public class LeftArrowButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        [SerializeField] InputHandler inputHandler;
         private bool isPointerDown;
+        public UnityEvent<bool> LeftPressedUpdateEvent;
 
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -23,7 +24,8 @@ namespace view
 
         private void Update()
         {
-            inputHandler.isLeftPressed = isPointerDown;
+            LeftPressedUpdateEvent?.Invoke(isPointerDown);//update the input manager through an event to reduce dependency
+           // inputHandler.isLeftPressed = isPointerDown;
         }
 
     }

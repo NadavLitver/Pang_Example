@@ -1,6 +1,7 @@
 using model;
 using UnityEngine;
 using UnityEngine.Events;
+using view;
 
 namespace controller
 {
@@ -9,6 +10,7 @@ namespace controller
         [SerializeField] PlayerData playerData;
         private float lastHit;
         [SerializeField] GameManager gameManager;
+        [SerializeField] BlinkOnHit blinkOnHit;
         private int currentHealthPoints;
         public UnityEvent<int> healthReducedEvent;
 
@@ -20,7 +22,9 @@ namespace controller
 
             //check if player lost
             healthReducedEvent.AddListener(gameManager.CheckLose);
-         
+
+            healthReducedEvent.AddListener(blinkOnHit.CallBlinkRoutine);
+
         }
         private bool CheckHitCooldown()//Check if getting hit is on cooldown
         {

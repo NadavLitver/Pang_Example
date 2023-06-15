@@ -1,7 +1,6 @@
-using controller;
 using UnityEngine;
 
-namespace view
+namespace controller
 {
     [RequireComponent(typeof(Animator))]
     public class RobotAnimatorUpdater : MonoBehaviour// animator updater updates the robot animator and sprite renderer based on the controller input handler

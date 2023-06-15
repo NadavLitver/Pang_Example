@@ -9,12 +9,14 @@ namespace controller
         [SerializeField] InputHandler inputHandler;
         [SerializeField] BallController ballController;
         [SerializeField] GameManager gameManager;
+        [SerializeField] RobotAnimatorUpdater robotAnimatorUpdater;
+        [SerializeField] Transform shootPoint;
         //data elements
         [SerializeField] model.LaserData laserData;
         [SerializeField] model.PlayerData playerData;
-        // view elements
-        [SerializeField] view.RobotAnimatorUpdater robotAnimatorUpdater;
-        //
+       
+      
+        
         private float lastTimeShot;
         public UnityEvent onShot;
         private void Start()
@@ -42,7 +44,7 @@ namespace controller
             if (CheckShootCooldown())
             {
                 GameObject current = laserData.LaserPool.GetFromPool();
-                current.transform.position = robotAnimatorUpdater.transform.position + Vector3.up;
+                current.transform.position = shootPoint.position;
                 onShot?.Invoke();
                 lastTimeShot = Time.time;
                 SoundManager.Play(SoundManager.Sound.playerShoot);

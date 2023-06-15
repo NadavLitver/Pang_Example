@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,6 +16,13 @@ namespace controller
         public UnityEvent onShoot;
         [SerializeField] LeftArrowButton leftArrowButton;
         [SerializeField] RightArrowButton rightArrowButton;
+        private void Start()
+        {
+            leftArrowButton.LeftPressedUpdateEvent.AddListener(SetIsLeftPressed);
+            rightArrowButton.RightPressedUpdateEvent.AddListener(SetIsRightPressed);
+        }
+
+     
         private void Update()
         {
             SetHorInput();
@@ -30,6 +38,15 @@ namespace controller
                 Debug.Log("Shoot");
             }
         }
+        public void SetIsLeftPressed(bool _isLeftPressed)
+        {
+            isLeftPressed = _isLeftPressed;
+        }
+        private void SetIsRightPressed(bool _isRightPressed)
+        {
+            isRightPressed = _isRightPressed;
+        }
+
         public void SetHorInput()
         {
             if (isLeftPressed)
