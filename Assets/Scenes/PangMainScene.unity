@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1616019751}
-  UIHandlerRef: {fileID: 857067623}
+  uIHandler: {fileID: 857067623}
   playerHitHandler: {fileID: 1839598511}
   soundManager: {fileID: 1715855051}
   OnLose:
@@ -2073,8 +2073,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c7c7a9d815e504bb045ef20c084fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabRef: {fileID: 2070016070694160667, guid: 5aa202dca1d71f34faf48afbed7c99eb, type: 3}
-  PoolSize: 20
+  prefabRef: {fileID: 2070016070694160667, guid: 5aa202dca1d71f34faf48afbed7c99eb, type: 3}
+  poolSize: 20
 --- !u!1 &557323607
 GameObject:
   m_ObjectHideFlags: 0
@@ -3097,10 +3097,10 @@ MonoBehaviour:
   scoreText: {fileID: 1188286689}
   healthText: {fileID: 851961483}
   levelText: {fileID: 1257413031}
-  CountDownText: {fileID: 1820687299}
-  EndingText: {fileID: 162721814}
-  StartText: {fileID: 797318681}
-  EndingPanel: {fileID: 1239454551}
+  countDownText: {fileID: 1820687299}
+  endingText: {fileID: 162721814}
+  startText: {fileID: 797318681}
+  endingPanel: {fileID: 1239454551}
 --- !u!1 &885851846
 GameObject:
   m_ObjectHideFlags: 0
@@ -3524,12 +3524,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a92a4cefb1726438bb16434d0d90ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpgradePanel: {fileID: 672332883}
-  SpeedButton: {fileID: 976809020}
-  HealthButton: {fileID: 327169799}
-  LaserUpgradeButton: {fileID: 500800004}
+  upgradePanel: {fileID: 672332883}
+  speedButton: {fileID: 976809020}
+  healthButton: {fileID: 327169799}
+  laserUpgradeButton: {fileID: 500800004}
   laserPool: {fileID: 541006448}
-  upgradesData: {fileID: 0}
+  upgradesData: {fileID: 11400000, guid: f2305ed008c22ab4f83f9dcd4e8efd0e, type: 2}
   shootController: {fileID: 1580545033}
   gameManagerRef: {fileID: 33495762}
   robotControllerRef: {fileID: 592452997}
@@ -11603,8 +11603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c7c7a9d815e504bb045ef20c084fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabRef: {fileID: 9037659183072536743, guid: 8975863388eddc247b5cecea12a6a82f, type: 3}
-  PoolSize: 20
+  prefabRef: {fileID: 9037659183072536743, guid: 8975863388eddc247b5cecea12a6a82f, type: 3}
+  poolSize: 20
 --- !u!114 &2028652584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11823,10 +11823,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 232457189}
-  PauseButton: {fileID: 437754790}
-  StartButton: {fileID: 2048763980}
-  ResetButton: {fileID: 2114336214}
-  UI_handler: {fileID: 857067623}
+  pauseButton: {fileID: 437754790}
+  startButton: {fileID: 2048763980}
+  resetButton: {fileID: 2114336214}
+  uIhandler: {fileID: 857067623}
 --- !u!1 &2114336212
 GameObject:
   m_ObjectHideFlags: 0

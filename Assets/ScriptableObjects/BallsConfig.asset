@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   bounceForce: 10
-  collisionLayer:
+  CollisionLayer:
     serializedVersion: 2
     m_Bits: 8

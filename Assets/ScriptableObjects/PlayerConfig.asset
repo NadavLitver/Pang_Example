@@ -17,6 +17,6 @@ MonoBehaviour:
   moveSpeed: 3.5
   width: 0.8
   startingHP: 3
-  collisionLayer:
+  CollisionLayer:
     serializedVersion: 2
     m_Bits: 8
