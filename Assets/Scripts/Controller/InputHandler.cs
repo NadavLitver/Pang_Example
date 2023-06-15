@@ -25,8 +25,7 @@ namespace controller
      
         private void Update()
         {
-            isLeftPressed = leftArrowButton.isPointerDown;
-            isRightPressed = rightArrowButton.isPointerDown;
+           
             SetHorInput();
             CheckShoot();
         }
@@ -43,6 +42,8 @@ namespace controller
 
         private void SetHorInput()
         {
+            isLeftPressed = leftArrowButton.isPointerDown;
+            isRightPressed = rightArrowButton.isPointerDown;
             if (isLeftPressed)
             {
                 horInput = -1;
