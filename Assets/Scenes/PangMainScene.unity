@@ -3629,7 +3629,7 @@ MonoBehaviour:
   HealthButton: {fileID: 327169799}
   LaserUpgradeButton: {fileID: 500800004}
   laserData: {fileID: 541006447}
-  upgradesData: {fileID: 0}
+  upgradesData: {fileID: 883774679}
   shootController: {fileID: 1580545033}
   gameManagerRef: {fileID: 33495762}
   robotControllerRef: {fileID: 592452997}
