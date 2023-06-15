@@ -12,6 +12,7 @@ namespace controller
         [SerializeField] private GameManager gameManager;
         [SerializeField] private BlinkOnHit blinkOnHit;
         [SerializeField] private SoundManager soundManager;
+        [SerializeField] BallsPoolHandler ballsPoolHandler;
         private int currentHealthPoints;
         public UnityEvent<int> healthReducedEvent;
 
@@ -25,6 +26,10 @@ namespace controller
             healthReducedEvent.AddListener(gameManager.CheckLose);
 
             healthReducedEvent.AddListener(blinkOnHit.CallBlinkRoutine);
+            foreach (var ball in ballsPoolHandler.BallPoolRef.Pool)
+            {
+                ball.GetComponent<Ball>().OnPlayerHit.AddListener(PlayerHit);
+            }
 
         }
         private bool CheckHitCooldown()//Check if getting hit is on cooldown

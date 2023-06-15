@@ -11489,6 +11489,7 @@ MonoBehaviour:
   gameManager: {fileID: 33495762}
   blinkOnHit: {fileID: 1534649828}
   soundManager: {fileID: 1715855051}
+  ballsPoolHandler: {fileID: 2028652584}
   healthReducedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -11618,7 +11619,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPoolRef: {fileID: 2028652583}
-  playerHPHandler: {fileID: 1839598511}
 --- !u!1 &2044090750
 GameObject:
   m_ObjectHideFlags: 0
