@@ -16,11 +16,7 @@ namespace controller
         public UnityEvent onShoot;
         [SerializeField] private LeftArrowButton leftArrowButton;
         [SerializeField] private RightArrowButton rightArrowButton;
-        //private void Start()
-        //{
-        //    leftArrowButton.LeftPressedUpdateEvent.AddListener(SetIsLeftPressed);
-        //    rightArrowButton.RightPressedUpdateEvent.AddListener(SetIsRightPressed);
-        //}
+   
 
      
         private void Update()
