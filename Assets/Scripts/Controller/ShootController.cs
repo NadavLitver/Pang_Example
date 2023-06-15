@@ -1,19 +1,25 @@
 using UnityEngine;
 using UnityEngine.Events;
+using view;
+using model;
 
 namespace controller
 {
     public class ShootController : MonoBehaviour// shootController handles all logic that involves shooting the lasers
     {
         //controller elements
-        [SerializeField] InputHandler inputHandler;
-        [SerializeField] BallController ballController;
-        [SerializeField] GameManager gameManager;
-        [SerializeField] RobotAnimatorUpdater robotAnimatorUpdater;
-        [SerializeField] Transform shootPoint;
+        [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private BallController ballController;
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private RobotAnimatorUpdater robotAnimatorUpdater;
+        [SerializeField] private Transform shootPoint;
+
+        //view elements
+        [SerializeField] private SoundManager soundManager;
+
         //data elements
-        [SerializeField] model.LaserData laserData;
-        [SerializeField] model.PlayerData playerData;
+        [SerializeField] private ObjectPool laserPool;
+        [SerializeField] private PlayerConfig playerData;
        
       
         
@@ -23,7 +29,7 @@ namespace controller
         {
             inputHandler.onShoot.AddListener(Shoot);
             onShot.AddListener(robotAnimatorUpdater.PlayShooting);
-            foreach (var laser in laserData.LaserPool.Pool)
+            foreach (var laser in laserPool.Pool)
             {
                 LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
 
@@ -43,11 +49,11 @@ namespace controller
         {
             if (CheckShootCooldown())
             {
-                GameObject current = laserData.LaserPool.GetFromPool();
+                GameObject current = laserPool.GetFromPool();
                 current.transform.position = shootPoint.position;
                 onShot?.Invoke();
                 lastTimeShot = Time.time;
-                SoundManager.Play(SoundManager.Sound.playerShoot);
+                soundManager.Play(SoundManager.Sound.playerShoot);
             }
             
         }
@@ -59,7 +65,7 @@ namespace controller
 
         public void ReturnLaser(LaserHandler laserHandler, Rigidbody2D ballHit)
         {
-            laserData.LaserPool.ReturnToPool(laserHandler.gameObject);
+            laserPool.ReturnToPool(laserHandler.gameObject);
         }
 
        

@@ -6,7 +6,7 @@ namespace controller
     public class LaserHandler : MonoBehaviour// the laser handler handels individual projectile logic
     {
         public UnityEvent<LaserHandler, Rigidbody2D> onHitBall;
-        public LaserData laserData;
+        public LaserConfig laserData;
         private float currentTimeAlive;
         private void OnEnable()
         {
@@ -30,7 +30,7 @@ namespace controller
         private void CheckTimeToLive()
         {
             currentTimeAlive += Time.deltaTime;
-            if (currentTimeAlive > laserData.TTL)
+            if (currentTimeAlive > laserData.TimeToLive)
             {
                 this.gameObject.SetActive(false);
             }

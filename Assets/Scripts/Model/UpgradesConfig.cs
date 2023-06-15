@@ -6,7 +6,10 @@ namespace model
 
     public class UpgradesConfig : ScriptableObject
     {
-        public int additionalHP;
-        public float newSpeed;
+        [SerializeField] private int additionalHP;
+        [SerializeField] private float newSpeed;
+
+        public int AdditionalHP { get => additionalHP;}
+        public float NewSpeed { get => newSpeed;}
     }
 }

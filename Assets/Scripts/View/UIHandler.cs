@@ -5,15 +5,15 @@ namespace view
 {
     public class UIHandler : MonoBehaviour// the UI handler is responsible for updating ui elements
     {
-        [SerializeField] TextMeshProUGUI scoreText;
-        [SerializeField] TextMeshProUGUI healthText;
-        [SerializeField] TextMeshProUGUI levelText;
-        [SerializeField] TextMeshProUGUI CountDownText;
-        [SerializeField] TextMeshProUGUI EndingText;
-        [SerializeField] TextMeshProUGUI StartText;
+        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI healthText;
+        [SerializeField] private TextMeshProUGUI levelText;
+        [SerializeField] private TextMeshProUGUI countDownText;
+        [SerializeField] private TextMeshProUGUI endingText;
+        [SerializeField] private TextMeshProUGUI startText;
 
 
-        [SerializeField] GameObject EndingPanel;
+        [SerializeField] private GameObject endingPanel;
         public void UpdateScore(int score)
         {
             if (scoreText != null)
@@ -37,35 +37,35 @@ namespace view
         }
         public void UpdateEnding(bool isWon)
         {
-            if (EndingText != null)
+            if (endingText != null)
             {
-                EndingText.text = isWon ? "You Won !" : "You Lost !";
+                endingText.text = isWon ? "You Won !" : "You Lost !";
             }
         }
         public void UpdateStartText()
         {
-            if (StartText != null)
+            if (startText != null)
             {
-                StartText.text = "Resume";
+                startText.text = "Resume";
             }
         }
         public void EnableEndingPanel(bool isWon)
         {
             UpdateEnding(isWon);
-            EndingPanel.SetActive(true);
+            endingPanel.SetActive(true);
         }
         public void CallCountdownRoutine(int level) => StartCoroutine(CountdownRoutine(level));
         IEnumerator CountdownRoutine(int level)
         {
             yield return new WaitForSeconds(0.05f);
-            CountDownText.gameObject.SetActive(true);
-            CountDownText.text = "3";
+            countDownText.gameObject.SetActive(true);
+            countDownText.text = "3";
             yield return new WaitForSeconds(1);
-            CountDownText.text = "2";
+            countDownText.text = "2";
             yield return new WaitForSeconds(1);
-            CountDownText.text = "1";
+            countDownText.text = "1";
             yield return new WaitForSeconds(1);
-            CountDownText.gameObject.SetActive(false);
+            countDownText.gameObject.SetActive(false);
 
         }
     }

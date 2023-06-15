@@ -7,10 +7,11 @@ namespace controller
 {
     public class PlayerHPHandler : MonoBehaviour// manages manipluations on playerHP
     {
-        [SerializeField] PlayerData playerData;
+        [SerializeField] private PlayerConfig playerData;
         private float lastHit;
-        [SerializeField] GameManager gameManager;
-        [SerializeField] BlinkOnHit blinkOnHit;
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private BlinkOnHit blinkOnHit;
+        [SerializeField] private SoundManager soundManager;
         private int currentHealthPoints;
         public UnityEvent<int> healthReducedEvent;
 
@@ -18,7 +19,7 @@ namespace controller
 
         private void Start()
         {
-            currentHealthPoints = playerData.StartHP;
+            currentHealthPoints = playerData.StartingHP;
 
             //check if player lost
             healthReducedEvent.AddListener(gameManager.CheckLose);
@@ -43,7 +44,7 @@ namespace controller
                 //invoke getting hit event
                 healthReducedEvent?.Invoke(CurrentHealthPoints);
                 //call sound
-                SoundManager.Play(SoundManager.Sound.playerHit);
+                soundManager.Play(SoundManager.Sound.playerHit);
 
             }
 

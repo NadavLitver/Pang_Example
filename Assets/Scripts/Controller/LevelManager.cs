@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using view;
+
 namespace controller
 {
     [DefaultExecutionOrder(1)]// delay script execution
@@ -9,9 +11,11 @@ namespace controller
         //data
         [SerializeField] private model.LevelConfig[] levelConfigs;
         //controllers
-        [SerializeField] BallController ballsController;
-        [SerializeField] UpgradeHandler upgradeHandler;
-        [SerializeField] GameManager gameManager;
+        [SerializeField] private BallController ballsController;
+        [SerializeField] private UpgradeHandler upgradeHandler;
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private SoundManager soundManager;
+
 
         private float delayBetweenLevels;
         internal int levelCount;
@@ -26,7 +30,7 @@ namespace controller
             StartCoroutine(LevelsRoutine());
             
         }
-        IEnumerator LevelsRoutine()
+        private IEnumerator LevelsRoutine()
         {
             foreach (var level in levelConfigs)
             {
@@ -52,7 +56,7 @@ namespace controller
                 //wait till all balls are destroyed to start new level
                 yield return new WaitUntil(() => ballsController.IsActiveBallsEmpty());
                 //call level completed sound
-                SoundManager.Play(SoundManager.Sound.levelCompleted);
+                soundManager.Play(SoundManager.Sound.levelCompleted);
 
 
 

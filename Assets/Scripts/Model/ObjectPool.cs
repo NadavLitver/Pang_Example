@@ -5,9 +5,9 @@ namespace model
 
     public class ObjectPool : MonoBehaviour
     {
-        [SerializeField] GameObject PrefabRef;
-        [SerializeField] int PoolSize = 20;
-        List<GameObject> pool;
+        [SerializeField] private GameObject prefabRef;
+        [SerializeField] private int poolSize = 20;
+        private List<GameObject> pool;
 
         public List<GameObject> Pool { get => pool;}
 
@@ -19,10 +19,10 @@ namespace model
         private void PopulatePool()
         {
             //Populate the GameObject pool list by the GameObject pool size 
-            for (int i = 0; i < PoolSize; i++)
+            for (int i = 0; i < poolSize; i++)
             {
-                GameObject current = Instantiate(PrefabRef);
-                current.name = PrefabRef.name + i;
+                GameObject current = Instantiate(prefabRef);
+                current.name = prefabRef.name + i;
                 pool.Add(current);
                 current.SetActive(false);
             }
@@ -40,8 +40,8 @@ namespace model
             }
 
             // If no inactive GameObject is available, create a new one and return it
-            GameObject current = Instantiate(PrefabRef);
-            current.name = PrefabRef.name + "Extra";
+            GameObject current = Instantiate(prefabRef);
+            current.name = prefabRef.name + "Extra";
             pool.Add(current);
             current.SetActive(true);
             return current;

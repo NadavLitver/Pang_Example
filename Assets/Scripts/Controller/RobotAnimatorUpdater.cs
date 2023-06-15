@@ -2,33 +2,32 @@ using UnityEngine;
 
 namespace controller
 {
-    [RequireComponent(typeof(Animator))]
     public class RobotAnimatorUpdater : MonoBehaviour// animator updater updates the robot animator and sprite renderer based on the controller input handler
     {
-        [SerializeField] InputHandler inputHandler;
-        [SerializeField] Animator animator;
-        [SerializeField] SpriteRenderer robotSR;
-        [SerializeField] GameManager gameManager;
+        [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private Animator animator;
+        [SerializeField] private SpriteRenderer robotSR;
+        [SerializeField] private GameManager gameManager;
 
         //hashes
-        private int RunningHash;
-        private int ShootingHash;
-        private int DeadHash;
+        private int runningHash;
+        private int shootingHash;
+        private int deadHash;
 
         private void Start()
         {
             //cache names to hashes
             gameManager.OnLose.AddListener(PlayDead);
-            RunningHash = Animator.StringToHash("Running");
-            ShootingHash = Animator.StringToHash("Shooting");
-            DeadHash = Animator.StringToHash("Dead");
+            runningHash = Animator.StringToHash("Running");
+            shootingHash = Animator.StringToHash("Shooting");
+            deadHash = Animator.StringToHash("Dead");
             if (animator == null) { animator = GetComponent<Animator>(); }
         }
         private void Update()
         {
             int horInput = inputHandler.GetHorInput();
             //set running based on input
-            animator.SetBool(RunningHash, horInput != 0);
+            animator.SetBool(runningHash, horInput != 0);
             if (horInput != 0)
             {//flip model
                 robotSR.flipX = horInput == -1;
@@ -36,11 +35,11 @@ namespace controller
         }
         public void PlayShooting()
         {
-            animator.Play(ShootingHash);
+            animator.Play(shootingHash);
         }
         public void PlayDead()
         {
-            animator.Play(DeadHash);
+            animator.Play(deadHash);
         }
     }
 }

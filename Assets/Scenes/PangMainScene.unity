@@ -170,6 +170,7 @@ MonoBehaviour:
   levelManager: {fileID: 1616019751}
   UIHandlerRef: {fileID: 857067623}
   playerHitHandler: {fileID: 1839598511}
+  soundManager: {fileID: 1715855051}
   OnLose:
     m_PersistentCalls:
       m_Calls: []
@@ -2037,10 +2038,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 541006446}
-  - component: {fileID: 541006447}
   - component: {fileID: 541006448}
   m_Layer: 0
-  m_Name: LaserData
+  m_Name: LaserPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2061,20 +2061,6 @@ Transform:
   m_Father: {fileID: 1605881789}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &541006447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541006445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4026191e5af4404fb599d07aae80528, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 731c10fb7f9adc34196868f25b991193, type: 2}
-  laserPool: {fileID: 541006448}
 --- !u!114 &541006448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2407,7 +2393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputHandler: {fileID: 2027051341}
   robot: {fileID: 1534649823}
-  playerData: {fileID: 1024599292}
+  playerData: {fileID: 11400000, guid: 0bfd1ffd78fe5fd42b7edeb7623bf9cc, type: 2}
 --- !u!1 &672332883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,51 +3101,6 @@ MonoBehaviour:
   EndingText: {fileID: 162721814}
   StartText: {fileID: 797318681}
   EndingPanel: {fileID: 1239454551}
---- !u!1 &883774677
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 883774678}
-  - component: {fileID: 883774679}
-  m_Layer: 0
-  m_Name: UpgradesData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &883774678
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 883774677}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1605881789}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &883774679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 883774677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9910919d50b28494f9286dca814af03b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: f2305ed008c22ab4f83f9dcd4e8efd0e, type: 2}
 --- !u!1 &885851846
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,51 +3345,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977213832}
   m_CullTransparentMesh: 1
---- !u!1 &1024599290
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1024599291}
-  - component: {fileID: 1024599292}
-  m_Layer: 0
-  m_Name: PlayerData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1024599291
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024599290}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1605881789}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1024599292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024599290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f264c0672397da4cb4da1061589d560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerConfig: {fileID: 11400000, guid: 0bfd1ffd78fe5fd42b7edeb7623bf9cc, type: 2}
 --- !u!1 &1121500914
 GameObject:
   m_ObjectHideFlags: 0
@@ -3632,11 +3528,12 @@ MonoBehaviour:
   SpeedButton: {fileID: 976809020}
   HealthButton: {fileID: 327169799}
   LaserUpgradeButton: {fileID: 500800004}
-  laserData: {fileID: 541006447}
-  upgradesData: {fileID: 883774679}
+  laserPool: {fileID: 541006448}
+  upgradesData: {fileID: 0}
   shootController: {fileID: 1580545033}
   gameManagerRef: {fileID: 33495762}
   robotControllerRef: {fileID: 592452997}
+  soundManager: {fileID: 1715855051}
 --- !u!1 &1159701553
 GameObject:
   m_ObjectHideFlags: 0
@@ -3646,7 +3543,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1159701554}
-  - component: {fileID: 1159701556}
   - component: {fileID: 1159701555}
   m_Layer: 0
   m_Name: RobotAnimatorController
@@ -3686,27 +3582,6 @@ MonoBehaviour:
   animator: {fileID: 1534649825}
   robotSR: {fileID: 1534649824}
   gameManager: {fileID: 33495762}
---- !u!95 &1159701556
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159701553}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1188286687
 GameObject:
   m_ObjectHideFlags: 0
@@ -10946,8 +10821,9 @@ MonoBehaviour:
   gameManager: {fileID: 33495762}
   robotAnimatorUpdater: {fileID: 1159701555}
   shootPoint: {fileID: 1233040310}
-  laserData: {fileID: 541006447}
-  playerData: {fileID: 1024599292}
+  soundManager: {fileID: 1715855051}
+  laserPool: {fileID: 541006448}
+  playerData: {fileID: 11400000, guid: 0bfd1ffd78fe5fd42b7edeb7623bf9cc, type: 2}
   onShot:
     m_PersistentCalls:
       m_Calls: []
@@ -11055,11 +10931,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1814938074}
   - {fileID: 2028652582}
-  - {fileID: 1024599291}
   - {fileID: 541006446}
-  - {fileID: 883774678}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11116,7 +10989,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 23e9888594c3e1b4b903d66d8dc69112, type: 2}
   ballsController: {fileID: 1699095251}
   upgradeHandler: {fileID: 1125248716}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 33495762}
+  soundManager: {fileID: 1715855051}
   OnAdvanceLevel:
     m_PersistentCalls:
       m_Calls: []
@@ -11300,7 +11174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballDataHandler: {fileID: 2028652584}
---- !u!1 &1814938073
+  ballsData: {fileID: 11400000, guid: d8253ac104550864eb8a45c2f67b5268, type: 2}
+  soundManager: {fileID: 1715855051}
+--- !u!1 &1715855049
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11308,51 +11184,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1814938074}
-  - component: {fileID: 1814938075}
+  - component: {fileID: 1715855050}
+  - component: {fileID: 1715855051}
   m_Layer: 0
-  m_Name: SoundData
+  m_Name: SoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1814938074
+--- !u!4 &1715855050
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814938073}
+  m_GameObject: {fileID: 1715855049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1605881789}
+  m_Father: {fileID: 2044090751}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1814938075
+--- !u!114 &1715855051
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814938073}
+  m_GameObject: {fileID: 1715855049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f9c87076a88d6447a024a80837eeced, type: 3}
+  m_Script: {fileID: 11500000, guid: aba3c0a31f717094fb600a31a07180e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
   - name: playerHit
     m_Sound: 0
     m_AudioClip: {fileID: 8300000, guid: 7fae43a84f4d2fa4b8a08c0c101e71ac, type: 3}
-    m_Volume: 0.253
+    m_Volume: 1
   - name: ballHit
     m_Sound: 1
     m_AudioClip: {fileID: 8300000, guid: f9cc058d3458bf24eaf48946c6a5d902, type: 3}
-    m_Volume: 0.901
+    m_Volume: 1
   - name: levelCompleted
     m_Sound: 2
     m_AudioClip: {fileID: 8300000, guid: cd9f29804902b454582b07569e594de2, type: 3}
@@ -11364,7 +11240,7 @@ MonoBehaviour:
   - name: playerShoot
     m_Sound: 4
     m_AudioClip: {fileID: 8300000, guid: 23272209ae97fc749b538ca4b44ce8db, type: 3}
-    m_Volume: 0.549
+    m_Volume: 1
   - name: UpgradeSelected
     m_Sound: 5
     m_AudioClip: {fileID: 8300000, guid: c58924f3d2b93ad4ab59b187ace90815, type: 3}
@@ -11609,9 +11485,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d4dd9181e46e4479d137efb836ff1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 1024599292}
+  playerData: {fileID: 11400000, guid: 0bfd1ffd78fe5fd42b7edeb7623bf9cc, type: 2}
   gameManager: {fileID: 33495762}
   blinkOnHit: {fileID: 1534649828}
+  soundManager: {fileID: 1715855051}
   healthReducedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -11741,11 +11618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPoolRef: {fileID: 2028652583}
-  ballsData: {fileID: 11400000, guid: d8253ac104550864eb8a45c2f67b5268, type: 2}
   playerHPHandler: {fileID: 1839598511}
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &2044090750
 GameObject:
   m_ObjectHideFlags: 0
@@ -11779,6 +11652,7 @@ Transform:
   - {fileID: 885851848}
   - {fileID: 857067619}
   - {fileID: 1534649823}
+  - {fileID: 1715855050}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

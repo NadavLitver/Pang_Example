@@ -15,8 +15,8 @@ MonoBehaviour:
   shootCD: 0.25
   hitCD: 1
   moveSpeed: 3.5
-  Width: 0.8
-  StartingHP: 3
+  width: 0.8
+  startingHP: 3
   collisionLayer:
     serializedVersion: 2
     m_Bits: 8

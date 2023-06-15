@@ -4,18 +4,16 @@ using controller;
 
 namespace model
 {
-    public class BallsDataHandler : MonoBehaviour
+    public class BallsPoolHandler : MonoBehaviour
     {
         [SerializeField] ObjectPool ballPoolRef;
-        [SerializeField] BallsConfig ballsData;
         [SerializeField] PlayerHPHandler playerHPHandler;
         List<Rigidbody2D> activeBalls;
-        public LayerMask collisionLayer;
 
         public ObjectPool BallPoolRef { get => ballPoolRef;}
-        internal float Speed { get => ballsData.speed; }
-        internal List<Rigidbody2D> ActiveBalls { get => activeBalls; }
-        public float BounceForce { get => ballsData.BounceForce;}
+      
+        public List<Rigidbody2D> ActiveBalls { get => activeBalls; }
+        
 
         private void Awake()
         {

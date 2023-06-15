@@ -2,34 +2,36 @@ using model;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using view;
+
 namespace controller
 {
     public class UpgradeHandler : MonoBehaviour// The Upgrade handler is responsible for all logic correlated with the upgrade panel
     {
         //UI elements
-        [SerializeField] GameObject UpgradePanel;
-        [SerializeField] Button SpeedButton;
-        [SerializeField] Button HealthButton;
-        [SerializeField] Button LaserUpgradeButton;
+        [SerializeField] private GameObject upgradePanel;
+        [SerializeField] private Button speedButton;
+        [SerializeField] private Button healthButton;
+        [SerializeField] private Button laserUpgradeButton;
         // Data elements
-        [SerializeField] LaserData laserData;
-        [SerializeField] UpgradesData upgradesData;
+        [SerializeField] private ObjectPool laserPool;
+        [SerializeField] private UpgradesConfig upgradesData;
         // controllers ellements
-        [SerializeField] ShootController shootController;
-        [SerializeField] GameManager gameManagerRef;
-        [SerializeField] LocoMotion robotControllerRef;
-
+        [SerializeField] private ShootController shootController;
+        [SerializeField] private GameManager gameManagerRef;
+        [SerializeField] private LocoMotion robotControllerRef;
+        [SerializeField] private SoundManager soundManager;
         private bool didChooseUpgrade;
 
         private void Start()
         {
-            LaserUpgradeButton.onClick.AddListener(UnSubscribeFromReturningLasers);
-            SpeedButton.onClick.AddListener(UpgradeSpeed);
-            HealthButton.onClick.AddListener(UpgradeHP);
+            laserUpgradeButton.onClick.AddListener(UnSubscribeFromReturningLasers);
+            speedButton.onClick.AddListener(UpgradeSpeed);
+            healthButton.onClick.AddListener(UpgradeHP);
         }
-        public void UnSubscribeFromReturningLasers()
+        private void UnSubscribeFromReturningLasers()
         {
-            foreach (var laser in laserData.LaserPool.Pool)
+            foreach (var laser in laserPool.Pool)
             {
                 // get laser handler
                 LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
@@ -38,30 +40,30 @@ namespace controller
             }
             didChooseUpgrade = true;
         }
-        public void UpgradeSpeed()
+        private void UpgradeSpeed()
         {
             // set a new speed
-            robotControllerRef.SetSpeed(upgradesData.newSpeed);
+            robotControllerRef.SetSpeed(upgradesData.NewSpeed);
             didChooseUpgrade = true;
 
         }
-        public void UpgradeHP()
+        private void UpgradeHP()
         {
             // add health points to existing
-            gameManagerRef.AddHealthPointsAndUpdateUI(upgradesData.hpAddition);
+            gameManagerRef.AddHealthPointsAndUpdateUI(upgradesData.AdditionalHP);
             didChooseUpgrade = true;
 
         }
-        public void TurnOffOnUpgradePanel(bool isOn)
+        private void TurnOffOnUpgradePanel(bool isOn)
         {
-            UpgradePanel.SetActive(isOn);
+            upgradePanel.SetActive(isOn);
         }
         public IEnumerator UpgradeRoutine()
         {
             TurnOffOnUpgradePanel(true);
             yield return new WaitUntil(() => didChooseUpgrade);// wait for player to make choice
             // call sound for upgrade
-            SoundManager.Play(SoundManager.Sound.UpgradeSelected);
+            soundManager.Play(SoundManager.Sound.UpgradeSelected);
             TurnOffOnUpgradePanel(false);
         }
     }

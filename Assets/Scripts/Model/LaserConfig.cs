@@ -5,8 +5,10 @@ namespace model
 
     public class LaserConfig : ScriptableObject
     {
-        public float speed;
-        public float timeToLive;//time to live
+        [SerializeField] private float speed;
+        [SerializeField] private float timeToLive;//time to live
 
+        public float Speed { get => speed;}
+        public float TimeToLive { get => timeToLive;}
     }
 }

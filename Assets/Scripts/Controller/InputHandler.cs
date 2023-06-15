@@ -14,8 +14,8 @@ namespace controller
         public bool isLeftPressed;
         public bool isRightPressed;
         public UnityEvent onShoot;
-        [SerializeField] LeftArrowButton leftArrowButton;
-        [SerializeField] RightArrowButton rightArrowButton;
+        [SerializeField] private LeftArrowButton leftArrowButton;
+        [SerializeField] private RightArrowButton rightArrowButton;
         private void Start()
         {
             leftArrowButton.LeftPressedUpdateEvent.AddListener(SetIsLeftPressed);
@@ -28,7 +28,7 @@ namespace controller
             SetHorInput();
             CheckShoot();
         }
-        public void CheckShoot()
+        private void CheckShoot()
         {
             if (CheckTouch() && !IsPointerOverUIObject())
             {
@@ -38,7 +38,7 @@ namespace controller
                 Debug.Log("Shoot");
             }
         }
-        public void SetIsLeftPressed(bool _isLeftPressed)
+        private void SetIsLeftPressed(bool _isLeftPressed)
         {
             isLeftPressed = _isLeftPressed;
         }
@@ -47,7 +47,7 @@ namespace controller
             isRightPressed = _isRightPressed;
         }
 
-        public void SetHorInput()
+        private void SetHorInput()
         {
             if (isLeftPressed)
             {
@@ -68,7 +68,7 @@ namespace controller
 #endif
         }
         public int GetHorInput() { return horInput; }
-        public bool CheckTouch()
+        private bool CheckTouch()
         {
             bool touchBegan = false;
             if (Input.touchCount > 0)

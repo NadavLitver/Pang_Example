@@ -5,11 +5,18 @@ namespace model
 
     public class PlayerConfig : ScriptableObject
     {
-        public float shootCD;
-        public float hitCD;
-        public float moveSpeed;
-        public float Width;
-        public int StartingHP;
-        public LayerMask collisionLayer;
+        [SerializeField] private float shootCD;
+        [SerializeField] private float hitCD;
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float width;
+        [SerializeField] private int startingHP;
+
+        public LayerMask CollisionLayer;
+
+        public float ShootCD { get => shootCD;}
+        public float HitCD { get => hitCD; }
+        public float MoveSpeed { get => moveSpeed;}
+        public float Width { get => width;}
+        public int StartingHP { get => startingHP; }
     }
 }

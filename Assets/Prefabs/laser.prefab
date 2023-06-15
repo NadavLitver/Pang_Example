@@ -101,8 +101,7 @@ MonoBehaviour:
   onHitBall:
     m_PersistentCalls:
       m_Calls: []
-  speed: 5
-  timeToLive: 5
+  laserData: {fileID: 11400000, guid: 731c10fb7f9adc34196868f25b991193, type: 2}
 --- !u!70 &6222717198816884933
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

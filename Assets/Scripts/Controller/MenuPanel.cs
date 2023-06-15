@@ -10,17 +10,18 @@ namespace controller
     public class MenuPanel : MonoBehaviour//the menu panel is responsible for handling the pause menu logic which is also the main menu
     {
         public GameObject pauseMenuUI;
-        [SerializeField] Button PauseButton;
-        [SerializeField] Button StartButton;
-        [SerializeField] Button ResetButton;
+        [SerializeField] private Button pauseButton;
+        [SerializeField] private Button startButton;
+        [SerializeField] private Button resetButton;
 
-        [SerializeField] UIHandler UI_handler;
-        bool isPaused;
-        bool didResumeOnce;
+        [SerializeField] private UIHandler uIhandler;
+
+        private bool isPaused;
+        private bool didResumeOnce;
         private void Start()
         {
-            PauseButton.onClick.AddListener(TogglePauseMenu);
-            StartButton.onClick.AddListener(TogglePauseMenu);
+            pauseButton.onClick.AddListener(TogglePauseMenu);
+            startButton.onClick.AddListener(TogglePauseMenu);
             TogglePauseMenu();
         }
         private void Update()
@@ -32,7 +33,7 @@ namespace controller
             }
         }
 
-        public void TogglePauseMenu()
+        private void TogglePauseMenu()
         {
             isPaused = !isPaused;
 
@@ -49,9 +50,9 @@ namespace controller
                 pauseMenuUI.SetActive(false);
                 if (!didResumeOnce)//make sure setting text once
                 {
-                    UI_handler.UpdateStartText();
+                    uIhandler.UpdateStartText();
                     didResumeOnce = true;
-                    ResetButton.gameObject.SetActive(true);
+                    resetButton.gameObject.SetActive(true);
                 }
                
 

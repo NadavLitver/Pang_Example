@@ -2,13 +2,26 @@ using model;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace controller
+
+namespace view
 {
-    public static class SoundManager
+    public class SoundManager : MonoBehaviour
     {
-        private static List<SoundAudioClip> clips;
-        private static AudioSource TwoDimensionalAudioSource;
-        public enum Sound//specify each sound here
+        private AudioSource twoDimensionalAudioSource;
+        [SerializeField] private List<SoundAudioClip> clips;
+
+       
+
+        [ContextMenu("Reset List")]// to easly init list for inspector
+        private void ResetList()
+        {
+            clips.Clear();
+            foreach (SoundManager.Sound item in Enum.GetValues(typeof(SoundManager.Sound)))
+            {
+                clips.Add(new SoundAudioClip(item));
+            }
+        }
+        public enum Sound
         {
             playerHit,
             ballHit,
@@ -16,47 +29,49 @@ namespace controller
             playerLost,
             playerShoot,
             UpgradeSelected,
-
-
         }
-        public static void Initialize()
+
+        private void Start()
+        {
+            Initialize();
+        }
+
+        private void Initialize()
         {
             // this is for the list to be in the inspector but the manager static this happens once on awake
-            clips = GameObject.FindObjectOfType<SoundManagerList>().Clips;
             //Creating AudioSource for static reference
             GameObject AudioSourceGO = new GameObject();
-            TwoDimensionalAudioSource = AudioSourceGO.AddComponent<AudioSource>();
+            twoDimensionalAudioSource = AudioSourceGO.AddComponent<AudioSource>();
             AudioSourceGO.name = "TwoDimensionalAudioSource";
         }
 
         // Simple play once with many overloads for custom settings when playing the sound
-        public static void Play(Sound sound)
+        public void Play(Sound sound)
         {
-            TwoDimensionalAudioSource.volume = Mathf.Clamp01(GetVolumeOfClip(sound));
-            if (TwoDimensionalAudioSource.volume == 0)
+            twoDimensionalAudioSource.volume = Mathf.Clamp01(GetVolumeOfClip(sound));
+            if (twoDimensionalAudioSource.volume == 0)
                 return;
-            TwoDimensionalAudioSource.PlayOneShot(GetAudioClip(sound));
+            twoDimensionalAudioSource.PlayOneShot(GetAudioClip(sound));
         }
 
-        public static void Play(Sound sound, float volume)
+        public void Play(Sound sound, float volume)
         {
-            TwoDimensionalAudioSource.volume = Mathf.Clamp01(volume);
-            if (TwoDimensionalAudioSource.volume == 0)
+            twoDimensionalAudioSource.volume = Mathf.Clamp01(volume);
+            if (twoDimensionalAudioSource.volume == 0)
                 return;
-            TwoDimensionalAudioSource.PlayOneShot(GetAudioClip(sound));
+            twoDimensionalAudioSource.PlayOneShot(GetAudioClip(sound));
         }
 
-        public static void Play(Sound sound, float volume, float pitch)
+        public void Play(Sound sound, float volume, float pitch)
         {
-            TwoDimensionalAudioSource.pitch = Mathf.Clamp(pitch, -3, 3);
-            TwoDimensionalAudioSource.volume = Mathf.Clamp01(volume);
-            if (TwoDimensionalAudioSource.volume == 0)
+            twoDimensionalAudioSource.pitch = Mathf.Clamp(pitch, -3, 3);
+            twoDimensionalAudioSource.volume = Mathf.Clamp01(volume);
+            if (twoDimensionalAudioSource.volume == 0)
                 return;
-            TwoDimensionalAudioSource.PlayOneShot(GetAudioClip(sound));
+            twoDimensionalAudioSource.PlayOneShot(GetAudioClip(sound));
         }
 
-
-        public static AudioClip GetAudioClip(Sound sound)
+        private AudioClip GetAudioClip(Sound sound)
         {
             foreach (SoundAudioClip clip in clips)
             {
@@ -68,7 +83,7 @@ namespace controller
             return null;
         }
 
-        public static float GetVolumeOfClip(Sound sound)
+        private float GetVolumeOfClip(Sound sound)
         {
             foreach (SoundAudioClip clip in clips)
             {
@@ -81,16 +96,18 @@ namespace controller
         }
     }
 }
+
 [Serializable]
 public class SoundAudioClip
 {
-    public SoundAudioClip(controller.SoundManager.Sound _sound)
+    public SoundAudioClip(view.SoundManager.Sound _sound)
     {
         m_Sound = _sound;
         name = _sound.ToString();
     }
+
     public string name; // The enum has a name, but Unity uses this name for the list
-    public controller.SoundManager.Sound m_Sound;
+    public view.SoundManager.Sound m_Sound;
     public AudioClip m_AudioClip;
     [Range(0, 1)]
     public float m_Volume = 1;

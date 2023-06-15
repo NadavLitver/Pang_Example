@@ -7,12 +7,12 @@ namespace controller
     {
         [SerializeField] InputHandler inputHandler;
         [SerializeField] Transform robot;
-        [SerializeField] PlayerData playerData;
+        [SerializeField] PlayerConfig playerData;
         private float dynamicSpeed;//didnt want to use SO speed because it changes during gameplay but doesnt save we resetting scene
 
         private void Start()
         {
-            dynamicSpeed = playerData.Speed;
+            dynamicSpeed = playerData.MoveSpeed;
         }
         private void Update()
         {
@@ -29,8 +29,8 @@ namespace controller
                 robot.Translate(Vector2.right * horInput * dynamicSpeed * Time.deltaTime);
               
                 //debugCollisions
-                Debug.DrawRay(robot.position, Vector2.left * playerData.width, Color.red);
-                Debug.DrawRay(robot.position, Vector2.right * playerData.width, Color.blue);
+                Debug.DrawRay(robot.position, Vector2.left * playerData.Width, Color.red);
+                Debug.DrawRay(robot.position, Vector2.right * playerData.Width, Color.blue);
             }
 
         }
@@ -41,12 +41,12 @@ namespace controller
         private bool CheckCollisionOnRight()
         {
             
-            return Physics2D.Raycast(robot.position, Vector2.right, playerData.width, playerData.collisionMask);
+            return Physics2D.Raycast(robot.position, Vector2.right, playerData.Width, playerData.CollisionLayer);
         }
         private bool CheckCollisionOnLeft()
         {
            
-            return Physics2D.Raycast(robot.position, Vector2.left, playerData.width, playerData.collisionMask);
+            return Physics2D.Raycast(robot.position, Vector2.left, playerData.Width, playerData.CollisionLayer);
         }
     }
 }

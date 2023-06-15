@@ -1,6 +1,8 @@
 using model;
 using System.Collections.Generic;
 using UnityEngine;
+using view;
+
 namespace controller
 {
     [DefaultExecutionOrder(+1)]//delay execution
@@ -8,7 +10,10 @@ namespace controller
     {
 
 
-        [SerializeField]BallsDataHandler ballDataHandler;
+        [SerializeField] private BallsPoolHandler ballDataHandler;
+        [SerializeField] private BallsConfig ballsData;
+
+        [SerializeField] private SoundManager soundManager;
 
 
         //  method for ball creation
@@ -25,7 +30,7 @@ namespace controller
 
         public Vector2 RandomBallVelocity()
         {
-            return GetRandomRightOrLeft() * ballDataHandler.Speed;
+            return GetRandomRightOrLeft() * ballsData.Speed;
         }
 
         internal void CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)//overloaded so I can have more controll than just default
@@ -39,7 +44,7 @@ namespace controller
             // Set ball position, velocity, and any other necessary properties
         }
         //  method for returning a ball to the pool(disabling it)
-        internal void ReturnBallToPool(Rigidbody2D ball)
+        private void ReturnBallToPool(Rigidbody2D ball)
         {
             RemoveFromActiveBalls(ball);
 
@@ -71,9 +76,9 @@ namespace controller
             float raycastSize = scale.x * 0.8f;
 
             // Perform raycast checks on the bottom-left, bottom-right, and bottom of the ball
-            bool isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize, ballDataHandler.collisionLayer);
-            bool isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, ballDataHandler.collisionLayer);
-            bool isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, ballDataHandler.collisionLayer);
+            bool isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize, ballsData.CollisionLayer);
+            bool isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, ballsData.CollisionLayer);
+            bool isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, ballsData.CollisionLayer);
 
             //Draw debugs
             Debug.DrawRay(ball.transform.position, Vector2.left * raycastSize, Color.red);
@@ -83,22 +88,22 @@ namespace controller
             // Process collision results as needed
             if (isLeftHit)
             {
-                ball.velocity = new Vector2(1 * ballDataHandler.Speed, ball.velocity.y);
+                ball.velocity = new Vector2(1 * ballsData.Speed, ball.velocity.y);
             }
             else if (isRightHit)
             {
-                ball.velocity = new Vector2(-1 * ballDataHandler.Speed, ball.velocity.y);
+                ball.velocity = new Vector2(-1 * ballsData.Speed, ball.velocity.y);
             }
             else if (isBottomHit)
             {
 
                 if (ball.velocity.x > 0)
                 {
-                    ball.velocity = new Vector2(1 * ballDataHandler.Speed, ballDataHandler.BounceForce);
+                    ball.velocity = new Vector2(1 * ballsData.Speed, ballsData.BounceForce);
                 }
                 else
                 {
-                    ball.velocity = new Vector2(-1 * ballDataHandler.Speed, ballDataHandler.BounceForce);
+                    ball.velocity = new Vector2(-1 * ballsData.Speed, ballsData.BounceForce);
                 }
 
             }
@@ -116,7 +121,7 @@ namespace controller
             }
         }
 
-        internal Vector2 GetRandomRightOrLeft()
+        private Vector2 GetRandomRightOrLeft()
         {
             // Generate a random value (0 or 1) to determine the direction
             int randomValue = Random.Range(0, 2);
@@ -149,17 +154,17 @@ namespace controller
                     break;
             }
             ReturnBallToPool(ball);
-            SoundManager.Play(SoundManager.Sound.ballHit);
+            soundManager.Play(SoundManager.Sound.ballHit);
 
         }
-        public bool IsActiveBallsEmpty()
+        internal bool IsActiveBallsEmpty()
         {
             return ballDataHandler.ActiveBalls.Count == 0;
         }
         private void CreateTwoBalls(Rigidbody2D ball, float size)
         {
-            CreateBall(ball.transform.position, Vector2.one * size, Vector2.right * ballDataHandler.Speed);
-            CreateBall(ball.transform.position, Vector2.one * size, Vector2.left * ballDataHandler.Speed);
+            CreateBall(ball.transform.position, Vector2.one * size, Vector2.right * ballsData.Speed);
+            CreateBall(ball.transform.position, Vector2.one * size, Vector2.left * ballsData.Speed);
         }
 
         [ContextMenu("SplitBalls")]
