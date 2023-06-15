@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static SoundManager;
-
+using controller;
+namespace model { 
 public class SoundManagerList : MonoBehaviour//SoundManager list is used to connect between the enum of the sound and the audio clip and control its volume
 {
     [SerializeField] List<SoundAudioClip> clips;
@@ -13,9 +12,10 @@ public class SoundManagerList : MonoBehaviour//SoundManager list is used to conn
     public void ResetList()
     {
         clips.Clear();
-        foreach (Sound item in Enum.GetValues(typeof(Sound)))
+        foreach (SoundManager.Sound item in Enum.GetValues(typeof(SoundManager.Sound)))
         {
             clips.Add(new SoundAudioClip(item));
         }
     }
+}
 }

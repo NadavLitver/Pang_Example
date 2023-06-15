@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
-namespace model
+namespace controller
 {
     public class Ball : MonoBehaviour// ball only exists to raise event when a ball collides with the player
     {

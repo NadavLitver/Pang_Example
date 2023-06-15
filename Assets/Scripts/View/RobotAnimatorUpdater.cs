@@ -9,6 +9,7 @@ namespace view
         [SerializeField] InputHandler inputHandler;
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer robotSR;
+        [SerializeField] GameManager gameManager;
         private int RunningHash;
         private int ShootingHash;
         private int DeadHash;
@@ -16,6 +17,7 @@ namespace view
         private void Start()
         {
             //cache names to hashes
+            gameManager.OnLose.AddListener(PlayDead);
             RunningHash = Animator.StringToHash("Running");
             ShootingHash = Animator.StringToHash("Shooting");
             DeadHash = Animator.StringToHash("Dead");

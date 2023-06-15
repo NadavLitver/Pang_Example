@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
-namespace model
+namespace controller
 {
     public class LaserHandler : MonoBehaviour// the laser handler handels individual projectile logic
     {
         public UnityEvent<LaserHandler, Rigidbody2D> onHitBall;
-        [SerializeField] float speed;
-        [SerializeField] float timeToLive;//time to live
+        [SerializeField] model.LaserData laserData;
         private float currentTimeAlive;
         private void OnEnable()
         {
@@ -21,7 +20,7 @@ namespace model
         }
         private void Update()
         {
-            transform.Translate(speed * Vector2.up * Time.deltaTime);
+            transform.Translate(laserData.Speed * Vector2.up * Time.deltaTime);
 
             CheckTimeToLive();
 
@@ -30,7 +29,7 @@ namespace model
         private void CheckTimeToLive()
         {
             currentTimeAlive += Time.deltaTime;
-            if (currentTimeAlive > timeToLive)
+            if (currentTimeAlive > laserData.TTL)
             {
                 this.gameObject.SetActive(false);
             }

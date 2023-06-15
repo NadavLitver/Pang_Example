@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-namespace model
+namespace controller
 {
     public class MenuPanel : MonoBehaviour//the menu panel is responsible for handling the pause menu logic which is also the main menu
     {

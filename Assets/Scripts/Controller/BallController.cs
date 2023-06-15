@@ -1,51 +1,41 @@
 using System.Collections.Generic;
 using UnityEngine;
+using model;
 
-namespace model
+namespace controller
 {
     public class BallController : MonoBehaviour // BallController: movement and collision logic for the balls.
     {
-        [SerializeField] ObjectPool ballPoolRef;
-        [SerializeField] float speed;
-        [SerializeField] float bounceForce;
-        [SerializeField] LayerMask collisionLayer;
-        [SerializeField] GameManager gameManager;
-        List<Rigidbody2D> activeBalls;
-       
-        internal float Speed { get => speed; }
-        internal List<Rigidbody2D> ActiveBalls { get => activeBalls; }
 
-        private void Awake()
-        {
-            activeBalls = new List<Rigidbody2D>();
-        }
-        private void Start()
-        {
-            foreach (var currentBall in ballPoolRef.Pool)
-            {
-                Ball currentBallRef = currentBall.GetComponent<Ball>();
-                currentBallRef.OnPlayerHit.AddListener(gameManager.PlayerHit);
-            }
-        }
+
+        BallsDataHandler ballDataHandler;
+
+     
         //  method for ball creation
         internal void CreateBall()//default overload
         {
-            GameObject ball = ballPoolRef.GetFromPool();
+            GameObject ball = ballDataHandler.BallPoolRef.GetFromPool();
             ball.transform.position = Vector3.zero;
             ball.transform.localScale = Vector3.one;
             Rigidbody2D ballRB = ball.GetComponent<Rigidbody2D>();
-            ballRB.velocity = GetRandomRightOrLeft() * speed;
-            activeBalls.Add(ballRB);
+            ballRB.velocity = RandomBallVelocity();
+            ballDataHandler.ActiveBalls.Add(ballRB);
             // Set ball position, velocity, and any other necessary properties
         }
+
+        public Vector2 RandomBallVelocity()
+        {
+            return GetRandomRightOrLeft() * ballDataHandler.Speed;
+        }
+
         internal void CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)//overloaded so I can have more controll than just default
         {
-            GameObject ball = ballPoolRef.GetFromPool();
+            GameObject ball = ballDataHandler.BallPoolRef.GetFromPool();
             ball.transform.position = pos;
             ball.transform.localScale = scale;
             Rigidbody2D ballRB = ball.GetComponent<Rigidbody2D>();
             ballRB.velocity = velocity;
-            activeBalls.Add(ballRB);
+            ballDataHandler.ActiveBalls.Add(ballRB);
             // Set ball position, velocity, and any other necessary properties
         }
         //  method for returning a ball to the pool(disabling it)
@@ -53,22 +43,22 @@ namespace model
         {
             RemoveFromActiveBalls(ball);
 
-            ballPoolRef.ReturnToPool(ball.gameObject);
+            ballDataHandler.BallPoolRef.ReturnToPool(ball.gameObject);
         }
 
         private void RemoveFromActiveBalls(Rigidbody2D ball)
         {
-            int index = activeBalls.IndexOf(ball);
+            int index = ballDataHandler.ActiveBalls.IndexOf(ball);
 
             if (index != -1)// if indexOf can't find it return -1 so incase it found something we continue to the rest of the logic
             {
-                int lastIndex = activeBalls.Count - 1;
+                int lastIndex = ballDataHandler.ActiveBalls.Count - 1;
 
                 // Swap the ball to be removed with the last ball in the list
-                Rigidbody2D lastBall = activeBalls[lastIndex];
-                activeBalls[lastIndex] = ball;
-                activeBalls[index] = lastBall;
-                activeBalls.RemoveAt(lastIndex);
+                Rigidbody2D lastBall = ballDataHandler.ActiveBalls[lastIndex];
+                ballDataHandler.ActiveBalls[lastIndex] = ball;
+                ballDataHandler.ActiveBalls[index] = lastBall;
+                ballDataHandler.ActiveBalls.RemoveAt(lastIndex);
             }
         }
 
@@ -81,9 +71,9 @@ namespace model
             float raycastSize = scale.x * 0.8f;
 
             // Perform raycast checks on the bottom-left, bottom-right, and bottom of the ball
-            bool isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize, collisionLayer);
-            bool isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, collisionLayer);
-            bool isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, collisionLayer);
+            bool isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize,ballDataHandler.collisionLayer);
+            bool isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, ballDataHandler.collisionLayer);
+            bool isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, ballDataHandler.collisionLayer);
 
             //Draw debugs
             Debug.DrawRay(ball.transform.position, Vector2.left * raycastSize, Color.red);
@@ -93,22 +83,22 @@ namespace model
             // Process collision results as needed
             if (isLeftHit)
             {
-                ball.velocity = new Vector2(1 * speed, ball.velocity.y);
+                ball.velocity = new Vector2(1 * ballDataHandler.Speed, ball.velocity.y);
             }
             else if (isRightHit)
             {
-                ball.velocity = new Vector2(-1 * speed, ball.velocity.y);
+                ball.velocity = new Vector2(-1 * ballDataHandler.Speed, ball.velocity.y);
             }
             else if (isBottomHit)
             {
                 
                 if(ball.velocity.x > 0)
                 {
-                    ball.velocity = new Vector2(1 * speed, bounceForce);
+                    ball.velocity = new Vector2(1 * ballDataHandler.Speed, ballDataHandler.BounceForce);
                 }
                 else
                 {
-                    ball.velocity = new Vector2(-1 * speed, bounceForce);
+                    ball.velocity = new Vector2(-1 * ballDataHandler.Speed, ballDataHandler.BounceForce);
                 }
                
             }
@@ -120,7 +110,7 @@ namespace model
 
         private void IterateOverBallsAndCheckCollision()
         {
-            foreach (var ball in activeBalls)//while a for loop might have been slightly faster the differences are negligible and a foreach loop is more readable and I don't need the index
+            foreach (var ball in ballDataHandler.ActiveBalls)//while a for loop might have been slightly faster the differences are negligible and a foreach loop is more readable and I don't need the index
             {
                 CheckCollisionForBall(ball);
             }
@@ -162,11 +152,14 @@ namespace model
             SoundManager.Play(SoundManager.Sound.ballHit);
 
         }
-
+        public bool IsActiveBallsEmpty()
+        {
+            return ballDataHandler.ActiveBalls.Count == 0;
+        }
         private void CreateTwoBalls(Rigidbody2D ball,float size)
         {
-            CreateBall(ball.transform.position, Vector2.one * size, Vector2.right * speed);
-            CreateBall(ball.transform.position, Vector2.one * size, Vector2.left * speed);
+            CreateBall(ball.transform.position, Vector2.one * size, Vector2.right * ballDataHandler.Speed);
+            CreateBall(ball.transform.position, Vector2.one * size, Vector2.left * ballDataHandler.Speed);
         }
 
         [ContextMenu("SplitBalls")]
@@ -174,7 +167,7 @@ namespace model
         {
             List<Rigidbody2D> ballsToSplit = new List<Rigidbody2D>(); // Create a separate list to store the balls to be split
 
-            foreach (var ball in activeBalls)
+            foreach (var ball in ballDataHandler.ActiveBalls)
             {
                 ballsToSplit.Add(ball); // Add the ball to the separate list
             }

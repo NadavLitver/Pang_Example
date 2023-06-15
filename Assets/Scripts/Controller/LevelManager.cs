@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-
-namespace model
+namespace controller
 {
     [DefaultExecutionOrder(1)]// delay script execution
     public class LevelManager : MonoBehaviour// LevelGenerator: Generates and manages the arrangement of game objects within each level.
@@ -10,7 +9,6 @@ namespace model
         [SerializeField] private LevelConfig[] levelConfigs;
         [SerializeField] BallController ballsController;
         [SerializeField] UpgradeHandler upgradeHandler;
-        [SerializeField] int levelToOpenUpgradePanel = 3;
         private float delayBetweenLevels;
         public UnityEvent<int> OnAdvanceLevel;
         public UnityEvent<bool> OnWin;
@@ -34,7 +32,7 @@ namespace model
                 levelCount = level.levelIndex;
                 OnAdvanceLevel?.Invoke(levelCount);
                 //check to open upgrade panel
-                if(levelCount == levelToOpenUpgradePanel)
+                if(level.upgradePanel)
                 {//Open Upgrade panel, yielding so it waits for the other routine to finish
                     yield return upgradeHandler.UpgradeRoutine();
                 }
@@ -46,11 +44,11 @@ namespace model
                 for (int i = 0; i < ballCount; i++)
                 {
                     // Spawn a ball using the ball controller and set the position,scale,direction
-                    ballsController.CreateBall(new Vector2(Random.Range(0,5), Random.Range(0, 2)), Vector2.one * ballSize, ballsController.GetRandomRightOrLeft() * ballsController.Speed);
+                    ballsController.CreateBall(new Vector2(Random.Range(0,5), Random.Range(0, 2)), Vector2.one * ballSize, ballsController.RandomBallVelocity());
                 }
 
                 //wait till all balls are destroyed to start new level
-                yield return new WaitUntil(() => ballsController.ActiveBalls.Count == 0);
+                yield return new WaitUntil(() => ballsController.IsActiveBallsEmpty());
                 //call level completed sound
                 SoundManager.Play(SoundManager.Sound.levelCompleted);
 

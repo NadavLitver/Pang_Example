@@ -1,9 +1,8 @@
+using model;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
-namespace model
+namespace controller
 {
     public class UpgradeHandler : MonoBehaviour// The Upgrade handler is responsible for all logic correlated with the upgrade panel
     {
@@ -12,10 +11,11 @@ namespace model
         [SerializeField] Button HealthButton;
         [SerializeField] Button LaserUpgradeButton;
         [SerializeField] ShootController shootController;
+        [SerializeField] LaserData laserData;
         [SerializeField] GameManager gameManagerRef;
-        [SerializeField] RobotController robotControllerRef;
-        [SerializeField] float newSpeed = 5;
-        [SerializeField] int healthPointsToAdd = 2;
+        [SerializeField] LocoMotion robotControllerRef;
+        [SerializeField] UpgradesData upgradesData;
+
         private bool didChooseUpgrade;
 
         private void Start()
@@ -26,7 +26,7 @@ namespace model
         }
         public void UnSubscribeFromReturningLasers()
         {
-            foreach (var laser in shootController.laserPool.Pool)
+            foreach (var laser in laserData.LaserPool.Pool)
             {
                 // get laser handler
                 LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
@@ -38,14 +38,14 @@ namespace model
         public void UpgradeSpeed()
         {
             // set a new speed
-            robotControllerRef.SetSpeed(newSpeed);
+            robotControllerRef.SetSpeed(upgradesData.newSpeed);
             didChooseUpgrade = true;
 
         }
         public void UpgradeHP()
         {
             // add health points to existing
-            gameManagerRef.AddHealthPoints(healthPointsToAdd);
+            gameManagerRef.AddHealthPointsAndUpdateUI(upgradesData.hpAddition);
             didChooseUpgrade = true;
 
         }

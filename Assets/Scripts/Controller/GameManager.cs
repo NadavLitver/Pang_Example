@@ -1,24 +1,20 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using view;
-namespace model
+
+namespace controller
 {
     [DefaultExecutionOrder(-1)]
-    public class GameManager : MonoBehaviour // GameManager: Manages the game state, score, health
+    public class GameManager : MonoBehaviour // GameManager: Manages the game state, score
     {
-        [SerializeField] int startingHealthPoints;
-        [SerializeField] float playerHitCD = 1;
         [SerializeField] LevelManager levelManager;
         [SerializeField] UIHandler UIHandlerRef;
-        [SerializeField] RobotAnimatorUpdater robotAnimatorUpdater;
+        [SerializeField] PlayerHPHandler playerHitHandler;
+        private float score;//no need for so if score is going to constantly change and it inits at 0
 
-        private int CurrentHealthPoints;
-        private float lastHit;
-        private float score;
 
-        public UnityEvent<int> healthReducedEvent;
         public UnityEvent OnLose;
 
         public float Score { get => score; }
@@ -27,7 +23,6 @@ namespace model
             //make sure timescale is one
             Time.timeScale = 1;
             // init variables
-            CurrentHealthPoints = startingHealthPoints;
             score = 0;
             //Init the static soundmanager
             SoundManager.Initialize();
@@ -38,7 +33,7 @@ namespace model
             // update UI on beggining of game
             UIHandlerRef.UpdateLevel(levelManager.levelCount);
             UIHandlerRef.UpdateScore((int)score);
-            UIHandlerRef.UpdateHealth(CurrentHealthPoints);
+            UIHandlerRef.UpdateHealth(playerHitHandler.CurrentHealthPoints);
 
             //Subscribe to events
 
@@ -50,33 +45,13 @@ namespace model
             levelManager.OnAdvanceLevel.AddListener(UIHandlerRef.UpdateLevel);
             //Call the 3 2 1 countdown on screen
             levelManager.OnAdvanceLevel.AddListener(UIHandlerRef.CallCountdownRoutine);
-            //check if player lost
-            healthReducedEvent.AddListener(CheckLose);
             //update health in ui when hit
-            healthReducedEvent.AddListener(UIHandlerRef.UpdateHealth);
+            playerHitHandler.healthReducedEvent.AddListener(UIHandlerRef.UpdateHealth);
             // On Finished All levels Call UI Handler
             levelManager.OnWin.AddListener(UIHandlerRef.EnableEndingPanel);
             // subscribe robot animator death anim to game lost
-            OnLose.AddListener(robotAnimatorUpdater.PlayDead);
         }
-        public void PlayerHit()
-        {
-            if (CheckHitCooldown())
-            {
-                //reduce hp
-                CurrentHealthPoints--;
-                //reduce score
-                score -= 50;
-                // update last time player was hit for cooldown
-                lastHit = Time.time;
-                //invoke getting hit event
-                healthReducedEvent?.Invoke(CurrentHealthPoints);
-                //call sound
-                SoundManager.Play(SoundManager.Sound.playerHit);
 
-            }
-
-        }
         public void CheckLose(int currentHealthPoints)
         {
             if (currentHealthPoints < 0)
@@ -84,7 +59,7 @@ namespace model
                 OnLose?.Invoke();
                 Time.timeScale = 0;
                 UIHandlerRef.EnableEndingPanel(false);
-                
+
                 SoundManager.Play(SoundManager.Sound.playerLost);
             }
         }
@@ -106,20 +81,20 @@ namespace model
         void UpdateHealthOnLevelAdvance(int level)
         {
             //increase health points by 1
-            CurrentHealthPoints++;
+            playerHitHandler.AddHp(1);
             // update in UI
-            UIHandlerRef.UpdateHealth(CurrentHealthPoints);
+            UIHandlerRef.UpdateHealth(playerHitHandler.CurrentHealthPoints);
 
         }
-        internal void AddHealthPoints(int healthPoints)
+        internal void AddHealthPointsAndUpdateUI(int healthPoints)
         {
-            CurrentHealthPoints += healthPoints;
+            playerHitHandler.AddHp(healthPoints);
             // update in UI
-            UIHandlerRef.UpdateHealth(CurrentHealthPoints);
+            UIHandlerRef.UpdateHealth(playerHitHandler.CurrentHealthPoints);
         }
-        private bool CheckHitCooldown()//Check if getting hit is on cooldown
+        public void ReduceScore(float scoreToDeduct)
         {
-            return Time.time - lastHit > playerHitCD;
+            score -= scoreToDeduct;
         }
         public void ResetScene()
         {

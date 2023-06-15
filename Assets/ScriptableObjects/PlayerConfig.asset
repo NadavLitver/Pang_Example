@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374276cbc99df3c4cabcec9f9c82a52b, type: 3}
-  m_Name: Level3
+  m_Script: {fileID: 11500000, guid: 439df53e767be7946aae82a117083bac, type: 3}
+  m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  levelIndex: 3
-  ballCount: 3
-  ballSize: 2
-  upgradePanel: 1
+  shootCD: 0.25
+  hitCD: 1
+  moveSpeed: 3.5
+  Width: 0.8
+  StartingHP: 3
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 8
