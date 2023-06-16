@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using view;
+using Zenject;
 
 namespace controller
 {
@@ -13,7 +14,7 @@ namespace controller
         [SerializeField] private Button startButton;
         [SerializeField] private Button resetButton;
 
-        [SerializeField] private UIHandler uIhandler;
+        [Inject] private IUIHandler iUIhandler;
 
         private bool isPaused;
         private bool didResumeOnce;
@@ -49,7 +50,7 @@ namespace controller
                 pauseMenuUI.SetActive(false);
                 if (!didResumeOnce)//make sure setting text once
                 {
-                    uIhandler.UpdateStartText();
+                    iUIhandler.UpdateStartText();
                     didResumeOnce = true;
                     resetButton.gameObject.SetActive(true);
                 }

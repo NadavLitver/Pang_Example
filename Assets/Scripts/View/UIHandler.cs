@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 namespace view
 {
-    public class UIHandler : MonoBehaviour// the UI handler is responsible for updating ui elements
+    public class UIHandler : MonoBehaviour,IUIHandler// the UI handler is responsible for updating ui elements
     {
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI healthText;

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using view;
+using Zenject;
 
 namespace controller
 {
@@ -10,7 +11,7 @@ namespace controller
     public class GameManager : MonoBehaviour // GameManager: Manages the game state, score
     {
         [SerializeField] LevelManager levelManager;
-        [SerializeField] UIHandler uIHandler;
+        [Inject] IUIHandler iUIHandler;
         [SerializeField] PlayerHPHandler playerHitHandler;
         [SerializeField] SoundManager soundManager;
         private float score;//no need for so if score is going to constantly change and it inits at 0
@@ -33,9 +34,9 @@ namespace controller
         {
 
             // update UI on beggining of game
-            uIHandler.UpdateLevel(levelManager.levelCount);
-            uIHandler.UpdateScore((int)score);
-            uIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
+            iUIHandler.UpdateLevel(levelManager.levelCount);
+            iUIHandler.UpdateScore((int)score);
+            iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
 
             //Subscribe to events
 
@@ -44,13 +45,13 @@ namespace controller
             //call on update health when advancing a level
             levelManager.OnAdvanceLevel.AddListener(UpdateHealthOnLevelAdvance);
             //update level in ui when advancing a level
-            levelManager.OnAdvanceLevel.AddListener(uIHandler.UpdateLevel);
+            levelManager.OnAdvanceLevel.AddListener(iUIHandler.UpdateLevel);
             //Call the 3 2 1 countdown on screen
-            levelManager.OnAdvanceLevel.AddListener(uIHandler.CallCountdownRoutine);
+            levelManager.OnAdvanceLevel.AddListener(iUIHandler.CallCountdownRoutine);
             //update health in ui when hit
-            playerHitHandler.healthReducedEvent.AddListener(uIHandler.UpdateHealth);
+            playerHitHandler.healthReducedEvent.AddListener(iUIHandler.UpdateHealth);
             // On Finished All levels Call UI Handler
-            OnEnd.AddListener(uIHandler.EnableEndingPanel);
+            OnEnd.AddListener(iUIHandler.EnableEndingPanel);
         }
 
         internal void CheckLose(int currentHealthPoints)
@@ -59,7 +60,7 @@ namespace controller
             {
                 OnLose?.Invoke();
                 Time.timeScale = 0;
-                uIHandler.EnableEndingPanel(false);
+                iUIHandler.EnableEndingPanel(false);
 
                 soundManager.Play(SoundManager.Sound.playerLost);
             }
@@ -68,15 +69,15 @@ namespace controller
         {
             score += 10 * ball.transform.localScale.x;
             //call on update ui
-            uIHandler.UpdateScore((int)score);
+            iUIHandler.UpdateScore((int)score);
         }
         private void UpdateScoreOnLevelAdvance(int level)
         {
             score += 100 * level;
 
             //call on update ui
-            uIHandler.UpdateScore((int)score);
-            uIHandler.UpdateLevel(level);
+            iUIHandler.UpdateScore((int)score);
+            iUIHandler.UpdateLevel(level);
 
         }
         private void UpdateHealthOnLevelAdvance(int level)
@@ -84,14 +85,14 @@ namespace controller
             //increase health points by 1
             playerHitHandler.AddHp(1);
             // update in UI
-            uIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
+            iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
 
         }
         internal void AddHealthPointsAndUpdateUI(int healthPoints)
         {
             playerHitHandler.AddHp(healthPoints);
             // update in UI
-            uIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
+            iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
         }
         internal void ReduceScore(float scoreToDeduct)
         {
