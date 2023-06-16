@@ -1,24 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+
 namespace model
 {
 
-    public class ObjectPool : MonoBehaviour
+    public class ObjectPool : MonoBehaviour,IObjectPool
     {
-        [SerializeField] private GameObject prefabRef;
+        [Inject] private GameObject prefabRef;
         [SerializeField] private int poolSize = 20;
         private List<GameObject> pool;
 
-        public List<GameObject> Pool { get => pool;}
+        public List<GameObject> Pool => pool;
 
         private void Awake()
         {
             pool = new List<GameObject>();
             PopulatePool();
         }
+
         private void PopulatePool()
         {
-            //Populate the GameObject pool list by the GameObject pool size 
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject current = Instantiate(prefabRef);
@@ -27,9 +29,9 @@ namespace model
                 current.SetActive(false);
             }
         }
+
         public GameObject GetFromPool()
         {
-            // Find an inactive GameObject in the pool and return it
             for (int i = 0; i < pool.Count; i++)
             {
                 if (!pool[i].activeInHierarchy)
@@ -39,17 +41,16 @@ namespace model
                 }
             }
 
-            // If no inactive GameObject is available, create a new one and return it
             GameObject current = Instantiate(prefabRef);
             current.name = prefabRef.name + "Extra";
             pool.Add(current);
             current.SetActive(true);
             return current;
         }
-        public void ReturnToPool(GameObject ball)
+
+        public void ReturnToPool(GameObject obj)
         {
-            // Deactivate the GameObject and return it to the pool
-            ball.SetActive(false);
+            obj.SetActive(false);
         }
     }
 }

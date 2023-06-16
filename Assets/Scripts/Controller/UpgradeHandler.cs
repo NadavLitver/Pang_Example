@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using view;
+using Zenject;
 
 namespace controller
 {
@@ -14,7 +15,7 @@ namespace controller
         [SerializeField] private Button healthButton;
         [SerializeField] private Button laserUpgradeButton;
         // Data elements
-        [SerializeField] private ObjectPool laserPool;
+        [Inject(Id = "LaserPool")] private IObjectPool laserPool;
         [SerializeField] private UpgradesConfig upgradesData;
         // controllers ellements
         [SerializeField] private ShootController shootController;

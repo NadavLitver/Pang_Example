@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace model
 {
     public class BallsPoolHandler : MonoBehaviour
     {
-        [SerializeField] ObjectPool ballPoolRef;
+        [Inject(Id = "BallPool")] IObjectPool ballPoolRef;
        // [SerializeField] PlayerHPHandler playerHPHandler;
         List<Rigidbody2D> activeBalls;
 
-        public ObjectPool BallPoolRef { get => ballPoolRef;}
+        public IObjectPool BallPoolRef { get => ballPoolRef;}
       
         public List<Rigidbody2D> ActiveBalls { get => activeBalls; }
         

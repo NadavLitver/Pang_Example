@@ -2073,7 +2073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c7c7a9d815e504bb045ef20c084fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabRef: {fileID: 2070016070694160667, guid: 5aa202dca1d71f34faf48afbed7c99eb, type: 3}
   poolSize: 20
 --- !u!1 &557323607
 GameObject:
@@ -3144,6 +3143,87 @@ Transform:
   m_Father: {fileID: 2044090751}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &891779906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 891779909}
+  - component: {fileID: 891779908}
+  - component: {fileID: 891779907}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &891779907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891779906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1e99511febd0d40b9268c180b5b3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabRefA: {fileID: 9037659183072536743, guid: 8975863388eddc247b5cecea12a6a82f, type: 3}
+  prefabRefB: {fileID: 2070016070694160667, guid: 5aa202dca1d71f34faf48afbed7c99eb, type: 3}
+  BallPool: {fileID: 2028652583}
+  LaserPool: {fileID: 541006448}
+--- !u!114 &891779908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891779906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 891779907}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &891779909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891779906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &976809016
 GameObject:
   m_ObjectHideFlags: 0
@@ -3526,7 +3606,6 @@ MonoBehaviour:
   speedButton: {fileID: 976809020}
   healthButton: {fileID: 327169799}
   laserUpgradeButton: {fileID: 500800004}
-  laserPool: {fileID: 0}
   upgradesData: {fileID: 11400000, guid: f2305ed008c22ab4f83f9dcd4e8efd0e, type: 2}
   shootController: {fileID: 1580545033}
   gameManagerRef: {fileID: 33495762}
@@ -10818,7 +10897,6 @@ MonoBehaviour:
   robotAnimatorUpdater: {fileID: 1159701555}
   shootPoint: {fileID: 1233040310}
   soundManager: {fileID: 1715855051}
-  laserPool: {fileID: 541006448}
   playerData: {fileID: 11400000, guid: 0bfd1ffd78fe5fd42b7edeb7623bf9cc, type: 2}
   onShot:
     m_PersistentCalls:
@@ -11600,7 +11678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c7c7a9d815e504bb045ef20c084fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabRef: {fileID: 9037659183072536743, guid: 8975863388eddc247b5cecea12a6a82f, type: 3}
   poolSize: 20
 --- !u!114 &2028652584
 MonoBehaviour:
@@ -11614,7 +11691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d911b670858d27b48924976eb5b17955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPoolRef: {fileID: 2028652583}
 --- !u!1 &2044090750
 GameObject:
   m_ObjectHideFlags: 0

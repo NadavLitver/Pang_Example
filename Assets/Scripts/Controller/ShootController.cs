@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using view;
 using model;
+using Zenject;
 
 namespace controller
 {
@@ -18,7 +19,7 @@ namespace controller
         [SerializeField] private SoundManager soundManager;
 
         //data elements
-        [SerializeField] private ObjectPool laserPool;
+        [Inject(Id = "LaserPool")] private IObjectPool laserPool;
         [SerializeField] private PlayerConfig playerData;
        
       
