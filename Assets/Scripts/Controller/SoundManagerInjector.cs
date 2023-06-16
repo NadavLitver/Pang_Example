@@ -1,12 +1,15 @@
 using UnityEngine;
 using view;
 using Zenject;
-
-public class SoundManagerInjector : MonoInstaller
+namespace controller
 {
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "SoundManagerInjector", menuName = "Installers/SoundManagerInjector", order = 8)]
+    public class SoundManagerInjector : ScriptableObjectInstaller<SoundManagerInjector>
     {
-        Container.Bind<ISoundManager>().To<SoundManager>().FromComponentInHierarchy().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<ISoundManager>().To<SoundManager>().FromComponentInHierarchy().AsSingle();
 
+        }
     }
 }

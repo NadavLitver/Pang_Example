@@ -8,26 +8,25 @@ using Zenject;
 namespace controller
 {
     [DefaultExecutionOrder(-1)]
-    public class GameManager : MonoBehaviour // GameManager: Manages the game state, score
+    public class GameManager : MonoBehaviour , IGameManager// GameManager: Manages the game state, score
     {
         [Inject] ILevelManager levelManager;
         [Inject] IUIHandler iUIHandler;
-        [SerializeField] PlayerHPHandler playerHitHandler;
+        [Inject] IPlayerHPHandler playerHitHandler;
         [Inject] private ISoundManager soundManager;
-        private float score;//no need for so if score is going to constantly change and it inits at 0
 
-
-        public UnityEvent OnLose;
-        public UnityEvent<bool> OnEnd;
-
+        private float score;
+        public UnityEvent OnLose { get; private set; }
+        public UnityEvent<bool> OnEnd { get; private set; }
         public float Score { get => score; }
         private void Awake()
         {
+            OnEnd = new UnityEvent<bool>();
+            OnLose = new UnityEvent();
             //make sure timescale is one
             Time.timeScale = 1;
             // init variables
             score = 0;
-            //Init the static soundmanager
            
         }
         private void Start()
@@ -38,7 +37,7 @@ namespace controller
             iUIHandler.UpdateScore((int)score);
             iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
 
-            //Subscribe to events
+            //Subscribe to events ->
 
             //call on update score when advancing a level
             levelManager.OnAdvanceLevel.AddListener(UpdateScoreOnLevelAdvance);
@@ -49,12 +48,12 @@ namespace controller
             //Call the 3 2 1 countdown on screen
             levelManager.OnAdvanceLevel.AddListener(iUIHandler.CallCountdownRoutine);
             //update health in ui when hit
-            playerHitHandler.healthReducedEvent.AddListener(iUIHandler.UpdateHealth);
+            playerHitHandler.HealthReducedEvent.AddListener(iUIHandler.UpdateHealth);
             // On Finished All levels Call UI Handler
             OnEnd.AddListener(iUIHandler.EnableEndingPanel);
         }
 
-        internal void CheckLose(int currentHealthPoints)
+        public void CheckLose(int currentHealthPoints)
         {
             if (currentHealthPoints < 0)
             {
@@ -65,7 +64,7 @@ namespace controller
                 soundManager.Play(SoundManager.Sound.playerLost);
             }
         }
-        internal void UpdateScoreOnSplitBall(LaserHandler laser, Rigidbody2D ball)
+        public void UpdateScoreOnSplitBall(ILaserHandler laser, Rigidbody2D ball)
         {
             score += 10 * ball.transform.localScale.x;
             //call on update ui
@@ -88,13 +87,13 @@ namespace controller
             iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
 
         }
-        internal void AddHealthPointsAndUpdateUI(int healthPoints)
+        public void AddHealthPointsAndUpdateUI(int healthPoints)
         {
             playerHitHandler.AddHp(healthPoints);
             // update in UI
             iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
         }
-        internal void ReduceScore(float scoreToDeduct)
+        public void ReduceScore(float scoreToDeduct)
         {
             score -= scoreToDeduct;
         }

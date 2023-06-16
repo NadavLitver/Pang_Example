@@ -3,12 +3,12 @@ using Zenject;
 
 namespace controller
 {
-    public class RobotAnimatorUpdater : MonoBehaviour// animator updater updates the robot animator and sprite renderer based on the controller input handler
+    public class RobotAnimatorUpdater : MonoBehaviour , IRobotAnimatorUpdater// animator updater updates the robot animator and sprite renderer based on the controller input handler
     {
         [Inject] private IInputHandler inputHandler;
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteRenderer robotSR;
-        [SerializeField] private GameManager gameManager;
+        [Inject] private IGameManager gameManager;
 
         //hashes
         private int runningHash;

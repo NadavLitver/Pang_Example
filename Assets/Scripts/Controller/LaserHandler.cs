@@ -3,10 +3,13 @@ using UnityEngine.Events;
 using model;
 namespace controller
 {
-    public class LaserHandler : MonoBehaviour// the laser handler handels individual projectile logic
+    public class LaserHandler : MonoBehaviour, ILaserHandler// the laser handler handels individual projectile logic
     {
-        public UnityEvent<LaserHandler, Rigidbody2D> onHitBall;
-        public LaserConfig laserData;
+        public UnityEvent<ILaserHandler, Rigidbody2D> OnHitBall { get; private set; }
+        public LaserConfig LaserData { get; private set; }
+
+        public GameObject myGameObject => gameObject;
+
         private float currentTimeAlive;
         private void OnEnable()
         {
@@ -16,21 +19,21 @@ namespace controller
         {
             if (collision.CompareTag("Ball"))
             {
-                onHitBall?.Invoke(this, collision.gameObject.GetComponent<Rigidbody2D>());
+                OnHitBall?.Invoke(this, collision.gameObject.GetComponent<Rigidbody2D>());
             }
         }
         private void Update()
         {
-            transform.Translate(laserData.Speed * Vector2.up * Time.deltaTime);
+            transform.Translate(LaserData.Speed * Vector2.up * Time.deltaTime);
 
             CheckTimeToLive();
 
         }
 
-        private void CheckTimeToLive()
+        public void CheckTimeToLive()
         {
             currentTimeAlive += Time.deltaTime;
-            if (currentTimeAlive > laserData.TimeToLive)
+            if (currentTimeAlive > LaserData.TimeToLive)
             {
                 this.gameObject.SetActive(false);
             }

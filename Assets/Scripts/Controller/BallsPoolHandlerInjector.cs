@@ -1,10 +1,15 @@
 using model;
+using UnityEngine;
 using Zenject;
-
-public class BallsPoolHandlerInjector : MonoInstaller
+namespace controller
 {
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "BallsPoolHandlerInjector", menuName = "Installers/BallsPoolHandlerInjector", order = 20)]
+
+    public class BallsPoolHandlerInjector : ScriptableObjectInstaller<BallsPoolHandlerInjector>
     {
-        Container.Bind<IBallsPoolHandler>().To<BallsPoolHandler>().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<IBallsPoolHandler>().To<BallsPoolHandler>().AsSingle();
+        }
     }
 }

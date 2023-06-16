@@ -8,6 +8,7 @@ namespace controller
     public class LocoMotion : MonoBehaviour, ILocomotion//handles basic movement for the robot and collisions
     {
         [Inject] IInputHandler inputHandler;
+
         [SerializeField] Transform robot;
         [SerializeField] PlayerConfig playerData;
         private float dynamicSpeed;//didnt want to use SO speed because it changes during gameplay but doesnt save we resetting scene

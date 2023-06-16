@@ -1,12 +1,14 @@
-using controller;
 using UnityEngine;
 using Zenject;
-
-public class ShootControllerInjector : MonoInstaller
+namespace controller
 {
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "ShootControllerInjector", menuName = "Installers/ShootControllerInjector", order = 7)]
+    public class ShootControllerInjector : ScriptableObjectInstaller<ShootControllerInjector>
     {
-        Container.Bind<IShootController>().To<ShootController>().FromComponentInHierarchy().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<IShootController>().To<ShootController>().FromComponentInHierarchy().AsSingle();
 
+        }
     }
 }

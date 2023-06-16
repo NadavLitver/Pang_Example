@@ -1,8 +1,10 @@
 using UnityEngine.Events;
-
-public interface IInputHandler
+namespace controller
 {
-    int GetHorInput();
-    UnityEvent onShoot { get; }
-}
+    public interface IInputHandler
+    {
+        int GetHorInput();
+        UnityEvent onShoot { get; }
+    }
 
+}

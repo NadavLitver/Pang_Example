@@ -11,9 +11,8 @@ namespace controller
         //controller elements
         [Inject] private IInputHandler inputHandler;
         [Inject] private IBallController ballController;
-        [SerializeField] private GameManager gameManager;
-        [SerializeField] private RobotAnimatorUpdater robotAnimatorUpdater;
-        [SerializeField] private Transform shootPoint;
+        [Inject] private IGameManager gameManager;
+        [Inject] private IRobotAnimatorUpdater robotAnimatorUpdater;
 
         //view elements
         [Inject] private ISoundManager soundManager;
@@ -21,27 +20,32 @@ namespace controller
         //data elements
         [Inject(Id = "LaserPool")] private IObjectPool laserPool;
         [SerializeField] private PlayerConfig playerData;
+        [SerializeField] private Transform shootPoint;
        
       
         
         private float lastTimeShot;
-        public UnityEvent onShot { get; private set; }
+        public UnityEvent OnShot { get; private set; }
+        private void Awake()
+        {
+            OnShot = new UnityEvent();
+        }
         private void Start()
         {
             inputHandler.onShoot.AddListener(Shoot);
-            onShot.AddListener(robotAnimatorUpdater.PlayShooting);
+            OnShot.AddListener(robotAnimatorUpdater.PlayShooting);
             foreach (var laser in laserPool.Pool)
             {
                 LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
 
                 //on laser hit ball call the "Split ball" method
-                currentLaserHandler.onHitBall.AddListener(ballController.SplitBall);
+                currentLaserHandler.OnHitBall.AddListener(ballController.SplitBall);
 
                 //on laser hit ball call update score
-                currentLaserHandler.onHitBall.AddListener(gameManager.UpdateScoreOnSplitBall);
+                currentLaserHandler.OnHitBall.AddListener(gameManager.UpdateScoreOnSplitBall);
 
                 // on laser hit ball return laser to object pool
-                currentLaserHandler.onHitBall.AddListener(ReturnLaser);
+                currentLaserHandler.OnHitBall.AddListener(ReturnLaser);
             }
         }
       
@@ -52,7 +56,7 @@ namespace controller
             {
                 GameObject current = laserPool.GetFromPool();
                 current.transform.position = shootPoint.position;
-                onShot?.Invoke();
+                OnShot?.Invoke();
                 lastTimeShot = Time.time;
                 soundManager.Play(SoundManager.Sound.playerShoot);
             }
@@ -64,9 +68,9 @@ namespace controller
             return Time.time - lastTimeShot > playerData.ShootCD;
         }
 
-        public void ReturnLaser(LaserHandler laserHandler, Rigidbody2D ballHit)
+        public void ReturnLaser(ILaserHandler laserHandler, Rigidbody2D ballHit)
         {
-            laserPool.ReturnToPool(laserHandler.gameObject);
+            laserPool.ReturnToPool(laserHandler.myGameObject);
         }
 
        

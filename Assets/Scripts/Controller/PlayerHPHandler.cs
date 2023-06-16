@@ -6,27 +6,30 @@ using Zenject;
 
 namespace controller
 {
-    public class PlayerHPHandler : MonoBehaviour// manages manipluations on playerHP
+    public class PlayerHPHandler : MonoBehaviour, IPlayerHPHandler// manages manipluations on playerHP
     {
         [SerializeField] private PlayerConfig playerData;
         private float lastHit;
-        [SerializeField] private GameManager gameManager;
+        [Inject] private IGameManager gameManager;
         [Inject] private IBlinkOnHit blinkOnHit;
         [Inject] private ISoundManager soundManager;
         [Inject] private IBallsPoolHandler ballsPoolHandler;
         private int currentHealthPoints;
-        public UnityEvent<int> healthReducedEvent;
+        public UnityEvent<int> HealthReducedEvent { get; private set; }
 
         public int CurrentHealthPoints { get => currentHealthPoints; }
-
-        private void Start()
+        private void Awake()
         {
             currentHealthPoints = playerData.StartingHP;
+            HealthReducedEvent = new UnityEvent<int>();
 
-            //check if player lost
-            healthReducedEvent.AddListener(gameManager.CheckLose);
+        }
+        private void Start()
+        {
+            //check if player lost on health reduced
+            HealthReducedEvent.AddListener(gameManager.CheckLose);
 
-            healthReducedEvent.AddListener(blinkOnHit.CallBlinkRoutine);
+            HealthReducedEvent.AddListener(blinkOnHit.CallBlinkRoutine);
             foreach (var ball in ballsPoolHandler.BallPoolRef.Pool)
             {
                 ball.GetComponent<Ball>().OnPlayerHit.AddListener(PlayerHit);
@@ -48,7 +51,7 @@ namespace controller
                 // update last time player was hit for cooldown
                 lastHit = Time.time;
                 //invoke getting hit event
-                healthReducedEvent?.Invoke(CurrentHealthPoints);
+                HealthReducedEvent?.Invoke(CurrentHealthPoints);
                 //call sound
                 soundManager.Play(SoundManager.Sound.playerHit);
 

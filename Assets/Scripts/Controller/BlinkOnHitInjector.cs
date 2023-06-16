@@ -1,11 +1,16 @@
+using UnityEngine;
 using view;
 using Zenject;
-
-public class BlinkOnHitInjector : MonoInstaller
+namespace controller
 {
-    public override void InstallBindings()
-    {
-        Container.Bind<IBlinkOnHit>().To<BlinkOnHit>().FromComponentInHierarchy().AsSingle();
+    [CreateAssetMenu(fileName = "BlinkOnHitInjector", menuName = "Installers/BlinkOnHitInjector", order = 21)]
 
+    public class BlinkOnHitInjector : ScriptableObjectInstaller<BlinkOnHitInjector>
+    {
+        public override void InstallBindings()
+        {
+            Container.Bind<IBlinkOnHit>().To<BlinkOnHit>().FromComponentInHierarchy().AsSingle();
+
+        }
     }
 }

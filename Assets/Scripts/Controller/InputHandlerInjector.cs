@@ -1,7 +1,10 @@
+using UnityEngine;
 using Zenject;
 namespace controller
 {
-    public class InputHandlerInjector : MonoInstaller
+    [CreateAssetMenu(fileName = "InputHandlerInjector", menuName = "Installers/InputHandlerInjector", order = 6)]
+
+    public class InputHandlerInjector : ScriptableObjectInstaller<InputHandlerInjector>
     {
         public override void InstallBindings()
         {

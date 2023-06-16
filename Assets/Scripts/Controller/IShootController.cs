@@ -1,9 +1,10 @@
-using controller;
-using UnityEngine.Events;
 using UnityEngine;
-
-public interface IShootController
+using UnityEngine.Events;
+namespace controller
 {
-    UnityEvent onShot { get; }
-    void ReturnLaser(LaserHandler laserHandler, Rigidbody2D ballHit);
+    public interface IShootController
+    {
+        UnityEvent OnShot { get; }
+        void ReturnLaser(ILaserHandler laserHandler, Rigidbody2D ballHit);
+    }
 }

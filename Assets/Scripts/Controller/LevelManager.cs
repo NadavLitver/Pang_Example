@@ -13,8 +13,8 @@ namespace controller
         [SerializeField] private model.LevelConfig[] levelConfigs;
         //controllers
         [Inject] private IBallController ballsController;
-        [SerializeField] private UpgradeHandler upgradeHandler;
-        [SerializeField] private GameManager gameManager;
+        [Inject] private IUpgradeHandler upgradeHandler;
+        [Inject] private IGameManager gameManager;
         [Inject] private ISoundManager soundManager;
 
 

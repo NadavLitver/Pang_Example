@@ -1,10 +1,15 @@
+using UnityEngine;
 using view;
 using Zenject;
-
-public class UIHandlerInjector : MonoInstaller
+namespace controller
 {
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "UIHandlerInjector", menuName = "Installers/UIHandlerInjector", order = 2)]
+
+    public class UIHandlerInjector : ScriptableObjectInstaller<UIHandlerInjector> 
     {
-        Container.Bind<IUIHandler>().To<UIHandler>().FromComponentInHierarchy().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<IUIHandler>().To<UIHandler>().FromComponentInHierarchy().AsSingle();
+        }
     }
 }

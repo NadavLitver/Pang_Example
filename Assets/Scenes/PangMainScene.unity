@@ -167,15 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d412ffd0110651b4e934c8797b592b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelManager: {fileID: 1616019751}
-  playerHitHandler: {fileID: 1839598511}
-  soundManager: {fileID: 1715855051}
-  OnLose:
-    m_PersistentCalls:
-      m_Calls: []
-  OnEnd:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &96363700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,7 +2377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a7a2e53fa4b92448bab3a8bee157ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 2027051341}
   robot: {fileID: 1534649823}
   playerData: {fileID: 11400000, guid: 0bfd1ffd78fe5fd42b7edeb7623bf9cc, type: 2}
 --- !u!1 &672332883
@@ -3152,10 +3142,7 @@ GameObject:
   - component: {fileID: 891779909}
   - component: {fileID: 891779908}
   - component: {fileID: 891779907}
-  - component: {fileID: 891779910}
-  - component: {fileID: 891779911}
   - component: {fileID: 891779912}
-  - component: {fileID: 891779913}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -3191,13 +3178,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 96ea27d44dbf9c640b1b9386d8710377, type: 2}
+  - {fileID: 11400000, guid: 70183dfd74396044e9ca29c64d094da2, type: 2}
+  - {fileID: 11400000, guid: a357b4525c081cc42913d8a28dccb082, type: 2}
+  - {fileID: 11400000, guid: 7336a2c269bdf9b41ab90df61af8e724, type: 2}
+  - {fileID: 11400000, guid: 746f5aa999836664d90c2514117c91df, type: 2}
+  - {fileID: 11400000, guid: edf10e9dbe998da42b74939d2c0eb27f, type: 2}
+  - {fileID: 11400000, guid: 2eb5c322a037d9d41bb1fa9a92a05344, type: 2}
+  - {fileID: 11400000, guid: 8d8f53b14b1c93a4ab6ff47686e9d620, type: 2}
+  - {fileID: 11400000, guid: b0a5527fbac6d774e9f780265de3ee25, type: 2}
+  - {fileID: 11400000, guid: 9683a618b06a8f146857a940ea355bc2, type: 2}
+  - {fileID: 11400000, guid: 5623c55b8f12076488d02630cf1e01c7, type: 2}
+  - {fileID: 11400000, guid: 5749de237cbcab24cb1e87aafe292d66, type: 2}
+  - {fileID: 11400000, guid: 75d0871d98101fe4883161cbc52bfca4, type: 2}
   _monoInstallers:
   - {fileID: 891779907}
-  - {fileID: 891779910}
-  - {fileID: 891779911}
   - {fileID: 891779912}
-  - {fileID: 891779913}
+  - {fileID: 0}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -3230,30 +3228,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &891779910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891779906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23058c544fb92c34fa44eb85e014ba7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &891779911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891779906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d11e9ed6c05370d45971525ea282924d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &891779912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3268,18 +3242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowButton1: {fileID: 1228714754}
   arrowButton2: {fileID: 557323612}
---- !u!114 &891779913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891779906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c2dc81b2cf1941469a5965d2bbb0daa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &976809016
 GameObject:
   m_ObjectHideFlags: 0
@@ -3663,10 +3625,6 @@ MonoBehaviour:
   healthButton: {fileID: 327169799}
   laserUpgradeButton: {fileID: 500800004}
   upgradesData: {fileID: 11400000, guid: f2305ed008c22ab4f83f9dcd4e8efd0e, type: 2}
-  shootController: {fileID: 1580545033}
-  gameManagerRef: {fileID: 33495762}
-  robotControllerRef: {fileID: 592452997}
-  soundManager: {fileID: 1715855051}
 --- !u!1 &1159701553
 GameObject:
   m_ObjectHideFlags: 0
@@ -3711,10 +3669,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f00d8543638d284499333d9a1244978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 2027051341}
   animator: {fileID: 1534649825}
   robotSR: {fileID: 1534649824}
-  gameManager: {fileID: 33495762}
 --- !u!1 &1188286687
 GameObject:
   m_ObjectHideFlags: 0
@@ -10946,16 +10902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c334e900714dad4ab82bbedb7dcb053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 2027051341}
-  ballController: {fileID: 1699095251}
-  gameManager: {fileID: 33495762}
-  robotAnimatorUpdater: {fileID: 1159701555}
-  shootPoint: {fileID: 1233040310}
-  soundManager: {fileID: 1715855051}
   playerData: {fileID: 11400000, guid: 0bfd1ffd78fe5fd42b7edeb7623bf9cc, type: 2}
-  onShot:
-    m_PersistentCalls:
-      m_Calls: []
+  shootPoint: {fileID: 1233040310}
 --- !u!1 &1596716434
 GameObject:
   m_ObjectHideFlags: 0
@@ -11116,13 +11064,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96b16da1ebaf02a4583c7bf80cdb1695, type: 2}
   - {fileID: 11400000, guid: ba53ab864914ca748908615b7aece568, type: 2}
   - {fileID: 11400000, guid: 23e9888594c3e1b4b903d66d8dc69112, type: 2}
-  ballsController: {fileID: 1699095251}
   upgradeHandler: {fileID: 1125248716}
-  gameManager: {fileID: 33495762}
-  soundManager: {fileID: 1715855051}
-  OnAdvanceLevel:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1663458222
 GameObject:
   m_ObjectHideFlags: 0
@@ -11303,7 +11245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballsData: {fileID: 11400000, guid: d8253ac104550864eb8a45c2f67b5268, type: 2}
-  soundManager: {fileID: 1715855051}
 --- !u!1 &1715855049
 GameObject:
   m_ObjectHideFlags: 0
@@ -11614,11 +11555,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 0bfd1ffd78fe5fd42b7edeb7623bf9cc, type: 2}
-  gameManager: {fileID: 33495762}
-  soundManager: {fileID: 1715855051}
-  healthReducedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1839598512
 Transform:
   m_ObjectHideFlags: 0
@@ -11680,9 +11616,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLeftPressed: 0
   isRightPressed: 0
-  onShoot:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2028652581
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,12 +10,11 @@ namespace controller
     public class BallController : MonoBehaviour, IBallController // BallController: movement and collision logic for the balls.
     {
 
-
+        //view
+        [Inject] private ISoundManager soundManager;
+        //data
         [Inject] private IBallsPoolHandler ballDataHandler;
         [SerializeField] private BallsConfig ballsData;
-
-        [Inject] private ISoundManager soundManager;
-
 
         //  method for ball creation
         public void CreateBall()//default overload
@@ -132,7 +131,7 @@ namespace controller
 
             return randomDirection;
         }
-        public void SplitBall(LaserHandler laser, Rigidbody2D ball)
+        public void SplitBall(ILaserHandler laser, Rigidbody2D ball)
         {
             float currentBallScale = ball.gameObject.transform.localScale.x;
             switch (currentBallScale)

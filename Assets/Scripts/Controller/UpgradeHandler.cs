@@ -7,19 +7,21 @@ using Zenject;
 
 namespace controller
 {
-    public class UpgradeHandler : MonoBehaviour// The Upgrade handler is responsible for all logic correlated with the upgrade panel
+    public class UpgradeHandler : MonoBehaviour, IUpgradeHandler// The Upgrade handler is responsible for all logic correlated with the upgrade panel
     {
         //UI elements
         [SerializeField] private GameObject upgradePanel;
         [SerializeField] private Button speedButton;
         [SerializeField] private Button healthButton;
         [SerializeField] private Button laserUpgradeButton;
+
         // Data elements
         [Inject(Id = "LaserPool")] private IObjectPool laserPool;
         [SerializeField] private UpgradesConfig upgradesData;
+
         // controllers ellements
         [Inject] private IShootController shootController;
-        [SerializeField] private GameManager gameManagerRef;
+        [Inject] private IGameManager gameManagerRef;
         [Inject] private ILocomotion robotControllerRef;
         [Inject] private ISoundManager soundManager;
         private bool didChooseUpgrade;
@@ -37,7 +39,7 @@ namespace controller
                 // get laser handler
                 LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
                 // remove listener so laser does not destroy upon hitting ball
-                currentLaserHandler.onHitBall.RemoveListener(shootController.ReturnLaser);
+                currentLaserHandler.OnHitBall.RemoveListener(shootController.ReturnLaser);
             }
             didChooseUpgrade = true;
         }

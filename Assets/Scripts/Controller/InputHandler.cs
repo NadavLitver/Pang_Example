@@ -16,8 +16,11 @@ namespace controller
         [Inject(Id =("Left"))] private IArrowButton leftArrowButton;
         [Inject(Id = ("Right"))] private IArrowButton rightArrowButton;
 
-        
-       
+
+        private void Awake()
+        {
+            onShoot = new UnityEvent();
+        }
         private void Update()
         {
            

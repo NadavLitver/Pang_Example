@@ -1,7 +1,11 @@
+using UnityEngine;
 using Zenject;
+
 namespace controller
 {
-    public class BallControllerInjector : MonoInstaller
+    [CreateAssetMenu(fileName = "BallControllerInjector", menuName = "Installers/BallControllerInjector", order = 3)]
+
+    public class BallControllerInjector : ScriptableObjectInstaller<BallControllerInjector>
     {
         public override void InstallBindings()
         {

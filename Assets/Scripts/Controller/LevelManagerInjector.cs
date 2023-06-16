@@ -1,12 +1,15 @@
-using controller;
 using UnityEngine;
 using Zenject;
-
-public class LevelManagerInjector : MonoInstaller
+namespace controller
 {
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "LevelManagerInjector", menuName = "Installers/LevelManagerInjector", order = 4)]
+    public class LevelManagerInjector : ScriptableObjectInstaller<LevelManagerInjector>
     {
-        Container.Bind<ILevelManager>().To<LevelManager>().FromComponentInHierarchy().AsSingle().NonLazy();
 
+        public override void InstallBindings()
+        {
+            Container.Bind<ILevelManager>().To<LevelManager>().FromComponentInHierarchy().AsSingle().NonLazy();
+
+        }
     }
 }
