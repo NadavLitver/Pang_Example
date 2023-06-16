@@ -2209,9 +2209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fd0ea1074d83c498fd86520b406539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RightPressedUpdateEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  isPointerDown: 0
 --- !u!1 &568014993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3528,7 +3526,7 @@ MonoBehaviour:
   speedButton: {fileID: 976809020}
   healthButton: {fileID: 327169799}
   laserUpgradeButton: {fileID: 500800004}
-  laserPool: {fileID: 541006448}
+  laserPool: {fileID: 0}
   upgradesData: {fileID: 11400000, guid: f2305ed008c22ab4f83f9dcd4e8efd0e, type: 2}
   shootController: {fileID: 1580545033}
   gameManagerRef: {fileID: 33495762}
@@ -3851,9 +3849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f48dd5657207244851fb9da68b77b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftPressedUpdateEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  isPointerDown: 0
 --- !u!1 &1233040309
 GameObject:
   m_ObjectHideFlags: 0
