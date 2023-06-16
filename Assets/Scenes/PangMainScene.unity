@@ -3195,7 +3195,6 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 891779907}
   - {fileID: 891779912}
-  - {fileID: 0}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -11064,7 +11063,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96b16da1ebaf02a4583c7bf80cdb1695, type: 2}
   - {fileID: 11400000, guid: ba53ab864914ca748908615b7aece568, type: 2}
   - {fileID: 11400000, guid: 23e9888594c3e1b4b903d66d8dc69112, type: 2}
-  upgradeHandler: {fileID: 1125248716}
 --- !u!1 &1663458222
 GameObject:
   m_ObjectHideFlags: 0

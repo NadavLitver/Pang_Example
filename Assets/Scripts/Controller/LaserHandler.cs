@@ -11,6 +11,10 @@ namespace controller
         public GameObject myGameObject => gameObject;
 
         private float currentTimeAlive;
+        private void Awake()
+        {
+            OnHitBall = new UnityEvent<ILaserHandler, Rigidbody2D>();
+        }
         private void OnEnable()
         {
             currentTimeAlive = 0;
