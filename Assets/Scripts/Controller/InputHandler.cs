@@ -7,13 +7,13 @@ using Zenject;
 namespace controller
 {
 
-    public class InputHandler : MonoBehaviour,IInputHandler// stores the information about player horizontal movement, if there was more complex movement such as jumping the input would also be here
+    public class InputHandler : MonoBehaviour, IInputHandler// stores the information about player horizontal movement, if there was more complex movement such as jumping the input would also be here
     {
         private int horInput;
         public bool isLeftPressed;
         public bool isRightPressed;
-        public UnityEvent onShoot{get;private set;}
-        [Inject(Id =("Left"))] private IArrowButton leftArrowButton;
+        public UnityEvent onShoot { get; private set; }
+        [Inject(Id = ("Left"))] private IArrowButton leftArrowButton;
         [Inject(Id = ("Right"))] private IArrowButton rightArrowButton;
 
 
@@ -23,7 +23,7 @@ namespace controller
         }
         private void Update()
         {
-           
+
             SetHorInput();
             CheckShoot();
         }
