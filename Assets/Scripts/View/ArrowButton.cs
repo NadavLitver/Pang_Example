@@ -4,19 +4,21 @@ using UnityEngine.EventSystems;
 
 namespace view
 {
-    public class LeftArrowButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class ArrowButton : MonoBehaviour, IArrowButton
     {
-        public bool isPointerDown;
        
+        public bool IsPointerDown { get; private set; }
+
+      
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            isPointerDown = true;
+            IsPointerDown = true;
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            isPointerDown = false;
+            IsPointerDown = false;
         }
 
       

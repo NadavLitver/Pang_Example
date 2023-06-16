@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 using model;
-public class ObjectPoolInstaller : MonoInstaller
+public class ObjectPoolInjector : MonoInstaller
 {
     public GameObject prefabRefA;
     public GameObject prefabRefB;

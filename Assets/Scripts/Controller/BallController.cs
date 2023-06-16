@@ -2,22 +2,23 @@ using model;
 using System.Collections.Generic;
 using UnityEngine;
 using view;
+using Zenject;
 
 namespace controller
 {
     [DefaultExecutionOrder(+1)]//delay execution
-    public class BallController : MonoBehaviour // BallController: movement and collision logic for the balls.
+    public class BallController : MonoBehaviour, IBallController // BallController: movement and collision logic for the balls.
     {
 
 
-        [SerializeField] private BallsPoolHandler ballDataHandler;
+        [Inject] private IBallsPoolHandler ballDataHandler;
         [SerializeField] private BallsConfig ballsData;
 
-        [SerializeField] private SoundManager soundManager;
+        [Inject] private ISoundManager soundManager;
 
 
         //  method for ball creation
-        internal void CreateBall()//default overload
+        public void CreateBall()//default overload
         {
             GameObject ball = ballDataHandler.BallPoolRef.GetFromPool();
             ball.transform.position = Vector3.zero;
@@ -33,7 +34,7 @@ namespace controller
             return GetRandomRightOrLeft() * ballsData.Speed;
         }
 
-        internal void CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)//overloaded so I can have more controll than just default
+        public void CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)//overloaded so I can have more controll than just default
         {
             GameObject ball = ballDataHandler.BallPoolRef.GetFromPool();
             ball.transform.position = pos;
@@ -157,7 +158,7 @@ namespace controller
             soundManager.Play(SoundManager.Sound.ballHit);
 
         }
-        internal bool IsActiveBallsEmpty()
+        public bool IsActiveBallsEmpty()
         {
             return ballDataHandler.ActiveBalls.Count == 0;
         }
@@ -203,5 +204,6 @@ namespace controller
             }
         }
 
+       
     }
 }

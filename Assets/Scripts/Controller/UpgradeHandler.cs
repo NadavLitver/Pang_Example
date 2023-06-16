@@ -18,10 +18,10 @@ namespace controller
         [Inject(Id = "LaserPool")] private IObjectPool laserPool;
         [SerializeField] private UpgradesConfig upgradesData;
         // controllers ellements
-        [SerializeField] private ShootController shootController;
+        [Inject] private IShootController shootController;
         [SerializeField] private GameManager gameManagerRef;
-        [SerializeField] private LocoMotion robotControllerRef;
-        [SerializeField] private SoundManager soundManager;
+        [Inject] private ILocomotion robotControllerRef;
+        [Inject] private ISoundManager soundManager;
         private bool didChooseUpgrade;
 
         private void Start()

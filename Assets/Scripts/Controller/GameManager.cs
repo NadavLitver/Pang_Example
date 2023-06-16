@@ -10,10 +10,10 @@ namespace controller
     [DefaultExecutionOrder(-1)]
     public class GameManager : MonoBehaviour // GameManager: Manages the game state, score
     {
-        [SerializeField] LevelManager levelManager;
+        [Inject] ILevelManager levelManager;
         [Inject] IUIHandler iUIHandler;
         [SerializeField] PlayerHPHandler playerHitHandler;
-        [SerializeField] SoundManager soundManager;
+        [Inject] private ISoundManager soundManager;
         private float score;//no need for so if score is going to constantly change and it inits at 0
 
 
@@ -34,7 +34,7 @@ namespace controller
         {
 
             // update UI on beggining of game
-            iUIHandler.UpdateLevel(levelManager.levelCount);
+            iUIHandler.UpdateLevel(levelManager.LevelCount);
             iUIHandler.UpdateScore((int)score);
             iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
 

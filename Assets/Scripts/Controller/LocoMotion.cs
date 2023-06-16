@@ -1,11 +1,13 @@
 using UnityEngine;
 using model;
+using Zenject;
+
 namespace controller
 {
 
-    public class LocoMotion : MonoBehaviour//handles basic movement for the robot and collisions
+    public class LocoMotion : MonoBehaviour, ILocomotion//handles basic movement for the robot and collisions
     {
-        [SerializeField] InputHandler inputHandler;
+        [Inject] IInputHandler inputHandler;
         [SerializeField] Transform robot;
         [SerializeField] PlayerConfig playerData;
         private float dynamicSpeed;//didnt want to use SO speed because it changes during gameplay but doesnt save we resetting scene
@@ -34,16 +36,16 @@ namespace controller
             }
 
         }
-        internal void SetSpeed(float _speed)
+        public void SetSpeed(float _speed)
         {
             dynamicSpeed = _speed;
         }
-        private bool CheckCollisionOnRight()
+        bool CheckCollisionOnRight()
         {
             
             return Physics2D.Raycast(robot.position, Vector2.right, playerData.Width, playerData.CollisionLayer);
         }
-        private bool CheckCollisionOnLeft()
+        bool CheckCollisionOnLeft()
         {
            
             return Physics2D.Raycast(robot.position, Vector2.left, playerData.Width, playerData.CollisionLayer);

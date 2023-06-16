@@ -2,28 +2,30 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using view;
+using Zenject;
 
 namespace controller
 {
     [DefaultExecutionOrder(1)]// delay script execution
-    public class LevelManager : MonoBehaviour// LevelGenerator: Generates and manages the arrangement of game objects within each level.
+    public class LevelManager : MonoBehaviour, ILevelManager// LevelGenerator: Generates and manages the arrangement of game objects within each level.
     {
         //data
         [SerializeField] private model.LevelConfig[] levelConfigs;
         //controllers
-        [SerializeField] private BallController ballsController;
+        [Inject] private IBallController ballsController;
         [SerializeField] private UpgradeHandler upgradeHandler;
         [SerializeField] private GameManager gameManager;
-        [SerializeField] private SoundManager soundManager;
+        [Inject] private ISoundManager soundManager;
 
 
         private float delayBetweenLevels;
-        internal int levelCount;
-        public UnityEvent<int> OnAdvanceLevel;
+        public int LevelCount { get; private set; }
+        public UnityEvent<int> OnAdvanceLevel { get; private set; }
         private void Awake()
         {
-            levelCount = 1;
+            LevelCount = 1;
             delayBetweenLevels = 4.5f;
+            OnAdvanceLevel = new UnityEvent<int>();
         }
         private void Start()
         {
@@ -35,8 +37,8 @@ namespace controller
             foreach (var level in levelConfigs)
             {
                 //update level index
-                levelCount = level.levelIndex;
-                OnAdvanceLevel?.Invoke(levelCount);
+                LevelCount = level.levelIndex;
+                OnAdvanceLevel?.Invoke(LevelCount);
                 //check to open upgrade panel
                 if(level.upgradePanel)
                 {//Open Upgrade panel, yielding so it waits for the other routine to finish

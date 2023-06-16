@@ -6,17 +6,17 @@ using Zenject;
 
 namespace controller
 {
-    public class ShootController : MonoBehaviour// shootController handles all logic that involves shooting the lasers
+    public class ShootController : MonoBehaviour,IShootController// shootController handles all logic that involves shooting the lasers
     {
         //controller elements
-        [SerializeField] private InputHandler inputHandler;
-        [SerializeField] private BallController ballController;
+        [Inject] private IInputHandler inputHandler;
+        [Inject] private IBallController ballController;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private RobotAnimatorUpdater robotAnimatorUpdater;
         [SerializeField] private Transform shootPoint;
 
         //view elements
-        [SerializeField] private SoundManager soundManager;
+        [Inject] private ISoundManager soundManager;
 
         //data elements
         [Inject(Id = "LaserPool")] private IObjectPool laserPool;
@@ -25,7 +25,7 @@ namespace controller
       
         
         private float lastTimeShot;
-        public UnityEvent onShot;
+        public UnityEvent onShot { get; private set; }
         private void Start()
         {
             inputHandler.onShoot.AddListener(Shoot);

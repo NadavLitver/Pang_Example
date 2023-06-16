@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 namespace view
 {
-    public class BlinkOnHit : MonoBehaviour// created only to make a small blinking effect when player is damaged
+    public class BlinkOnHit : MonoBehaviour,IBlinkOnHit// created only to make a small blinking effect when player is damaged
     {
         [SerializeField] private SpriteRenderer robotSR;
         [SerializeField] private Color blinkColor = new Color(1, 1, 1, 0.25f);

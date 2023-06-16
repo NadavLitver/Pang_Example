@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1616019751}
-  uIHandler: {fileID: 857067623}
   playerHitHandler: {fileID: 1839598511}
   soundManager: {fileID: 1715855051}
   OnLose:
@@ -1642,7 +1641,7 @@ GameObject:
   - component: {fileID: 490186105}
   - component: {fileID: 490186106}
   m_Layer: 0
-  m_Name: Letter Boxer Camera
+  m_Name: Letter Boxer Camera(For Viewport Changes)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2208,7 +2207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fd0ea1074d83c498fd86520b406539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPointerDown: 0
 --- !u!1 &568014993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,6 +3152,10 @@ GameObject:
   - component: {fileID: 891779909}
   - component: {fileID: 891779908}
   - component: {fileID: 891779907}
+  - component: {fileID: 891779910}
+  - component: {fileID: 891779911}
+  - component: {fileID: 891779912}
+  - component: {fileID: 891779913}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -3192,6 +3194,10 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 891779907}
+  - {fileID: 891779910}
+  - {fileID: 891779911}
+  - {fileID: 891779912}
+  - {fileID: 891779913}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -3224,6 +3230,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &891779910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891779906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23058c544fb92c34fa44eb85e014ba7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &891779911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891779906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11e9ed6c05370d45971525ea282924d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &891779912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891779906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ad5bae5db60eb4bbf591f625b9b564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowButton1: {fileID: 1228714754}
+  arrowButton2: {fileID: 557323612}
+--- !u!114 &891779913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891779906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2dc81b2cf1941469a5965d2bbb0daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &976809016
 GameObject:
   m_ObjectHideFlags: 0
@@ -3925,10 +3981,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1228714749}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69f48dd5657207244851fb9da68b77b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 31fd0ea1074d83c498fd86520b406539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPointerDown: 0
 --- !u!1 &1233040309
 GameObject:
   m_ObjectHideFlags: 0
@@ -11247,7 +11302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2d4803428014849b56dcfa4bdb4166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballDataHandler: {fileID: 2028652584}
   ballsData: {fileID: 11400000, guid: d8253ac104550864eb8a45c2f67b5268, type: 2}
   soundManager: {fileID: 1715855051}
 --- !u!1 &1715855049
@@ -11561,9 +11615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 0bfd1ffd78fe5fd42b7edeb7623bf9cc, type: 2}
   gameManager: {fileID: 33495762}
-  blinkOnHit: {fileID: 1534649828}
   soundManager: {fileID: 1715855051}
-  ballsPoolHandler: {fileID: 2028652584}
   healthReducedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -11631,8 +11683,6 @@ MonoBehaviour:
   onShoot:
     m_PersistentCalls:
       m_Calls: []
-  leftArrowButton: {fileID: 1228714754}
-  rightArrowButton: {fileID: 557323612}
 --- !u!1 &2028652581
 GameObject:
   m_ObjectHideFlags: 0
@@ -11642,10 +11692,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2028652582}
-  - component: {fileID: 2028652584}
   - component: {fileID: 2028652583}
   m_Layer: 0
-  m_Name: BallData
+  m_Name: BallPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11679,18 +11728,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolSize: 20
---- !u!114 &2028652584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028652581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d911b670858d27b48924976eb5b17955, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2044090750
 GameObject:
   m_ObjectHideFlags: 0
@@ -11898,7 +11935,6 @@ MonoBehaviour:
   pauseButton: {fileID: 437754790}
   startButton: {fileID: 2048763980}
   resetButton: {fileID: 2114336214}
-  uIhandler: {fileID: 857067623}
 --- !u!1 &2114336212
 GameObject:
   m_ObjectHideFlags: 0

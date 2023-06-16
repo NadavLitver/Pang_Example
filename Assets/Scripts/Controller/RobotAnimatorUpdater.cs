@@ -1,10 +1,11 @@
 using UnityEngine;
+using Zenject;
 
 namespace controller
 {
     public class RobotAnimatorUpdater : MonoBehaviour// animator updater updates the robot animator and sprite renderer based on the controller input handler
     {
-        [SerializeField] private InputHandler inputHandler;
+        [Inject] private IInputHandler inputHandler;
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteRenderer robotSR;
         [SerializeField] private GameManager gameManager;

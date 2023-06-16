@@ -2,6 +2,7 @@ using model;
 using UnityEngine;
 using UnityEngine.Events;
 using view;
+using Zenject;
 
 namespace controller
 {
@@ -10,9 +11,9 @@ namespace controller
         [SerializeField] private PlayerConfig playerData;
         private float lastHit;
         [SerializeField] private GameManager gameManager;
-        [SerializeField] private BlinkOnHit blinkOnHit;
-        [SerializeField] private SoundManager soundManager;
-        [SerializeField] BallsPoolHandler ballsPoolHandler;
+        [Inject] private IBlinkOnHit blinkOnHit;
+        [Inject] private ISoundManager soundManager;
+        [Inject] private IBallsPoolHandler ballsPoolHandler;
         private int currentHealthPoints;
         public UnityEvent<int> healthReducedEvent;
 

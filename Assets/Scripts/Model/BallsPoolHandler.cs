@@ -4,21 +4,15 @@ using Zenject;
 
 namespace model
 {
-    public class BallsPoolHandler : MonoBehaviour
+    public class BallsPoolHandler : IBallsPoolHandler
     {
         [Inject(Id = "BallPool")] IObjectPool ballPoolRef;
        // [SerializeField] PlayerHPHandler playerHPHandler;
-        List<Rigidbody2D> activeBalls;
+        List<Rigidbody2D> activeBalls = new List<Rigidbody2D>();
 
         public IObjectPool BallPoolRef { get => ballPoolRef;}
-      
-        public List<Rigidbody2D> ActiveBalls { get => activeBalls; }
         
-
-        private void Awake()
-        {
-            activeBalls = new List<Rigidbody2D>();
-        }
+        public List<Rigidbody2D> ActiveBalls { get => activeBalls; }
        
     }
 }

@@ -1,24 +1,23 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using view;
+using Zenject;
 
 namespace controller
 {
 
-    public class InputHandler : MonoBehaviour// stores the information about player horizontal movement, if there was more complex movement such as jumping the input would also be here
+    public class InputHandler : MonoBehaviour,IInputHandler// stores the information about player horizontal movement, if there was more complex movement such as jumping the input would also be here
     {
         private int horInput;
         public bool isLeftPressed;
         public bool isRightPressed;
-        public UnityEvent onShoot;
-        [SerializeField] private LeftArrowButton leftArrowButton;
-        [SerializeField] private RightArrowButton rightArrowButton;
-   
+        public UnityEvent onShoot{get;private set;}
+        [Inject(Id =("Left"))] private IArrowButton leftArrowButton;
+        [Inject(Id = ("Right"))] private IArrowButton rightArrowButton;
 
-     
+        
+       
         private void Update()
         {
            
@@ -38,8 +37,8 @@ namespace controller
 
         private void SetHorInput()
         {
-            isLeftPressed = leftArrowButton.isPointerDown;
-            isRightPressed = rightArrowButton.isPointerDown;
+            isLeftPressed = leftArrowButton.IsPointerDown;
+            isRightPressed = rightArrowButton.IsPointerDown;
             if (isLeftPressed)
             {
                 horInput = -1;
@@ -80,20 +79,14 @@ namespace controller
             }
             return false;
         }
-        private bool IsPointerOverUIObject()//check that touch is not on ui object ( so you don't shoot when moving)
+        private bool IsPointerOverUIObject()
         {
+            // Check if the current touch or mouse position is over a UI object
             PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
             eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-            foreach (var result in results)
-            {
-                if (result.gameObject == leftArrowButton.gameObject || result.gameObject == rightArrowButton.gameObject)
-                {
-                    return true; // Pointer is over the left or right arrow button
-                }
-            }
-            return false; // Pointer is not over the left or right arrow button
+            return results.Count > 0;
         }
     }
 

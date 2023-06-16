@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace view
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : MonoBehaviour,ISoundManager
     {
         private AudioSource twoDimensionalAudioSource;
         [SerializeField] private List<SoundAudioClip> clips;
