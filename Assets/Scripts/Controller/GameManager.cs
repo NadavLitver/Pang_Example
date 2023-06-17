@@ -1,4 +1,5 @@
 
+using model;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ namespace controller
         private readonly IUIHandler iUIHandler;
         private readonly IPlayerHPHandler playerHitHandler;
         private readonly ISoundManager soundManager;
+
 
         private float score;
         public UnityEvent OnLose { get; private set; }
@@ -40,7 +42,7 @@ namespace controller
             InitUI();
             //set up Events
             InitEvents();
-            
+      
         }
 
         private void InitUI()
@@ -91,9 +93,9 @@ namespace controller
                 soundManager.Play(SoundManager.Sound.playerLost);
             }
         }
-        public void UpdateScoreOnSplitBall(ILaserHandler laser, Rigidbody2D ball)
+        public void UpdateScoreOnSplitBall()
         {
-            score += 10 * ball.transform.localScale.x;
+            score += 50;
             //call on update ui
             iUIHandler.UpdateScore((int)score);
         }

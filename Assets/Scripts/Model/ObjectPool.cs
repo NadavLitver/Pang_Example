@@ -6,18 +6,20 @@ using Zenject;
 namespace model
 {
 
-    public class ObjectPool : MonoBehaviour,IObjectPool
+    public class ObjectPool : IObjectPool
     {
-        [Inject] private GameObject prefabRef;
-        [Inject] private Context context;
-        [SerializeField] private int poolSize = 20;
+        [Inject] private readonly GameObject prefabRef;
+        [Inject] private readonly Context context;
+        private int poolSize = 30;
         private List<GameObject> pool = new List<GameObject>();
         public List<GameObject> Pool => pool;
 
-        private void Awake()
+        
+        public ObjectPool()
         {
             PopulatePool();
         }
+        
         public void PopulatePool()
         {
             for (int i = 0; i < poolSize; i++)
@@ -40,7 +42,7 @@ namespace model
                 }
             }
 
-            GameObject current = Instantiate(prefabRef);
+            GameObject current = context.Container.InstantiatePrefab(prefabRef);
             current.name = prefabRef.name + "Extra";
             pool.Add(current);
             current.SetActive(true);

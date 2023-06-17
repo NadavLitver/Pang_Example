@@ -12,11 +12,10 @@ namespace controller
         private int horInput;
         public bool isLeftPressed;
         public bool isRightPressed;
-        public UnityEvent onShoot { get; private set; }
+        public UnityEvent onShoot { get;set; }
         [Inject(Id = ("Left"))] private IArrowButton leftArrowButton;
         [Inject(Id = ("Right"))] private IArrowButton rightArrowButton;
 
-        public void Init() => onShoot = new UnityEvent();
       
         private void Update()
         {

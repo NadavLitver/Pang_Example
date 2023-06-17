@@ -1970,51 +1970,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1 &541006445
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 541006446}
-  - component: {fileID: 541006448}
-  m_Layer: 0
-  m_Name: LaserPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &541006446
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541006445}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1605881789}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &541006448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541006445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c7c7a9d815e504bb045ef20c084fa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolSize: 20
 --- !u!1 &557323607
 GameObject:
   m_ObjectHideFlags: 0
@@ -3091,7 +3046,6 @@ GameObject:
   m_Component:
   - component: {fileID: 891779909}
   - component: {fileID: 891779908}
-  - component: {fileID: 891779907}
   - component: {fileID: 891779912}
   - component: {fileID: 891779913}
   m_Layer: 0
@@ -3101,22 +3055,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &891779907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891779906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab1e99511febd0d40b9268c180b5b3cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabRefA: {fileID: 9037659183072536743, guid: 8975863388eddc247b5cecea12a6a82f, type: 3}
-  prefabRefB: {fileID: 2070016070694160667, guid: 5aa202dca1d71f34faf48afbed7c99eb, type: 3}
-  BallPool: {fileID: 2028652583}
-  LaserPool: {fileID: 541006448}
 --- !u!114 &891779908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3130,6 +3068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: b3bf91cafb9c5fb4d8199e461f3d2165, type: 2}
   - {fileID: 11400000, guid: 8d8f53b14b1c93a4ab6ff47686e9d620, type: 2}
   - {fileID: 11400000, guid: 96ea27d44dbf9c640b1b9386d8710377, type: 2}
   - {fileID: 11400000, guid: 5623c55b8f12076488d02630cf1e01c7, type: 2}
@@ -3145,9 +3084,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 630c9848523e3284cba91bf2a36879ec, type: 2}
   - {fileID: 11400000, guid: 137f9641f5139b744890b97dccfef589, type: 2}
   _monoInstallers:
-  - {fileID: 891779907}
-  - {fileID: 891779912}
   - {fileID: 891779913}
+  - {fileID: 891779912}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -10882,9 +10820,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2028652582}
-  - {fileID: 541006446}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11325,51 +11261,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLeftPressed: 0
   isRightPressed: 0
---- !u!1 &2028652581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2028652582}
-  - component: {fileID: 2028652583}
-  m_Layer: 0
-  m_Name: BallPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2028652582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028652581}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1605881789}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2028652583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028652581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c7c7a9d815e504bb045ef20c084fa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolSize: 20
 --- !u!1 &2044090750
 GameObject:
   m_ObjectHideFlags: 0
