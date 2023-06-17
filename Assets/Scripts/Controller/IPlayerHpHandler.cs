@@ -5,6 +5,8 @@ namespace controller
     {
         int CurrentHealthPoints { get; }
         UnityEvent<int> HealthReducedEvent { get; }
+        UnityEvent<int> HealthIncreasedEvent { get; }
+
         void PlayerHit();
         void AddHp(int hpToAdd);
         void ReduceHP(int hpToDeduct);

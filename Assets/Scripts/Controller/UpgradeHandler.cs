@@ -1,6 +1,7 @@
 using model;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using view;
 using Zenject;
@@ -15,43 +16,44 @@ namespace controller
         private readonly Button laserUpgradeButton;
         private readonly IObjectPool laserPool;
         private readonly UpgradesConfig upgradesData;
-        private readonly IShootController shootController;
-        private readonly IGameManager gameManager;
-        private readonly ILocomotion robotControllerRef;
+        private readonly ILocomotion robotController;
         private readonly ISoundManager soundManager;
+        private readonly IPlayerHPHandler playerHPHandler;
         private bool didChooseUpgrade;
+
+        public UnityEvent<int> OnHPUpgraded { get; private set; }
 
         [Inject]
         public UpgradeHandler(
              GameObject upgradePanel,
-             [Inject(Id = "SpeedButton")] Button speedButton,
-             [Inject(Id = "HealthButton")] Button healthButton,
-             [Inject(Id = "LaserUpgradeButton")] Button laserUpgradeButton,
-             [Inject(Id = "LaserPool")] IObjectPool laserPool,
-             UpgradesConfig upgradesData,
-             IShootController shootController,
-             IGameManager gameManager,
-             ILocomotion robotControllerRef,
-             ISoundManager soundManager)//I dislike wrapping like this but there were alot of arguments
+             [Inject(Id = "SpeedButton")] Button _speedButton,
+             [Inject(Id = "HealthButton")] Button _healthButton,
+             [Inject(Id = "LaserUpgradeButton")] Button _laserUpgradeButton,
+             [Inject(Id = "LaserPool")] IObjectPool _laserPool,
+             UpgradesConfig _upgradesData,
+             ILocomotion _robotController,
+             IPlayerHPHandler _playerHPHandler,
+             ISoundManager _soundManager)//I dislike wrapping like this but there were alot of arguments
         {//Init refrences after injection
             this.upgradePanel = upgradePanel;
-            this.speedButton = speedButton;
-            this.healthButton = healthButton;
-            this.laserUpgradeButton = laserUpgradeButton;
-            this.laserPool = laserPool;
-            this.upgradesData = upgradesData;
-            this.shootController = shootController;
-            this.gameManager = gameManager;
-            this.robotControllerRef = robotControllerRef;
-            this.soundManager = soundManager;
+            this.speedButton = _speedButton;
+            this.healthButton = _healthButton;
+            this.laserUpgradeButton = _laserUpgradeButton;
+            this.laserPool = _laserPool;
+            this.upgradesData = _upgradesData;
+            this.robotController = _robotController;
+            this.playerHPHandler = _playerHPHandler;
+            this.soundManager = _soundManager;
 
             Initialize();
         }
         private void Initialize()//subscribe to events
         {
+            OnHPUpgraded = new UnityEvent<int>();
             laserUpgradeButton.onClick.AddListener(UnSubscribeFromReturningLasers);
             speedButton.onClick.AddListener(UpgradeSpeed);
             healthButton.onClick.AddListener(UpgradeHP);
+            OnHPUpgraded.AddListener(playerHPHandler.AddHp);
         }
 
         private void UnSubscribeFromReturningLasers()
@@ -61,21 +63,21 @@ namespace controller
                 // get laser handler
                 LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
                 // remove listener so laser does not destroy upon hitting ball
-                currentLaserHandler.OnHitBall.RemoveListener(shootController.ReturnLaser);
+                currentLaserHandler.OnHitBall.RemoveListener(currentLaserHandler.ReturnSelfToPool);
             }
             didChooseUpgrade = true;
         }
         private void UpgradeSpeed()
         {
             // set a new speed
-            robotControllerRef.SetSpeed(upgradesData.NewSpeed);
+            robotController.SetSpeed(upgradesData.NewSpeed);
             didChooseUpgrade = true;
 
         }
         private void UpgradeHP()
         {
             // add health points to existing
-            gameManager.AddHealthPointsAndUpdateUI(upgradesData.AdditionalHP);
+            OnHPUpgraded.Invoke(upgradesData.AdditionalHP);
             didChooseUpgrade = true;
 
         }

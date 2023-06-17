@@ -26,7 +26,6 @@ namespace controller
         {
 
 
-
             this.levelManager = _levelManager;
             this.iUIHandler = _IUIHandler;
             this.playerHitHandler = _playerHitHandler;
@@ -72,8 +71,13 @@ namespace controller
             playerHitHandler.HealthReducedEvent.AddListener(ReduceScoreOnHit);
             //chech if lost when hit
             playerHitHandler.HealthReducedEvent.AddListener(CheckLose);
+            //update health in ui when gained HP
+            playerHitHandler.HealthIncreasedEvent.AddListener(iUIHandler.UpdateHealth);
             // On Finished All levels Call UI Handler
             levelManager.OnEnd.AddListener(iUIHandler.EnableEndingPanel);
+
+            
+
         }
 
         public void CheckLose(int currentHealthPoints)
@@ -106,15 +110,8 @@ namespace controller
         {
             //increase health points by 1
             playerHitHandler.AddHp(1);
-            // update in UI
-            iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
+      
 
-        }
-        public void AddHealthPointsAndUpdateUI(int healthPoints)
-        {
-            playerHitHandler.AddHp(healthPoints);
-            // update in UI
-            iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
         }
         public void ReduceScoreOnHit(int remainingHealth)
         {

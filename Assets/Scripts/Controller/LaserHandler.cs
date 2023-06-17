@@ -1,20 +1,34 @@
 using UnityEngine;
 using UnityEngine.Events;
 using model;
+using Zenject;
+using System;
+
 namespace controller
 {
     public class LaserHandler : MonoBehaviour, ILaserHandler// the laser handler handels individual projectile logic
     {
         public UnityEvent<ILaserHandler, Rigidbody2D> OnHitBall { get; private set; }
         public LaserConfig LaserData;
-
         public GameObject myGameObject => gameObject;
+        [Inject] IBallController ballController;
+        [Inject] IGameManager gameManager;
 
         private float currentTimeAlive;
-        private void Awake()
+        private void Start()
         {
             OnHitBall = new UnityEvent<ILaserHandler, Rigidbody2D>();
+            OnHitBall.AddListener(ballController.SplitBall);
+            OnHitBall.AddListener(gameManager.UpdateScoreOnSplitBall);
+            OnHitBall.AddListener(ReturnSelfToPool);
         }
+
+        public void ReturnSelfToPool(ILaserHandler _laser, Rigidbody2D _ballRB2D)
+        {
+            this.gameObject.SetActive(false);
+
+        }
+
         private void OnEnable()
         {
             currentTimeAlive = 0;
@@ -42,5 +56,7 @@ namespace controller
                 this.gameObject.SetActive(false);
             }
         }
+      
+       
     }
 }

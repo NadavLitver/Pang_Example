@@ -10,7 +10,6 @@ namespace controller
         void UpdateScoreOnSplitBall(ILaserHandler laser, Rigidbody2D ball);
         void ResetScene();
         void ReduceScoreOnHit(int healthPoints);
-        void AddHealthPointsAndUpdateUI(int healthPoints);
         
     }
 }

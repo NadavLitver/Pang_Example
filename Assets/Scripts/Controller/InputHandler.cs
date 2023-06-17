@@ -17,7 +17,7 @@ namespace controller
         [Inject(Id = ("Right"))] private IArrowButton rightArrowButton;
 
         public void Init() => onShoot = new UnityEvent();
-
+      
         private void Update()
         {
 
