@@ -13,14 +13,20 @@ namespace controller
         public GameObject myGameObject => gameObject;
         [Inject] IBallController ballController;
         [Inject] IGameManager gameManager;
+        [Inject] IUpgradeHandler upgradeHandler;
 
         private float currentTimeAlive;
-        private void Start()
+        private void Awake()
         {
             OnHitBall = new UnityEvent<ILaserHandler, Rigidbody2D>();
             OnHitBall.AddListener(ballController.SplitBall);
             OnHitBall.AddListener(gameManager.UpdateScoreOnSplitBall);
             OnHitBall.AddListener(ReturnSelfToPool);
+            upgradeHandler.OnLasersUpgraded.AddListener(UnSubscribeFromReturningToPool);
+        }
+        private void UnSubscribeFromReturningToPool()
+        {
+            OnHitBall.RemoveListener(ReturnSelfToPool);
         }
 
         public void ReturnSelfToPool(ILaserHandler _laser, Rigidbody2D _ballRB2D)

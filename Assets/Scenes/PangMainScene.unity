@@ -3132,6 +3132,7 @@ MonoBehaviour:
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: 8d8f53b14b1c93a4ab6ff47686e9d620, type: 2}
   - {fileID: 11400000, guid: 96ea27d44dbf9c640b1b9386d8710377, type: 2}
+  - {fileID: 11400000, guid: 5623c55b8f12076488d02630cf1e01c7, type: 2}
   - {fileID: 11400000, guid: 70183dfd74396044e9ca29c64d094da2, type: 2}
   - {fileID: 11400000, guid: 7336a2c269bdf9b41ab90df61af8e724, type: 2}
   - {fileID: 11400000, guid: 746f5aa999836664d90c2514117c91df, type: 2}
@@ -3143,7 +3144,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 75d0871d98101fe4883161cbc52bfca4, type: 2}
   - {fileID: 11400000, guid: 630c9848523e3284cba91bf2a36879ec, type: 2}
   - {fileID: 11400000, guid: 137f9641f5139b744890b97dccfef589, type: 2}
-  - {fileID: 11400000, guid: 5623c55b8f12076488d02630cf1e01c7, type: 2}
   _monoInstallers:
   - {fileID: 891779907}
   - {fileID: 891779912}

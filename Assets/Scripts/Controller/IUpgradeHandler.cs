@@ -7,5 +7,7 @@ namespace controller
     {
         IEnumerator UpgradeRoutine();
         UnityEvent<int> OnHPUpgraded { get; }
+        public UnityEvent OnLasersUpgraded { get;  }
+
     }
 }

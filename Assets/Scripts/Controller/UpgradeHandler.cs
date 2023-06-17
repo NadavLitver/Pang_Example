@@ -22,6 +22,8 @@ namespace controller
         private bool didChooseUpgrade;
 
         public UnityEvent<int> OnHPUpgraded { get; private set; }
+        public UnityEvent OnLasersUpgraded { get; private set; }
+
 
         [Inject]
         public UpgradeHandler(
@@ -50,6 +52,7 @@ namespace controller
         private void Initialize()//subscribe to events
         {
             OnHPUpgraded = new UnityEvent<int>();
+            OnLasersUpgraded = new UnityEvent();
             laserUpgradeButton.onClick.AddListener(UnSubscribeFromReturningLasers);
             speedButton.onClick.AddListener(UpgradeSpeed);
             healthButton.onClick.AddListener(UpgradeHP);
@@ -58,13 +61,14 @@ namespace controller
 
         private void UnSubscribeFromReturningLasers()
         {
-            foreach (var laser in laserPool.Pool)
-            {
-                // get laser handler
-                LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
-                // remove listener so laser does not destroy upon hitting ball
-                currentLaserHandler.OnHitBall.RemoveListener(currentLaserHandler.ReturnSelfToPool);
-            }
+            //foreach (var laser in laserPool.Pool)
+            //{
+            //    // get laser handler
+            //    LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
+            //    // remove listener so laser does not destroy upon hitting ball
+            //    currentLaserHandler.OnHitBall.RemoveListener(currentLaserHandler.ReturnSelfToPool);
+            //}
+            OnLasersUpgraded.Invoke();
             didChooseUpgrade = true;
         }
         private void UpgradeSpeed()
