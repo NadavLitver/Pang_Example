@@ -6,7 +6,6 @@ using Zenject;
 
 namespace controller
 {
-    [DefaultExecutionOrder(1)]// delay script execution
     public class LevelManager : MonoBehaviour, ILevelManager// LevelGenerator: Generates and manages the arrangement of game objects within each level.
     {
         //data
@@ -14,21 +13,24 @@ namespace controller
         //controllers
         [Inject] private IBallController ballsController;
         [Inject] private IUpgradeHandler upgradeHandler;
-        [Inject] private IGameManager gameManager;
         [Inject] private ISoundManager soundManager;
 
 
         private float delayBetweenLevels;
         public int LevelCount { get; private set; }
         public UnityEvent<int> OnAdvanceLevel { get; private set; }
+        public UnityEvent<bool> OnEnd { get; private set; }
+
         private void Awake()
         {
             LevelCount = 1;
             delayBetweenLevels = 4.5f;
             OnAdvanceLevel = new UnityEvent<int>();
+            OnEnd = new UnityEvent<bool>();
         }
         private void Start()
         {
+          
             StartCoroutine(LevelsRoutine());
             
         }
@@ -40,7 +42,7 @@ namespace controller
                 LevelCount = level.levelIndex;
                 OnAdvanceLevel?.Invoke(LevelCount);
                 //check to open upgrade panel
-                if(level.upgradePanel)
+                if (level.upgradePanel)
                 {//Open Upgrade panel, yielding so it waits for the other routine to finish
                     yield return upgradeHandler.UpgradeRoutine();
                 }
@@ -66,7 +68,7 @@ namespace controller
 
             }
             // after all levels are done the player has won and an event is raised
-            gameManager.OnEnd?.Invoke(true);
+            OnEnd?.Invoke(true);
 
         }
     }

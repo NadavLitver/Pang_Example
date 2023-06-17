@@ -7,5 +7,6 @@ namespace model
         List<GameObject> Pool { get; }
         GameObject GetFromPool();
         void ReturnToPool(GameObject obj);
+        void PopulatePool();
     }
 }

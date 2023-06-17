@@ -9,17 +9,12 @@ namespace model
     {
         [Inject] private GameObject prefabRef;
         [SerializeField] private int poolSize = 20;
-        private List<GameObject> pool;
+        private List<GameObject> pool = new List<GameObject>();
 
         public List<GameObject> Pool => pool;
 
-        private void Awake()
-        {
-            pool = new List<GameObject>();
-            PopulatePool();
-        }
-
-        private void PopulatePool()
+       
+        public void PopulatePool()
         {
             for (int i = 0; i < poolSize; i++)
             {

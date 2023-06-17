@@ -7,31 +7,53 @@ using Zenject;
 
 namespace controller
 {
-    public class UpgradeHandler : MonoBehaviour, IUpgradeHandler// The Upgrade handler is responsible for all logic correlated with the upgrade panel
+    public class UpgradeHandler : IUpgradeHandler// The Upgrade handler is responsible for all logic correlated with the upgrade panel
     {
-        //UI elements
-        [SerializeField] private GameObject upgradePanel;
-        [SerializeField] private Button speedButton;
-        [SerializeField] private Button healthButton;
-        [SerializeField] private Button laserUpgradeButton;
-
-        // Data elements
-        [Inject(Id = "LaserPool")] private IObjectPool laserPool;
-        [SerializeField] private UpgradesConfig upgradesData;
-
-        // controllers ellements
-        [Inject] private IShootController shootController;
-        [Inject] private IGameManager gameManagerRef;
-        [Inject] private ILocomotion robotControllerRef;
-        [Inject] private ISoundManager soundManager;
+        private readonly GameObject upgradePanel;
+        private readonly Button speedButton;
+        private readonly Button healthButton;
+        private readonly Button laserUpgradeButton;
+        private readonly IObjectPool laserPool;
+        private readonly UpgradesConfig upgradesData;
+        private readonly IShootController shootController;
+        private readonly IGameManager gameManager;
+        private readonly ILocomotion robotControllerRef;
+        private readonly ISoundManager soundManager;
         private bool didChooseUpgrade;
 
-        private void Start()
+        [Inject]
+        public UpgradeHandler(
+             GameObject upgradePanel,
+             [Inject(Id = "SpeedButton")] Button speedButton,
+             [Inject(Id = "HealthButton")] Button healthButton,
+             [Inject(Id = "LaserUpgradeButton")] Button laserUpgradeButton,
+             [Inject(Id = "LaserPool")] IObjectPool laserPool,
+             UpgradesConfig upgradesData,
+             IShootController shootController,
+             IGameManager gameManager,
+             ILocomotion robotControllerRef,
+             ISoundManager soundManager)//I dislike wrapping like this but there were alot of arguments
+        {//Init refrences after injection
+            this.upgradePanel = upgradePanel;
+            this.speedButton = speedButton;
+            this.healthButton = healthButton;
+            this.laserUpgradeButton = laserUpgradeButton;
+            this.laserPool = laserPool;
+            this.upgradesData = upgradesData;
+            this.shootController = shootController;
+            this.gameManager = gameManager;
+            this.robotControllerRef = robotControllerRef;
+            this.soundManager = soundManager;
+
+            Initialize();
+        }
+        private void Initialize()//subscribe to events
         {
             laserUpgradeButton.onClick.AddListener(UnSubscribeFromReturningLasers);
             speedButton.onClick.AddListener(UpgradeSpeed);
             healthButton.onClick.AddListener(UpgradeHP);
         }
+
         private void UnSubscribeFromReturningLasers()
         {
             foreach (var laser in laserPool.Pool)
@@ -53,7 +75,7 @@ namespace controller
         private void UpgradeHP()
         {
             // add health points to existing
-            gameManagerRef.AddHealthPointsAndUpdateUI(upgradesData.AdditionalHP);
+            gameManager.AddHealthPointsAndUpdateUI(upgradesData.AdditionalHP);
             didChooseUpgrade = true;
 
         }
@@ -63,11 +85,11 @@ namespace controller
         }
         public IEnumerator UpgradeRoutine()
         {
-            TurnOffOnUpgradePanel(true);
+            
+            TurnOffOnUpgradePanel(true);//turn on the panel
             yield return new WaitUntil(() => didChooseUpgrade);// wait for player to make choice
-            // call sound for upgrade
-            soundManager.Play(SoundManager.Sound.UpgradeSelected);
-            TurnOffOnUpgradePanel(false);
+            soundManager.Play(SoundManager.Sound.UpgradeSelected);//play sounds after player chose
+            TurnOffOnUpgradePanel(false);// turn off the panel
         }
     }
 }

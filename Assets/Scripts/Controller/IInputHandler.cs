@@ -5,6 +5,7 @@ namespace controller
     {
         int GetHorInput();
         UnityEvent onShoot { get; }
+        public void Init();
     }
 
 }

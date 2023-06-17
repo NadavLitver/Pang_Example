@@ -7,35 +7,54 @@ using Zenject;
 
 namespace controller
 {
-    [DefaultExecutionOrder(-1)]
-    public class GameManager : MonoBehaviour , IGameManager// GameManager: Manages the game state, score
+
+    public class GameManager : IGameManager// GameManager: Manages the game state, score
     {
-        [Inject] ILevelManager levelManager;
-        [Inject] IUIHandler iUIHandler;
-        [Inject] IPlayerHPHandler playerHitHandler;
-        [Inject] private ISoundManager soundManager;
+        private readonly ILevelManager levelManager;
+        private readonly IUIHandler iUIHandler;
+        private readonly IPlayerHPHandler playerHitHandler;
+        private readonly ISoundManager soundManager;
 
         private float score;
         public UnityEvent OnLose { get; private set; }
-        public UnityEvent<bool> OnEnd { get; private set; }
         public float Score { get => score; }
-        private void Awake()
+
+        
+
+        [Inject]
+        public GameManager(ILevelManager _levelManager, IUIHandler _IUIHandler, IPlayerHPHandler _playerHitHandler, ISoundManager _soundManager)
         {
-            OnEnd = new UnityEvent<bool>();
+
+
+
+            this.levelManager = _levelManager;
+            this.iUIHandler = _IUIHandler;
+            this.playerHitHandler = _playerHitHandler;
+            this.soundManager = _soundManager;
+
             OnLose = new UnityEvent();
             //make sure timescale is one
             Time.timeScale = 1;
             // init variables
             score = 0;
-           
+            //set up UI
+            InitUI();
+            //set up Events
+            InitEvents();
+            
         }
-        private void Start()
-        {
 
+        private void InitUI()
+        {
             // update UI on beggining of game
             iUIHandler.UpdateLevel(levelManager.LevelCount);
             iUIHandler.UpdateScore((int)score);
             iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
+        }
+        private void InitEvents()
+        {
+
+
 
             //Subscribe to events ->
 
@@ -49,8 +68,12 @@ namespace controller
             levelManager.OnAdvanceLevel.AddListener(iUIHandler.CallCountdownRoutine);
             //update health in ui when hit
             playerHitHandler.HealthReducedEvent.AddListener(iUIHandler.UpdateHealth);
+            //deduct score when hit
+            playerHitHandler.HealthReducedEvent.AddListener(ReduceScoreOnHit);
+            //chech if lost when hit
+            playerHitHandler.HealthReducedEvent.AddListener(CheckLose);
             // On Finished All levels Call UI Handler
-            OnEnd.AddListener(iUIHandler.EnableEndingPanel);
+            levelManager.OnEnd.AddListener(iUIHandler.EnableEndingPanel);
         }
 
         public void CheckLose(int currentHealthPoints)
@@ -93,14 +116,16 @@ namespace controller
             // update in UI
             iUIHandler.UpdateHealth(playerHitHandler.CurrentHealthPoints);
         }
-        public void ReduceScore(float scoreToDeduct)
+        public void ReduceScoreOnHit(int remainingHealth)
         {
+            int scoreToDeduct = 100 / remainingHealth;
             score -= scoreToDeduct;
         }
+        
         public void ResetScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-       
+
     }
 }

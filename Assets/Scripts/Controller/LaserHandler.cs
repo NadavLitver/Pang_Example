@@ -6,7 +6,7 @@ namespace controller
     public class LaserHandler : MonoBehaviour, ILaserHandler// the laser handler handels individual projectile logic
     {
         public UnityEvent<ILaserHandler, Rigidbody2D> OnHitBall { get; private set; }
-        public LaserConfig LaserData { get; private set; }
+        public LaserConfig LaserData;
 
         public GameObject myGameObject => gameObject;
 

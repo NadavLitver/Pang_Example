@@ -6,35 +6,38 @@ using Zenject;
 
 namespace controller
 {
-    public class PlayerHPHandler : MonoBehaviour, IPlayerHPHandler// manages manipluations on playerHP
+    public class PlayerHPHandler : IPlayerHPHandler// manages manipluations on playerHP
     {
-        [SerializeField] private PlayerConfig playerData;
+        private readonly PlayerConfig playerData;
+        private readonly IBlinkOnHit blinkOnHit;
+        private readonly ISoundManager soundManager;
+        private readonly IBallsPoolHandler ballsPoolHandler;
         private float lastHit;
-        [Inject] private IGameManager gameManager;
-        [Inject] private IBlinkOnHit blinkOnHit;
-        [Inject] private ISoundManager soundManager;
-        [Inject] private IBallsPoolHandler ballsPoolHandler;
         private int currentHealthPoints;
         public UnityEvent<int> HealthReducedEvent { get; private set; }
 
         public int CurrentHealthPoints { get => currentHealthPoints; }
-        private void Awake()
+        [Inject]
+        public PlayerHPHandler(IBlinkOnHit _blinkOnHit, ISoundManager _soundManager, IBallsPoolHandler _ballsPoolHandler, PlayerConfig _PlayerConfig)
         {
+            // InitReferences
+            this.blinkOnHit = _blinkOnHit;
+            this.soundManager = _soundManager;
+            this.ballsPoolHandler = _ballsPoolHandler;
+            this.playerData = _PlayerConfig;
+
+            Debug.Log("Player HP Handler Was Called");
+            //Init Variables
             currentHealthPoints = playerData.StartingHP;
             HealthReducedEvent = new UnityEvent<int>();
 
-        }
-        private void Start()
-        {
-            //check if player lost on health reduced
-            HealthReducedEvent.AddListener(gameManager.CheckLose);
-
+            //subscribe to event for blinking when getting hit
             HealthReducedEvent.AddListener(blinkOnHit.CallBlinkRoutine);
+            // making it so when ball hit player, player is hit
             foreach (var ball in ballsPoolHandler.BallPoolRef.Pool)
             {
                 ball.GetComponent<Ball>().OnPlayerHit.AddListener(PlayerHit);
             }
-
         }
         private bool CheckHitCooldown()//Check if getting hit is on cooldown
         {
@@ -46,8 +49,6 @@ namespace controller
             {
                 //reduce hp
                 currentHealthPoints--;
-                //reduce score
-                gameManager.ReduceScore(50);
                 // update last time player was hit for cooldown
                 lastHit = Time.time;
                 //invoke getting hit event

@@ -1,66 +1,78 @@
+using model;
 using UnityEngine;
 using UnityEngine.Events;
 using view;
-using model;
 using Zenject;
 
 namespace controller
 {
-    public class ShootController : MonoBehaviour,IShootController// shootController handles all logic that involves shooting the lasers
+    public class ShootController : IShootController// shootController handles all logic that involves shooting the lasers
     {
         //controller elements
-        [Inject] private IInputHandler inputHandler;
-        [Inject] private IBallController ballController;
-        [Inject] private IGameManager gameManager;
-        [Inject] private IRobotAnimatorUpdater robotAnimatorUpdater;
+        private readonly IInputHandler inputHandler;
+        private readonly IBallController ballController;
+        private readonly IGameManager gameManager;
+        private readonly IRobotAnimatorUpdater robotAnimatorUpdater;
 
         //view elements
-        [Inject] private ISoundManager soundManager;
+        private readonly ISoundManager soundManager;
 
         //data elements
-        [Inject(Id = "LaserPool")] private IObjectPool laserPool;
-        [SerializeField] private PlayerConfig playerData;
-        [SerializeField] private Transform shootPoint;
-       
-      
-        
+
+        private readonly PlayerConfig playerData;
+
+        private readonly IObjectPool laserPool;// not
+
+
         private float lastTimeShot;
         public UnityEvent OnShot { get; private set; }
-        private void Awake()
+        [Inject]
+        public ShootController(IInputHandler _inputHandler, IBallController _ballController, IGameManager _gameManager, IRobotAnimatorUpdater _robotAnimatorUpdater, ISoundManager _soundManager, PlayerConfig _playerData, [Inject(Id = "LaserPool")] IObjectPool _laserPool)
         {
-            OnShot = new UnityEvent();
-        }
-        private void Start()
-        {
+            // Init Refrences
+            this.inputHandler = _inputHandler;
+            this.ballController = _ballController;
+            this.gameManager = _gameManager;
+            this.robotAnimatorUpdater = _robotAnimatorUpdater;
+            this.soundManager = _soundManager;
+            this.playerData = _playerData;
+            this.laserPool = _laserPool;
+
+
+            inputHandler.Init();
             inputHandler.onShoot.AddListener(Shoot);
+
+            OnShot = new UnityEvent();
             OnShot.AddListener(robotAnimatorUpdater.PlayShooting);
+
+            InitializeLaserPool();
+
+        }
+        public void InitializeLaserPool()
+        {
+           
+
+            laserPool.PopulatePool();
             foreach (var laser in laserPool.Pool)
             {
                 LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
 
-                //on laser hit ball call the "Split ball" method
                 currentLaserHandler.OnHitBall.AddListener(ballController.SplitBall);
-
-                //on laser hit ball call update score
                 currentLaserHandler.OnHitBall.AddListener(gameManager.UpdateScoreOnSplitBall);
-
-                // on laser hit ball return laser to object pool
                 currentLaserHandler.OnHitBall.AddListener(ReturnLaser);
             }
         }
-      
-
         private void Shoot()
         {
             if (CheckShootCooldown())
             {
                 GameObject current = laserPool.GetFromPool();
-                current.transform.position = shootPoint.position;
+                current.transform.position = robotAnimatorUpdater.ShootPoint.position;
                 OnShot?.Invoke();
                 lastTimeShot = Time.time;
                 soundManager.Play(SoundManager.Sound.playerShoot);
             }
-            
+
         }
 
         private bool CheckShootCooldown()//Check if shot is on cooldown
@@ -73,6 +85,6 @@ namespace controller
             laserPool.ReturnToPool(laserHandler.myGameObject);
         }
 
-       
+
     }
 }

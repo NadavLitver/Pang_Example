@@ -8,12 +8,15 @@ namespace controller
         [Inject] private IInputHandler inputHandler;
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteRenderer robotSR;
+        [SerializeField] private Transform shootPoint;
         [Inject] private IGameManager gameManager;
 
         //hashes
         private int runningHash;
         private int shootingHash;
         private int deadHash;
+
+        public Transform ShootPoint => shootPoint;
 
         private void Start()
         {
