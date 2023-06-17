@@ -7,8 +7,7 @@ namespace controller
     {
         public override void InstallBindings()
         {
-            Debug.Log("Trying to bind ShootController");
-            Container.Bind<IShootController>().To<ShootController>().FromNew().AsSingle();
+            Container.Bind<IShootController>().To<ShootController>().FromNew().AsSingle().NonLazy();// this one is non lazy because it doesnt have refrences but needs to be created on the beggining
 
         }
     }
