@@ -6,20 +6,19 @@ using Zenject;
 
 namespace controller
 {
-    [DefaultExecutionOrder(+1)]//delay execution
     public class BallController : IBallController, ITickable // BallController: movement and collision logic for the balls.
     {
-
+        //controllers
+        private readonly IBallsPoolHandler ballPoolHandler;
         //view
         private readonly ISoundManager soundManager;
         //data
-        private readonly IBallsPoolHandler ballDataHandler;
         private readonly BallsConfig ballsData;
         [Inject]
         public BallController(ISoundManager _soundManager, IBallsPoolHandler _ballDataHandler, BallsConfig _ballsData)
         {
             this.soundManager = _soundManager;
-            this.ballDataHandler = _ballDataHandler;
+            this.ballPoolHandler = _ballDataHandler;
             this.ballsData = _ballsData;
         }
 
@@ -27,56 +26,56 @@ namespace controller
         //  method for ball creation
         public void CreateBall()//default overload
         {
-            GameObject ball = ballDataHandler.BallPoolRef.GetFromPool();
+            Ball ball = ballPoolHandler.BallPoolRef.GetFromPool();
             ball.transform.position = Vector3.zero;
             ball.transform.localScale = Vector3.one;
-            Rigidbody2D ballRB = ball.GetComponent<Rigidbody2D>();
+            Rigidbody2D ballRB = ball.Rb2d;
             ballRB.velocity = RandomBallVelocity();
-            ballDataHandler.ActiveBalls.Add(ballRB);
+            ballPoolHandler.ActiveBalls.Add(ball);
             // Set ball position, velocity, and any other necessary properties
         }
 
 
         public void CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)//overloaded 
         {
-            GameObject ball = ballDataHandler.BallPoolRef.GetFromPool();
+            Ball ball = ballPoolHandler.BallPoolRef.GetFromPool();
             ball.transform.position = pos;
             ball.transform.localScale = scale;
-            Rigidbody2D ballRB = ball.GetComponent<Rigidbody2D>();
+            Rigidbody2D ballRB = ball.Rb2d;
             ballRB.velocity = velocity;
-            ballDataHandler.ActiveBalls.Add(ballRB);
+            ballPoolHandler.ActiveBalls.Add(ball);
             // Set ball position, velocity, and any other necessary properties
         }
 
-        private void ReturnBallToPool(Rigidbody2D ball) //  method for returning a ball to the pool(disabling it)
+        private void ReturnBallToPool(Ball ball) //  method for returning a ball to the pool(disabling it)
         {
             RemoveFromActiveBalls(ball);
 
-            ballDataHandler.BallPoolRef.ReturnToPool(ball.gameObject);
+            ballPoolHandler.BallPoolRef.ReturnToPool(ball);
         }
 
         public Vector2 RandomBallVelocity()// get a random velocity from a ball
         {
             return GetRandomRightOrLeft() * ballsData.Speed;
         }
-        private void RemoveFromActiveBalls(Rigidbody2D ball)//Remove ball from the Active balls list
+        private void RemoveFromActiveBalls(Ball ball)//Remove ball from the Active balls list
         {
-            int index = ballDataHandler.ActiveBalls.IndexOf(ball);
+            int index = ballPoolHandler.ActiveBalls.IndexOf(ball);
 
             if (index != -1)// if indexOf can't find it return -1 so incase it found something we continue to the rest of the logic
             {
-                int lastIndex = ballDataHandler.ActiveBalls.Count - 1;
+                int lastIndex = ballPoolHandler.ActiveBalls.Count - 1;
 
                 // Swap the ball to be removed with the last ball in the list
-                Rigidbody2D lastBall = ballDataHandler.ActiveBalls[lastIndex];
-                ballDataHandler.ActiveBalls[lastIndex] = ball;
-                ballDataHandler.ActiveBalls[index] = lastBall;
-                ballDataHandler.ActiveBalls.RemoveAt(lastIndex);
+                Ball lastBall = ballPoolHandler.ActiveBalls[lastIndex];
+                ballPoolHandler.ActiveBalls[lastIndex] = ball;
+                ballPoolHandler.ActiveBalls[index] = lastBall;
+                ballPoolHandler.ActiveBalls.RemoveAt(lastIndex);
             }
         }
 
 
-        private void CheckCollisionForBall(Rigidbody2D ball)
+        private void CheckCollisionForBall(Ball ball)
         {
             Vector2 scale = ball.transform.localScale;
 
@@ -93,25 +92,30 @@ namespace controller
             isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize, ballsData.CollisionLayer);
             if(isLeftHit)
             {
-                ball.velocity = new Vector2(1 * ballsData.Speed, ball.velocity.y); // Process collision results as needed
+                ball.Rb2d.velocity = new Vector2(1 * ballsData.Speed, ball.Rb2d.velocity.y); // Process collision results as needed
+                Debug.Log("LeftHit");
                 return;
             }
             isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, ballsData.CollisionLayer);
             if(isRightHit)
             {
-                ball.velocity = new Vector2(-1 * ballsData.Speed, ball.velocity.y); // Process collision results as needed
+                ball.Rb2d.velocity = new Vector2(-1 * ballsData.Speed, ball.Rb2d.velocity.y); // Process collision results as needed
+                Debug.Log("RightHit");
+
                 return;
             }
             isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, ballsData.CollisionLayer);
             if (isBottomHit)
             { // Process collision results as needed
-                if (ball.velocity.x > 0)
+                Debug.Log("BottomHit");
+
+                if (ball.Rb2d.velocity.x > 0)
                 {
-                    ball.velocity = new Vector2(1 * ballsData.Speed, ballsData.BounceForce);
+                    ball.Rb2d.velocity = new Vector2(1 * ballsData.Speed, ballsData.BounceForce);
                 }
                 else
                 {
-                    ball.velocity = new Vector2(-1 * ballsData.Speed, ballsData.BounceForce);
+                    ball.Rb2d.velocity = new Vector2(-1 * ballsData.Speed, ballsData.BounceForce);
                 }
                 return;
             }
@@ -125,7 +129,7 @@ namespace controller
 
         private void IterateOverBallsAndCheckCollision()// loop over all active balls and check collision
         {
-            foreach (var ball in ballDataHandler.ActiveBalls)//while a for loop might have been slightly faster the differences are negligible and a foreach loop is more readable and I don't need the index
+            foreach (var ball in ballPoolHandler.ActiveBalls)//while a for loop might have been slightly faster the differences are negligible and a foreach loop is more readable and I don't need the index
             {
                 CheckCollisionForBall(ball);
             }
@@ -141,7 +145,7 @@ namespace controller
 
             return randomDirection;
         }
-        public void SplitBall(ILaserHandler laser, Rigidbody2D ball)// split ball depending on scale
+        public void SplitBall(ILaserHandler laser, Ball ball)// split ball depending on scale
         {
             float currentBallScale = ball.gameObject.transform.localScale.x;
             switch (currentBallScale)
@@ -169,9 +173,9 @@ namespace controller
         }
         public bool IsActiveBallsEmpty()// check if there are any active balls left
         {
-            return ballDataHandler.ActiveBalls.Count == 0;
+            return ballPoolHandler.ActiveBalls.Count == 0;
         }
-        private void CreateTwoBalls(Rigidbody2D ball, float size)// create to balls that go to different direction in the position of a given ball
+        private void CreateTwoBalls(Ball ball, float size)// create to balls that go to different direction in the position of a given ball
         {
             CreateBall(ball.transform.position, Vector2.one * size, Vector2.right * ballsData.Speed);
             CreateBall(ball.transform.position, Vector2.one * size, Vector2.left * ballsData.Speed);
@@ -180,9 +184,9 @@ namespace controller
         [ContextMenu("SplitBalls")]
         private void SplitAllBalls()//just for testing in editor
         {
-            List<Rigidbody2D> ballsToSplit = new List<Rigidbody2D>(); // Create a separate list to store the balls to be split
+            List<Ball> ballsToSplit = new List<Ball>(); // Create a separate list to store the balls to be split
 
-            foreach (var ball in ballDataHandler.ActiveBalls)
+            foreach (var ball in ballPoolHandler.ActiveBalls)
             {
                 ballsToSplit.Add(ball); // Add the ball to the separate list
             }

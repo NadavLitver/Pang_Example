@@ -165,6 +165,7 @@ MonoBehaviour:
   OnPlayerHit:
     m_PersistentCalls:
       m_Calls: []
+  rb2d: {fileID: 2420878163584083154}
 --- !u!82 &5460535587287502511
 AudioSource:
   m_ObjectHideFlags: 0

@@ -97,10 +97,10 @@ namespace controller
             soundManager.Play(SoundManager.Sound.playerLost);// play a losing sound
         }
 
-        public void UpdateScoreOnSplitBall(ILaserHandler laser, Rigidbody2D ballRB)
+        public void UpdateScoreOnSplitBall(ILaserHandler laser, Ball ball)
         {
             //increase score based on balls size (the smaller the bigger the score gain is)
-            score += 50 / ballRB.transform.localScale.x;
+            score += 50 / ball.transform.localScale.x;
             //call on update ui
             iUIHandler.UpdateScore((int)score);
         }

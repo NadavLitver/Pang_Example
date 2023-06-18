@@ -8,10 +8,13 @@ namespace controller
     public class Ball : MonoBehaviour// ball only exists to raise event when a ball collides with the player
     {
         //events
-        public UnityEvent OnPlayerHit;
+        public UnityEvent OnPlayerHit = new UnityEvent();
         //controllers
         [Inject] private readonly IPlayerHPHandler playerHPHandler;
-       
+        [SerializeField] Rigidbody2D rb2d;
+
+        public Rigidbody2D Rb2d { get => rb2d;}
+
         private void Start()
         {
             OnPlayerHit.AddListener(playerHPHandler.PlayerHit);

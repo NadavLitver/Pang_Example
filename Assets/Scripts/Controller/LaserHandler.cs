@@ -16,10 +16,10 @@ namespace controller
         [Inject] IGameManager gameManager;
         [Inject] IUpgradeHandler upgradeHandler;
         //events
-        public UnityEvent<ILaserHandler, Rigidbody2D> OnHitBall { get; private set; }
+        public UnityEvent<ILaserHandler, Ball> OnHitBall { get; private set; }
         private void Awake()
         {
-            OnHitBall = new UnityEvent<ILaserHandler, Rigidbody2D>();//init event
+            OnHitBall = new UnityEvent<ILaserHandler, Ball>();//init event
             //add listeners
             OnHitBall.AddListener(ballController.SplitBall);
             OnHitBall.AddListener(ReturnSelfToPool);
@@ -36,7 +36,7 @@ namespace controller
             this.gameObject.SetActive(false);
 
         }
-        public void ReturnSelfToPool(ILaserHandler laser, Rigidbody2D ballRB)//returning too object pool by set game object off/ overload
+        public void ReturnSelfToPool(ILaserHandler laser, Ball ball)//returning too object pool by set game object off/ overload
         {
             this.gameObject.SetActive(false);
 
@@ -50,7 +50,7 @@ namespace controller
         {
             if (collision.CompareTag("Ball"))//identify collision with ball and invoke an event
             {
-                OnHitBall?.Invoke(this, collision.gameObject.GetComponent<Rigidbody2D>());
+                OnHitBall?.Invoke(this, collision.gameObject.GetComponent<Ball>());
             }
         }
         private void Update()

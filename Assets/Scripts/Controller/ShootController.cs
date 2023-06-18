@@ -17,13 +17,13 @@ namespace controller
 
         //data elements
         private readonly PlayerConfig playerData;
-        private readonly IObjectPool laserPool;// not
+        private readonly IObjectPool<LaserHandler> laserPool;
         private float lastTimeShot;
         //events
         public UnityEvent OnShot { get; private set; }
 
         [Inject]
-        public ShootController(IInputHandler _inputHandler, IRobotAnimatorUpdater _robotAnimatorUpdater, ISoundManager _soundManager, PlayerConfig _playerData, [Inject(Id = "LaserPool")] IObjectPool _laserPool)
+        public ShootController(IInputHandler _inputHandler, IRobotAnimatorUpdater _robotAnimatorUpdater, ISoundManager _soundManager, PlayerConfig _playerData, IObjectPool<LaserHandler> _laserPool)
         {
             // Init Refrences
             this.inputHandler = _inputHandler;
@@ -46,7 +46,7 @@ namespace controller
         {
             if (CheckShootCooldown())
             {
-                GameObject current = laserPool.GetFromPool();
+                GameObject current = laserPool.GetFromPool().gameObject;
                 current.transform.position = robotAnimatorUpdater.ShootPoint.position;
                 OnShot?.Invoke();
                 lastTimeShot = Time.time;
