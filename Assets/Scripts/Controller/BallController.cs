@@ -11,16 +11,16 @@ namespace controller
     {
 
         //view
-        [Inject] private ISoundManager soundManager;
+        private readonly ISoundManager soundManager;
         //data
-        [Inject] private IBallsPoolHandler ballDataHandler;
-        [Inject] private BallsConfig ballsData;
-
-        public BallController(ISoundManager soundManager, IBallsPoolHandler ballDataHandler, BallsConfig ballsData)
+        private readonly IBallsPoolHandler ballDataHandler;
+        private readonly BallsConfig ballsData;
+        [Inject]
+        public BallController(ISoundManager _soundManager, IBallsPoolHandler _ballDataHandler, BallsConfig _ballsData)
         {
-            this.soundManager = soundManager;
-            this.ballDataHandler = ballDataHandler;
-            this.ballsData = ballsData;
+            this.soundManager = _soundManager;
+            this.ballDataHandler = _ballDataHandler;
+            this.ballsData = _ballsData;
         }
 
 
@@ -47,7 +47,7 @@ namespace controller
             ballDataHandler.ActiveBalls.Add(ballRB);
             // Set ball position, velocity, and any other necessary properties
         }
-       
+
         private void ReturnBallToPool(Rigidbody2D ball) //  method for returning a ball to the pool(disabling it)
         {
             RemoveFromActiveBalls(ball);
@@ -82,29 +82,29 @@ namespace controller
 
             // Calculate the raycast size based on the ball's scale
             float raycastSize = scale.x * 0.8f;
-
-            // Perform raycast checks on the bottom-left, bottom-right, and bottom of the ball
-            bool isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize, ballsData.CollisionLayer);
-            bool isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, ballsData.CollisionLayer);
-            bool isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, ballsData.CollisionLayer);
-
             //Draw debugs
             Debug.DrawRay(ball.transform.position, Vector2.left * raycastSize, Color.red);
             Debug.DrawRay(ball.transform.position, Vector2.right * raycastSize, Color.green);
             Debug.DrawRay(ball.transform.position, Vector2.down * raycastSize, Color.blue);
-
-            // Process collision results as needed
-            if (isLeftHit)
+            // Perform raycast checks on the bottom-left, bottom-right, and bottom of the ball
+            bool isLeftHit;
+            bool isRightHit;
+            bool isBottomHit;
+            isLeftHit = Physics2D.Raycast(ball.transform.position, Vector2.left, raycastSize, ballsData.CollisionLayer);
+            if(isLeftHit)
             {
-                ball.velocity = new Vector2(1 * ballsData.Speed, ball.velocity.y);
+                ball.velocity = new Vector2(1 * ballsData.Speed, ball.velocity.y); // Process collision results as needed
+                return;
             }
-            else if (isRightHit)
+            isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, ballsData.CollisionLayer);
+            if(isRightHit)
             {
-                ball.velocity = new Vector2(-1 * ballsData.Speed, ball.velocity.y);
+                ball.velocity = new Vector2(-1 * ballsData.Speed, ball.velocity.y); // Process collision results as needed
+                return;
             }
-            else if (isBottomHit)
-            {
-
+            isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, ballsData.CollisionLayer);
+            if (isBottomHit)
+            { // Process collision results as needed
                 if (ball.velocity.x > 0)
                 {
                     ball.velocity = new Vector2(1 * ballsData.Speed, ballsData.BounceForce);
@@ -113,14 +113,15 @@ namespace controller
                 {
                     ball.velocity = new Vector2(-1 * ballsData.Speed, ballsData.BounceForce);
                 }
-
+                return;
             }
+      
         }
         public void Tick()
         {
             IterateOverBallsAndCheckCollision();
         }
-      
+
 
         private void IterateOverBallsAndCheckCollision()// loop over all active balls and check collision
         {
@@ -212,6 +213,6 @@ namespace controller
             }
         }
 
-      
+
     }
 }
