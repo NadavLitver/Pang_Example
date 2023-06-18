@@ -6,18 +6,18 @@ namespace controller
 
     public class BlinkOnHitInstaller : MonoInstaller
     {
-        [SerializeField] BlinkOnHit blinkOnHit;
+        
         [SerializeField] private SpriteRenderer robotSR;
         /// <summary>
         /// install the sprite renderer for Blink on Hit Class
-        ///  create and install blink for hit from prefab
+        ///  create and install blink 
         /// </summary>
         public override void InstallBindings()
         {
           
             Container.Bind<SpriteRenderer>().FromInstance(robotSR).WhenInjectedInto<BlinkOnHit>();
           
-            Container.Bind<IBlinkOnHit>().To<BlinkOnHit>().FromComponentInNewPrefab(blinkOnHit).AsSingle();
+            Container.Bind<IBlinkOnHit>().To<BlinkOnHit>().FromNew().AsSingle();
 
         }
     }

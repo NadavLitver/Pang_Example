@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -6,7 +8,7 @@ using Zenject;
 
 namespace view
 {
-    public class UIHandler : MonoBehaviour, IUIHandler// the UI handler is responsible for updating ui elements
+    public class UIHandler : IUIHandler// the UI handler is responsible for updating ui elements
     {
         [Inject(Id = "ScoreText")] private readonly TextMeshProUGUI scoreText;
         [Inject(Id = "HealthText")] private readonly TextMeshProUGUI healthText;
@@ -59,19 +61,19 @@ namespace view
             endingPanel.SetActive(true);
             OnEndingPanel.Invoke(true);
         }
-        public void CallCountdownRoutine(int level) => StartCoroutine(CountdownRoutine(level));
-        IEnumerator CountdownRoutine(int level)//small routine to create a countdown between each level
+        public void CallCountdownRoutine(int level) => _= CountdownRoutine(level);
+
+        private async UniTaskVoid CountdownRoutine(int level)
         {
-            yield return new WaitForSeconds(0.05f);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.05f));
             countDownText.gameObject.SetActive(true);
             countDownText.text = "3";
-            yield return new WaitForSeconds(1);
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
             countDownText.text = "2";
-            yield return new WaitForSeconds(1);
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
             countDownText.text = "1";
-            yield return new WaitForSeconds(1);
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
             countDownText.gameObject.SetActive(false);
-
         }
     }
 }

@@ -8,7 +8,6 @@ namespace controller
 
     public class UIHandlerInstaller : MonoInstaller
     {
-        [SerializeField] private UIHandler uiHandler;
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI healthText;
         [SerializeField] private TextMeshProUGUI levelText;
@@ -17,12 +16,12 @@ namespace controller
         [SerializeField] private TextMeshProUGUI startText;
         [SerializeField] private GameObject endingPanel;
         /// <summary>
-        /// install the ui handler from a new prefab
+        /// create and install the ui handler 
         /// install the corresponding texts using ID
         /// </summary>
         public override void InstallBindings()
         {
-            Container.Bind<IUIHandler>().To<UIHandler>().FromComponentInNewPrefab(uiHandler).AsSingle().NonLazy();
+            Container.Bind<IUIHandler>().To<UIHandler>().FromNew().AsSingle().NonLazy();
             Container.Bind<TextMeshProUGUI>().WithId("ScoreText").FromInstance(scoreText);
             Container.Bind<TextMeshProUGUI>().WithId("HealthText").FromInstance(healthText);
             Container.Bind<TextMeshProUGUI>().WithId("LevelText").FromInstance(levelText);
