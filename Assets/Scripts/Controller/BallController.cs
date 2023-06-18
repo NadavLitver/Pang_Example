@@ -7,14 +7,22 @@ using Zenject;
 namespace controller
 {
     [DefaultExecutionOrder(+1)]//delay execution
-    public class BallController : MonoBehaviour, IBallController // BallController: movement and collision logic for the balls.
+    public class BallController : IBallController, ITickable // BallController: movement and collision logic for the balls.
     {
 
         //view
         [Inject] private ISoundManager soundManager;
         //data
         [Inject] private IBallsPoolHandler ballDataHandler;
-        [SerializeField] private BallsConfig ballsData;
+        [Inject] private BallsConfig ballsData;
+
+        public BallController(ISoundManager soundManager, IBallsPoolHandler ballDataHandler, BallsConfig ballsData)
+        {
+            this.soundManager = soundManager;
+            this.ballDataHandler = ballDataHandler;
+            this.ballsData = ballsData;
+        }
+
 
         //  method for ball creation
         public void CreateBall()//default overload
@@ -108,10 +116,11 @@ namespace controller
 
             }
         }
-        private void Update()
+        public void Tick()
         {
             IterateOverBallsAndCheckCollision();
         }
+      
 
         private void IterateOverBallsAndCheckCollision()// loop over all active balls and check collision
         {
@@ -203,6 +212,6 @@ namespace controller
             }
         }
 
-
+      
     }
 }

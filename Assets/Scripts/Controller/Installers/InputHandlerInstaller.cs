@@ -6,15 +6,12 @@ namespace controller
 
     public class InputHandlerInstaller : ScriptableObjectInstaller<InputHandlerInstaller>
     {
-        [SerializeField] private InputHandler inputHandlerPrefab;
         /// <summary>
-        /// create(from prefab) and install the Input Handler, Its non lazy because its refrenced using events so I needed to create an instance on the application startup
+        /// create and install the Input Handler, Its non lazy because I needed to create an instance on the application startup
         /// </summary>
         public override void InstallBindings()
         {
-
-
-            Container.Bind<IInputHandler>().To<InputHandler>().FromComponentInNewPrefab(inputHandlerPrefab).AsSingle().NonLazy();
+            Container.BindInterfacesTo<InputHandler>().FromNew().AsSingle().NonLazy();
         }
     }
 }

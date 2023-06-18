@@ -7,22 +7,15 @@ using Zenject;
 namespace controller
 {
 
-    public class InputHandler : MonoBehaviour, IInputHandler// stores the information about player horizontal movement, if there was more complex movement such as jumping the input would also be here
+    public class InputHandler : IInputHandler, ITickable// stores the information about player horizontal movement, if there was more complex movement such as jumping the input would also be here
     {
         private int horInput;
         public bool isLeftPressed;
         public bool isRightPressed;
-        public UnityEvent OnTapScreen { get;set; }
+        public UnityEvent OnTapScreen { get; set; }
         [Inject(Id = ("Left"))] private IArrowButton leftArrowButton;
         [Inject(Id = ("Right"))] private IArrowButton rightArrowButton;
 
-      
-        private void Update()
-        {
-
-            SetHorInput();
-            CheckShoot();
-        }
         private void CheckShoot()
         {
             if (CheckTouch() && !IsPointerOverUIObject())
@@ -86,6 +79,12 @@ namespace controller
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
             return results.Count > 0;
+        }
+
+        public void Tick()
+        {
+            SetHorInput();
+            CheckShoot();
         }
     }
 
