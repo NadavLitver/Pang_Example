@@ -56,10 +56,7 @@ namespace controller
             ballPoolHandler.BallPoolRef.ReturnToPool((Ball)ball);
         }
 
-        public Vector2 RandomBallVelocity()// get a random velocity from a ball with default speed
-        {
-            return GetRandomRightOrLeft() * ballsData.Speed;
-        }
+       
         public Vector2 RandomBallVelocity(float speed)// get a random velocity from a ball with speed overload
         {
             return GetRandomRightOrLeft() * speed;

@@ -16,7 +16,7 @@ namespace controller
         [Inject] private readonly BallsConfig ballsConfig;
         public Rigidbody2D Rb2d { get => rb2d;}
 
-        public BallData ballData { get; set; }
+        public BallData ballData { get; set; }//individualData
         [SerializeField] Rigidbody2D rb2d;
       
         private void Start()

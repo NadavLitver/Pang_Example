@@ -5,11 +5,10 @@ namespace model
     [CreateAssetMenu(fileName = "BallsConfig", menuName = "Pang/BallsDatas Config", order = 2)]
     public class BallsConfig : ScriptableObject//SO that holds ball data
     {
-        [SerializeField] private float speed;
         [SerializeField] private float bounceForce;
-        public LayerMask CollisionLayer;
+        [SerializeField] private LayerMask collisionLayer;
+        public LayerMask CollisionLayer { get => collisionLayer; }
 
-        public float Speed { get => speed; }
         public float BounceForce { get => bounceForce; }
 
         [SerializeField] private float[] ballSizes;

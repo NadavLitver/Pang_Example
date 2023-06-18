@@ -8,7 +8,6 @@ namespace controller
 
         void SplitBall(ILaserHandler laser, IBall ball);
         bool IsActiveBallsEmpty();
-        Vector2 RandomBallVelocity();
         Vector2 RandomBallVelocity(float speed);
 
     }
