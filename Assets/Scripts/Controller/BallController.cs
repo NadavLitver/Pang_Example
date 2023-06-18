@@ -1,5 +1,7 @@
 using model;
+using ModestTree;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using view;
 using Zenject;
@@ -93,21 +95,17 @@ namespace controller
             if(isLeftHit)
             {
                 ball.Rb2d.velocity = new Vector2(1 * ballsData.Speed, ball.Rb2d.velocity.y); // Process collision results as needed
-                Debug.Log("LeftHit");
                 return;
             }
             isRightHit = Physics2D.Raycast(ball.transform.position, Vector2.right, raycastSize, ballsData.CollisionLayer);
             if(isRightHit)
             {
                 ball.Rb2d.velocity = new Vector2(-1 * ballsData.Speed, ball.Rb2d.velocity.y); // Process collision results as needed
-                Debug.Log("RightHit");
-
                 return;
             }
             isBottomHit = Physics2D.Raycast(ball.transform.position, Vector2.down, raycastSize, ballsData.CollisionLayer);
             if (isBottomHit)
             { // Process collision results as needed
-                Debug.Log("BottomHit");
 
                 if (ball.Rb2d.velocity.x > 0)
                 {
@@ -147,27 +145,12 @@ namespace controller
         }
         public void SplitBall(ILaserHandler laser, Ball ball)// split ball depending on scale
         {
-            float currentBallScale = ball.gameObject.transform.localScale.x;
-            switch (currentBallScale)
+            float currentBallScale = ball.gameObject.transform.localScale.x;// get current size
+            if(GetIndexOfSize(currentBallScale) != 0)//check ball isnt the smallest size
             {
-                case 3:
-                    CreateTwoBalls(ball, 2);
-                    break;
-                case 2:
-                    CreateTwoBalls(ball, 1);
-                    break;
-                case 1:
-                    CreateTwoBalls(ball, 0.5f);
-                    break;
-                case 0.5f:
-                    CreateTwoBalls(ball, 0.35f);
-                    break;
-                case 0.35f:
-                    break;
-                default:
-                    break;
+                CreateTwoBalls(ball, GetSmallerSize(currentBallScale));// create two balls one size smaller
             }
-            ReturnBallToPool(ball);
+            ReturnBallToPool(ball);//return ball to pool
             soundManager.Play(SoundManager.Sound.ballHit);
 
         }
@@ -181,42 +164,25 @@ namespace controller
             CreateBall(ball.transform.position, Vector2.one * size, Vector2.left * ballsData.Speed);
         }
 
-        [ContextMenu("SplitBalls")]
-        private void SplitAllBalls()//just for testing in editor
+       
+        public float GetSmallerSize(float size)
         {
-            List<Ball> ballsToSplit = new List<Ball>(); // Create a separate list to store the balls to be split
-
-            foreach (var ball in ballPoolHandler.ActiveBalls)
+            int index = GetIndexOfSize(size);
+            if (index > 0 && index < ballsData.BallSizes.Length)
             {
-                ballsToSplit.Add(ball); // Add the ball to the separate list
+                return ballsData.BallSizes[index - 1];
             }
-
-            foreach (var ball in ballsToSplit) // Iterate over the separate list
+            else
             {
-                float currentBallScale = ball.gameObject.transform.localScale.x;
-                switch (currentBallScale)
-                {
-                    case 3:
-                        CreateTwoBalls(ball, 2);
-                        break;
-                    case 2:
-                        CreateTwoBalls(ball, 1);
-                        break;
-                    case 1:
-                        CreateTwoBalls(ball, 0.5f);
-                        break;
-                    case 0.5f:
-                        CreateTwoBalls(ball, 0.35f);
-                        break;
-                    case 0.35f:
-                        break;
-                    default:
-                        break;
-                }
-                ReturnBallToPool(ball);
+                // Handle the case when the size is not found or it is the smallest size
+                return ballsData.BallSizes[0];
             }
         }
-
+        public int GetIndexOfSize(float size)
+        {
+           return ballsData.BallSizes.IndexOf(size);
+        }
+       
 
     }
-}
+} 

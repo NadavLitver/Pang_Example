@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 namespace model
 {
@@ -9,6 +10,14 @@ namespace model
         public LayerMask CollisionLayer;
 
         public float Speed { get => speed; }
-        public float BounceForce { get => bounceForce;  }
+        public float BounceForce { get => bounceForce; }
+
+        [SerializeField] private float[] ballSizes;
+        public float[] BallSizes { get => ballSizes;}
+
+     
+
+
+
     }
 }

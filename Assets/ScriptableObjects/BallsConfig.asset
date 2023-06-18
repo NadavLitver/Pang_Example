@@ -17,3 +17,9 @@ MonoBehaviour:
   CollisionLayer:
     serializedVersion: 2
     m_Bits: 8
+  ballSizes:
+  - 0.35
+  - 0.5
+  - 1
+  - 2
+  - 3

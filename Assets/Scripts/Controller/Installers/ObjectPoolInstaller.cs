@@ -10,7 +10,7 @@ namespace controller
         public Ball prefabRefA;
         public LaserHandler prefabRefB;
         /// <summary>
-        /// create and install the object pools and pass arguments for their corresponding consructors (ObjectPool base class)
+        /// create and install the object pools and pass arguments for their corresponding consructors
         /// </summary>
         public override void InstallBindings()
         {
