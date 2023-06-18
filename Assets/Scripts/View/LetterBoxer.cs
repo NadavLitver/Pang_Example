@@ -1,41 +1,31 @@
 using UnityEngine;
 namespace view
 {
-    public class LetterBoxer : MonoBehaviour// created to change size of camera view and viewport to adjust to different aspect ratios and resolutions
+    public class LetterBoxer : ILetterBoxer // created to change size of camera view and viewport to adjust to different aspect ratios and resolutions
     {
         private Camera cam;// main camera
         private enum ReferenceMode { DesignedAspectRatio, OrginalResolution };
-     
-        [SerializeField] float x = 16;
-        [SerializeField] float y = 9;
-        [SerializeField] float width = 1920;
-        [SerializeField] float height = 1080;
-        [SerializeField] bool onAwake = true;
-        [SerializeField] bool onUpdate = true;
-        [SerializeField] ReferenceMode referenceMode;
 
-        public void Awake()
+        float x = 20;
+        float y = 9;
+        float width = 2400;
+        float height = 1080;
+
+        ReferenceMode referenceMode;
+        public LetterBoxer()
         {
             // store reference to the camera
-            cam = GetComponent<Camera>();
+            cam = Camera.main;
+            //set reference mode
+            referenceMode = ReferenceMode.OrginalResolution;
+            // perform sizing
+            PerformSizing();
 
-            // perform sizing if onAwake is set
-            if (onAwake)
-            {
-                PerformSizing();
-            }
         }
 
-        public void Update()
-        {
-            // perform sizing if onUpdate is set
-            if (onUpdate)
-            {
-                PerformSizing();
-            }
-        }
 
-        private void PerformSizing()
+
+        public void PerformSizing()
         {
             // calc based on aspect ratio
             float targetRatio = x / y;

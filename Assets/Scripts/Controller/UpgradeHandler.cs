@@ -1,5 +1,5 @@
+using Cysharp.Threading.Tasks;
 using model;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,7 +11,7 @@ namespace controller
     public class UpgradeHandler : IUpgradeHandler// The Upgrade handler is responsible for all logic correlated with the upgrade panel
     {
         //controllers
-       
+
         private readonly ILocomotion robotController;
         private readonly ISoundManager soundManager;
         private readonly IPlayerHPHandler playerHPHandler;
@@ -63,7 +63,7 @@ namespace controller
 
         private void UnSubscribeFromReturningLasers()
         {
-         
+
             OnLasersUpgraded.Invoke();
             didChooseUpgrade = true;
         }
@@ -85,13 +85,12 @@ namespace controller
         {
             upgradePanel.SetActive(isOn);
         }
-        public IEnumerator UpgradeRoutine()
+        public async UniTask UpgradeRoutine()
         {
-            
-            TurnOffOnUpgradePanel(true);//turn on the panel
-            yield return new WaitUntil(() => didChooseUpgrade);// wait for player to make choice
-            soundManager.Play(SoundManager.Sound.UpgradeSelected);//play sounds after player chose
-            TurnOffOnUpgradePanel(false);// turn off the panel
+            TurnOffOnUpgradePanel(true);
+            await UniTask.WaitUntil(() => didChooseUpgrade);
+            soundManager.Play(SoundManager.Sound.UpgradeSelected);
+            TurnOffOnUpgradePanel(false);
         }
     }
 }
