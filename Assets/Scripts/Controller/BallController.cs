@@ -52,14 +52,14 @@ namespace controller
             return ball;
             // Set ball position, velocity, and any other necessary properties
         }
-        public IBall CreateBall(IBall fatherBall)
+        public IBall CreateBall(IBall fatherBall, Vector2 dir)
         {
             Ball ball = ballPoolHandler.BallPoolRef.GetFromPool();
             ball.ballData = fatherBall.ballData.ChildData;
             ball.Rb2d.transform.position = fatherBall.Rb2d.transform.position;
             ball.Rb2d.transform.localScale = ball.ballData.Size * Vector2.one;
             Rigidbody2D ballRB = ball.Rb2d;
-            ballRB.velocity = RandomBallVelocity(ball.ballData.Speed);
+            ballRB.velocity = dir * ball.ballData.Speed;
             ballPoolHandler.ActiveBalls.Add(ball);
             return ball;
         }
@@ -121,10 +121,14 @@ namespace controller
         }
         private void Split(IBall ball)// create to balls that go to different direction in the position of a given ball
         {
+            bool isRight = true;
             for (int i = 0; i < ball.ballData.SplitAmount; i++)
             {
-                CreateBall(ball);
+                Vector2 dir = isRight ? Vector2.right : Vector2.left;//make sure balls wont go to same direction
+                isRight = !isRight;//flip for next loop
+                CreateBall(ball,dir);
             }
+         
         }
 
        
