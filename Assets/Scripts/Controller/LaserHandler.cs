@@ -50,7 +50,7 @@ namespace controller
         {
             if (collision.CompareTag("Ball"))//identify collision with ball and invoke an event
             {
-                OnHitBall?.Invoke(this, collision.gameObject.GetComponent<Ball>());
+                OnHitBall?.Invoke(this, collision.gameObject.GetComponent<IBall>());
             }
         }
         private void Update()
