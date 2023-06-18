@@ -3,6 +3,7 @@ using ModestTree;
 using UnityEngine;
 using view;
 using Zenject;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 namespace controller
 {
@@ -23,20 +24,8 @@ namespace controller
         }
 
 
-        //  method for ball creation
-        public IBall CreateBall()//default overload
-        {
-            Ball ball = ballPoolHandler.BallPoolRef.GetFromPool();
-            ball.Rb2d.transform.position = Vector3.zero;
-            ball.Rb2d.transform.localScale = Vector3.one;
-            Rigidbody2D ballRB = ball.Rb2d;
-            ballRB.velocity = RandomBallVelocity();
-            ballPoolHandler.ActiveBalls.Add(ball);
-            return ball;
-            // Set ball position, velocity, and any other necessary properties
-        }
-
-        //overloaded 
+      
+        //method for creating ball used when creating new balls 
         public IBall CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)
         {
             Ball ball = ballPoolHandler.BallPoolRef.GetFromPool();
@@ -48,6 +37,7 @@ namespace controller
             return ball;
             // Set ball position, velocity, and any other necessary properties
         }
+        //overload method used when splitting balls
         public IBall CreateBall(IBall fatherBall, Vector2 dir)
         {
             Ball ball = ballPoolHandler.BallPoolRef.GetFromPool();
