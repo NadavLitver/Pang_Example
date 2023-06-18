@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: IndividualBallConfig_FastHuge
   m_EditorClassIdentifier: 
   speed: 5
-  ChildSpeed: 3
-  size: 0.35
+  splitAmount: 2
+  size: 3
+  childData: {fileID: 11400000, guid: 00160fe22d5426345907672ab7a8fe87, type: 2}

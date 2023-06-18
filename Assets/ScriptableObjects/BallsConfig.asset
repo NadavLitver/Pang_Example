@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873ff3c1be346334fb018405a63eac78, type: 3}
   m_Name: BallsConfig
   m_EditorClassIdentifier: 
-  speed: 3
   bounceForce: 10
-  CollisionLayer:
+  collisionLayer:
     serializedVersion: 2
     m_Bits: 8
   ballSizes:

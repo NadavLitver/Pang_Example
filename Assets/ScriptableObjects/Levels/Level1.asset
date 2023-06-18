@@ -15,4 +15,4 @@ MonoBehaviour:
   levelIndex: 1
   upgradePanel: 0
   ballsDatas:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 12b797508604da04c869cbf585e09511, type: 2}
