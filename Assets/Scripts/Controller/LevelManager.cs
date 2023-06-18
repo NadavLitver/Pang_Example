@@ -1,14 +1,14 @@
 using Cysharp.Threading.Tasks;
+using model;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
 using view;
-using model;
 using Zenject;
 
 namespace controller
 {
-    public class LevelManager :  ILevelManager// LevelGenerator: Generates and manages the arrangement of game objects within each level.
+    public class LevelManager : ILevelManager// LevelGenerator: Generates and manages the arrangement of game objects within each level.
     {
         //data
         [Inject] LevelConfigList levels;
@@ -21,8 +21,8 @@ namespace controller
         private float delayBetweenLevels;
         public int LevelCount { get; private set; }
         //events
-        public UnityEvent<int> OnAdvanceLevel { get; private set; }
-        public UnityEvent<bool> OnEnd { get; private set; }
+        public UnityEvent<int> OnAdvanceLevel { get; } = new UnityEvent<int>();
+        public UnityEvent<bool> OnEnd { get; } = new UnityEvent<bool>();
         [Inject]
         public LevelManager(IBallController _ballsController, IUpgradeHandler _upgradeHandler, ISoundManager _soundManager, LevelConfigList _levels)
         {
@@ -35,36 +35,36 @@ namespace controller
             LevelCount = 1;
             delayBetweenLevels = 4.5f;
             //init events
-            OnAdvanceLevel = new UnityEvent<int>();
-            OnEnd = new UnityEvent<bool>();
-
             _ = LevelsRoutine();
         }
-    
+
         private async UniTask LevelsRoutine()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(.15));
             foreach (LevelConfig level in levels.LevelConfigs)
             {
                 // update level index
-                LevelCount = level.levelIndex;
+                LevelCount = level.LevelIndex;
                 OnAdvanceLevel?.Invoke(LevelCount);
 
                 // check to open upgrade panel
-                if (level.upgradePanel)
+                if (level.UpgradePanel)
                 {
                     await upgradeHandler.UpgradeRoutine();
                 }
 
                 await UniTask.Delay(TimeSpan.FromSeconds(delayBetweenLevels)); // small delay between levels, scaling with timescale
 
-                int ballCount = level.ballCount;
-                float ballSize = level.ballSize;
+                int ballCount = level.BallsDatas.Length;
 
                 for (int i = 0; i < ballCount; i++)
                 {
+                    float ballSize = level.BallsDatas[i].Size;
+                    float ballSpeed = level.BallsDatas[i].Speed;
+
                     // Spawn a ball using the ball controller and set the position, scale, direction
-                    ballsController.CreateBall(new Vector2(UnityEngine.Random.Range(0, 5), UnityEngine.Random.Range(0, 2)), Vector2.one * ballSize, ballsController.RandomBallVelocity());
+                    IBall currentBall = ballsController.CreateBall(new Vector2(UnityEngine.Random.Range(0, 5), UnityEngine.Random.Range(0, 2)), Vector2.one * ballSize, ballsController.RandomBallVelocity(ballSpeed));
+                    currentBall.ballData = level.BallsDatas[i];
                 }
 
                 // wait until all balls are destroyed to start a new level

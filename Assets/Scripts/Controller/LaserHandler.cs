@@ -16,10 +16,10 @@ namespace controller
         [Inject] IGameManager gameManager;
         [Inject] IUpgradeHandler upgradeHandler;
         //events
-        public UnityEvent<ILaserHandler, Ball> OnHitBall { get; private set; }
+        public UnityEvent<ILaserHandler, IBall> OnHitBall { get; } = new UnityEvent<ILaserHandler, IBall>();  
         private void Awake()
         {
-            OnHitBall = new UnityEvent<ILaserHandler, Ball>();//init event
+         
             //add listeners
             OnHitBall.AddListener(ballController.SplitBall);
             OnHitBall.AddListener(ReturnSelfToPool);
@@ -36,7 +36,7 @@ namespace controller
             this.gameObject.SetActive(false);
 
         }
-        public void ReturnSelfToPool(ILaserHandler laser, Ball ball)//returning too object pool by set game object off/ overload
+        public void ReturnSelfToPool(ILaserHandler laser, IBall ball)//returning too object pool by set game object off/ overload
         {
             this.gameObject.SetActive(false);
 

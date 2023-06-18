@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Level4
   m_EditorClassIdentifier: 
   levelIndex: 4
-  ballCount: 3
-  ballSize: 3
+  upgradePanel: 0
+  ballsDatas:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

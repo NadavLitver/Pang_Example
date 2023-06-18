@@ -2934,7 +2934,6 @@ MonoBehaviour:
   animator: {fileID: 1534649825}
   robotSR: {fileID: 1534649824}
   shootPoint: {fileID: 1233040310}
-  robotAnimatorUpdaterPrefab: {fileID: 6686158687055728852, guid: 6bcdfded051ddbd4e9ce93482ae1447f, type: 3}
 --- !u!114 &891779916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2947,7 +2946,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e5be5bbc3d0624b8aeb66892f55d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locomotionPrefab: {fileID: 463584619018723961, guid: 66479a1590d58454382b9956d5b5e8cf, type: 3}
   locomotionTransform: {fileID: 1534649823}
 --- !u!114 &891779917
 MonoBehaviour:

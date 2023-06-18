@@ -5,6 +5,6 @@ namespace controller
     public interface IBallsPoolHandler
     {
         IObjectPool<Ball> BallPoolRef { get; }
-        List<Ball> ActiveBalls { get; }
+        List<IBall> ActiveBalls { get; }
     }
 }

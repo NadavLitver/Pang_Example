@@ -17,8 +17,8 @@ namespace controller
         private int currentHealthPoints;
         public int CurrentHealthPoints { get => currentHealthPoints; }
         //events
-        public UnityEvent<int> HealthReducedEvent { get; private set; }
-        public UnityEvent<int> HealthIncreasedEvent  { get; private set; }
+        public UnityEvent<int> HealthReducedEvent { get; } = new UnityEvent<int>();
+        public UnityEvent<int> HealthIncreasedEvent  { get; } = new UnityEvent<int>();
 
         [Inject]
         public PlayerHPHandler(IBlinkOnHit _blinkOnHit, ISoundManager _soundManager, PlayerConfig _PlayerConfig)
@@ -29,9 +29,7 @@ namespace controller
             this.playerData = _PlayerConfig;
 
             //Init Variables
-            currentHealthPoints = playerData.StartingHP;
-            HealthReducedEvent = new UnityEvent<int>();
-            HealthIncreasedEvent = new UnityEvent<int>();
+            currentHealthPoints = playerData.StartingHP;  
 
             //subscribe to event for blinking when getting hit
             HealthReducedEvent.AddListener(blinkOnHit.CallBlinkRoutine);

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1e99511febd0d40b9268c180b5b3cf, type: 3}
   m_Name: ObjectPoolInstaller
   m_EditorClassIdentifier: 
-  prefabRefA: {fileID: 8654834949222972828, guid: 8975863388eddc247b5cecea12a6a82f, type: 3}
+  prefabRefA: {fileID: 8944095962115082659, guid: 8975863388eddc247b5cecea12a6a82f, type: 3}
   prefabRefB: {fileID: 4888533665663545342, guid: 5aa202dca1d71f34faf48afbed7c99eb, type: 3}

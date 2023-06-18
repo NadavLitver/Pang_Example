@@ -17,7 +17,7 @@ namespace view
         [Inject(Id = "StartText")] private readonly TextMeshProUGUI startText;
         [Inject(Id = "EndingPanel")] private readonly GameObject endingPanel;
 
-        public UnityEvent<bool> OnEndingPanel { get; set; }
+        public UnityEvent<bool> OnEndingPanel { get; } = new UnityEvent<bool>();
 
         public void UpdateScore(int score)
         {

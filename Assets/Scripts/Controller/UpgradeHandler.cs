@@ -23,8 +23,8 @@ namespace controller
         private readonly UpgradesConfig upgradesData;
         private bool didChooseUpgrade;
         //events
-        public UnityEvent<int> OnHPUpgraded { get; private set; }
-        public UnityEvent OnLasersUpgraded { get; private set; }
+        public UnityEvent<int> OnHPUpgraded { get;} = new UnityEvent<int>();
+        public UnityEvent OnLasersUpgraded { get; } = new UnityEvent();
 
 
         [Inject]
@@ -51,9 +51,7 @@ namespace controller
         }
         private void Initialize()//subscribe to events
         {
-            //init events
-            OnHPUpgraded = new UnityEvent<int>();
-            OnLasersUpgraded = new UnityEvent();
+          
             //subscrive to events. each upgrade option to its corresponding upgrade
             laserUpgradeButton.onClick.AddListener(UnSubscribeFromReturningLasers);
             speedButton.onClick.AddListener(UpgradeSpeed);

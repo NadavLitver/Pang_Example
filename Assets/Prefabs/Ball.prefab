@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3092355091995229932}
   - component: {fileID: 2420878163584083154}
   - component: {fileID: 108185540518783872}
-  - component: {fileID: 8654834949222972828}
   - component: {fileID: 5460535587287502511}
+  - component: {fileID: 8944095962115082659}
   m_Layer: 7
   m_Name: Ball
   m_TagString: Ball
@@ -150,22 +150,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.65
---- !u!114 &8654834949222972828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9037659183072536743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f585d48e5b8974b4e878d180c2fa2aa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnPlayerHit:
-    m_PersistentCalls:
-      m_Calls: []
-  rb2d: {fileID: 2420878163584083154}
 --- !u!82 &5460535587287502511
 AudioSource:
   m_ObjectHideFlags: 0
@@ -262,3 +246,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8944095962115082659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9037659183072536743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bffbbfe470b54e64db2370ff05abf804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childrenSpeed: 3
+  rb2d: {fileID: 2420878163584083154}

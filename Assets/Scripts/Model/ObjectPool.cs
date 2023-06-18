@@ -12,6 +12,8 @@ namespace model
         private List<T> pool = new List<T>();
         public List<T> Pool => pool;
 
+      
+
         [Inject]
         public ObjectPool(T _prefabRef, DiContainer _container)
         {
@@ -53,6 +55,8 @@ namespace model
         {
             obj.gameObject.SetActive(false);
         }
+
+       
     }
 
 }

@@ -12,7 +12,7 @@ namespace controller
         private int horInput;
         public bool isLeftPressed;
         public bool isRightPressed;
-        public UnityEvent OnTapScreen { get; set; }
+        public UnityEvent OnTapScreen { get; set; } = new UnityEvent();
         [Inject(Id = ("Left"))] private IArrowButton leftArrowButton;
         [Inject(Id = ("Right"))] private IArrowButton rightArrowButton;
 

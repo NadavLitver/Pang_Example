@@ -11,7 +11,7 @@ namespace view
         void UpdateStartText();
         void EnableEndingPanel(bool isWon);
         void CallCountdownRoutine(int level);
-        public UnityEvent<bool> OnEndingPanel { get; set; }
+        public UnityEvent<bool> OnEndingPanel { get; }
     }
 
 }

@@ -8,11 +8,11 @@ namespace controller
     {
         [Inject]private readonly IObjectPool<Ball> ballPoolRef;
 
-        List<Ball> activeBalls = new List<Ball>();
+        List<IBall> activeBalls = new List<IBall>();
 
         public IObjectPool<Ball> BallPoolRef { get => ballPoolRef;}
-        
-        public List<Ball> ActiveBalls { get => activeBalls; }
+   
+        public List<IBall> ActiveBalls { get => activeBalls; }
        
     }
 }

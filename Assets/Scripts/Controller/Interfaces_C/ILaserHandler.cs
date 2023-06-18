@@ -5,8 +5,8 @@ namespace controller
 {
     public interface ILaserHandler
     {
-        UnityEvent<ILaserHandler, Ball> OnHitBall { get; }
-        void ReturnSelfToPool(ILaserHandler laser, Ball ball);
+        UnityEvent<ILaserHandler, IBall> OnHitBall { get; }
+        void ReturnSelfToPool(ILaserHandler laser, IBall ball);
         void CheckTimeToLive();
         GameObject myGameObject { get; }
     }

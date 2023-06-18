@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace model
 {
-    [CreateAssetMenu(fileName = "BallsConfig", menuName = "Pang/Balls Config", order = 2)]
+    [CreateAssetMenu(fileName = "BallsConfig", menuName = "Pang/BallsDatas Config", order = 2)]
     public class BallsConfig : ScriptableObject//SO that holds ball data
     {
         [SerializeField] private float speed;

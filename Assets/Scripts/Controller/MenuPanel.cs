@@ -42,7 +42,6 @@ namespace controller
             startButton.onClick.AddListener(TogglePauseMenu);
             inputHandler.OnTapScreen.AddListener(CheckToUnpause);
             resetButton.onClick.AddListener(ResetScene);
-            iUIhandler.OnEndingPanel = new UnityEvent<bool>();
             iUIhandler.OnEndingPanel.AddListener(TurnOnOffResetButton);
 
             TogglePauseMenu();

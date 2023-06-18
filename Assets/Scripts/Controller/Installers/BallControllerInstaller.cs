@@ -13,7 +13,7 @@ namespace controller
         public override void InstallBindings()
         {
 
-            Container.BindInterfacesTo<BallController>().FromNew().AsSingle();
+            Container.Bind<IBallController>().To<BallController>().FromNew().AsSingle();
 
         }
     }

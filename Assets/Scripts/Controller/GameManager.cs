@@ -18,7 +18,7 @@ namespace controller
         private float score;
         public float Score { get => score; }
         //events
-        public UnityEvent OnLose { get; private set; }
+        public UnityEvent OnLose { get; } = new UnityEvent();
 
 
 
@@ -32,7 +32,7 @@ namespace controller
             this.playerHitHandler = _playerHitHandler;
             this.soundManager = _soundManager;
 
-            OnLose = new UnityEvent();
+          
             //make sure timescale is one
             Time.timeScale = 1;
             // init variables
@@ -97,10 +97,10 @@ namespace controller
             soundManager.Play(SoundManager.Sound.playerLost);// play a losing sound
         }
 
-        public void UpdateScoreOnSplitBall(ILaserHandler laser, Ball ball)
+        public void UpdateScoreOnSplitBall(ILaserHandler laser, IBall ball)
         {
             //increase score based on balls size (the smaller the bigger the score gain is)
-            score += 50 / ball.transform.localScale.x;
+            score += 50 / ball.Rb2d.transform.localScale.x;
             //call on update ui
             iUIHandler.UpdateScore((int)score);
         }

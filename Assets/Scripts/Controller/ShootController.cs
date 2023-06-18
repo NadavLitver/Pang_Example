@@ -20,7 +20,7 @@ namespace controller
         private readonly IObjectPool<LaserHandler> laserPool;
         private float lastTimeShot;
         //events
-        public UnityEvent OnShot { get; private set; }
+        public UnityEvent OnShot { get; } = new UnityEvent();
 
         [Inject]
         public ShootController(IInputHandler _inputHandler, IRobotAnimatorUpdater _robotAnimatorUpdater, ISoundManager _soundManager, PlayerConfig _playerData, IObjectPool<LaserHandler> _laserPool)
@@ -32,11 +32,9 @@ namespace controller
             this.playerData = _playerData;
             this.laserPool = _laserPool;
 
-            //Init and subscribe to events
-            inputHandler.OnTapScreen = new UnityEvent();//the constructor is being called before the input handler ( a mono ) awake is called so i initialized the event here, maybe a good reason to use cs actions instead
+            //subscribe to events
+           
             inputHandler.OnTapScreen.AddListener(Shoot);
-
-            OnShot = new UnityEvent();
             OnShot.AddListener(robotAnimatorUpdater.PlayShooting);
 
 
