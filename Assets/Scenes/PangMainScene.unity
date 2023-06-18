@@ -2794,7 +2794,6 @@ GameObject:
   - component: {fileID: 857067622}
   - component: {fileID: 857067621}
   - component: {fileID: 857067620}
-  - component: {fileID: 857067623}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -2891,25 +2890,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &857067623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 857067618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b244496d0ace18d439819a7e1938317b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 1188286689}
-  healthText: {fileID: 851961483}
-  levelText: {fileID: 1257413031}
-  countDownText: {fileID: 1820687299}
-  endingText: {fileID: 162721814}
-  startText: {fileID: 797318681}
-  endingPanel: {fileID: 1239454551}
 --- !u!1 &885851846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2971,6 +2951,7 @@ GameObject:
   - component: {fileID: 891779916}
   - component: {fileID: 891779915}
   - component: {fileID: 891779917}
+  - component: {fileID: 891779918}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -2995,7 +2976,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d8f53b14b1c93a4ab6ff47686e9d620, type: 2}
   - {fileID: 11400000, guid: 96ea27d44dbf9c640b1b9386d8710377, type: 2}
   - {fileID: 11400000, guid: 5623c55b8f12076488d02630cf1e01c7, type: 2}
-  - {fileID: 11400000, guid: 7336a2c269bdf9b41ab90df61af8e724, type: 2}
   - {fileID: 11400000, guid: 746f5aa999836664d90c2514117c91df, type: 2}
   - {fileID: 11400000, guid: 2eb5c322a037d9d41bb1fa9a92a05344, type: 2}
   - {fileID: 11400000, guid: 9683a618b06a8f146857a940ea355bc2, type: 2}
@@ -3133,6 +3113,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkOnHit: {fileID: 2263692278599878375, guid: a5aec4c533a6fab4db8ddbb6044895db, type: 3}
   robotSR: {fileID: 1534649824}
+--- !u!114 &891779918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891779906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23058c544fb92c34fa44eb85e014ba7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiHandler: {fileID: 1162528898432295125, guid: 729c39b7a38a34543b41a52bc8c43f07, type: 3}
+  scoreText: {fileID: 1188286689}
+  healthText: {fileID: 851961483}
+  levelText: {fileID: 1257413031}
+  countDownText: {fileID: 1820687299}
+  endingText: {fileID: 162721814}
+  startText: {fileID: 797318681}
+  endingPanel: {fileID: 0}
 --- !u!1 &976809016
 GameObject:
   m_ObjectHideFlags: 0

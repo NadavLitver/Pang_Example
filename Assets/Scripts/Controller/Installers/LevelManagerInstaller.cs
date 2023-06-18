@@ -6,9 +6,11 @@ namespace controller
     public class LevelManagerInstaller : ScriptableObjectInstaller
     {
         [SerializeField] private LevelManager levelManager;
+        /// <summary>
+        /// create(from prefab) and install the Level Manager
+        /// </summary>
         public override void InstallBindings()
         {
-            // create(from prefab) and install the Level Manager
 
             Container.Bind<ILevelManager>().To<LevelManager>().FromComponentInNewPrefab(levelManager).AsSingle();
 

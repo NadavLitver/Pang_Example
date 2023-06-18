@@ -8,10 +8,12 @@ namespace controller
     public class BallControllerInstaller : ScriptableObjectInstaller<BallControllerInstaller>
     {
         [SerializeField] private BallController ballControllerPrefab;
-
+        /// <summary>
+        /// create(from prefab) and install the ball controller
+        /// </summary>
         public override void InstallBindings()
         {
-            // create(from prefab) and install the ball controller
+           
             Container.Bind<IBallController>().To<BallController>().FromComponentInNewPrefab(ballControllerPrefab).AsSingle();
 
         }

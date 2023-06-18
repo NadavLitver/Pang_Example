@@ -7,6 +7,9 @@ namespace controller
 
     public class PlayerHpHandlerInstaller : ScriptableObjectInstaller<PlayerHpHandlerInstaller>
     {
+        /// <summary>
+        /// Create and install the PlayerHPHandler
+        /// </summary>
         public override void InstallBindings()
         {
             Container.Bind<IPlayerHPHandler>().To<PlayerHPHandler>().FromNew().AsSingle();

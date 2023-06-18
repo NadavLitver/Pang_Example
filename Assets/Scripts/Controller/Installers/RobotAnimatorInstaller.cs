@@ -9,6 +9,10 @@ namespace controller
         [SerializeField] private SpriteRenderer robotSR;
         [SerializeField] private Transform shootPoint;
         [SerializeField] RobotAnimatorUpdater robotAnimatorUpdaterPrefab;
+        /// <summary>
+        /// Install the components neccessary for the animator updater
+        /// Create and install the updater from a prefab
+        /// </summary>
         public override void InstallBindings()
         {
             Container.Bind<Transform>().FromInstance(shootPoint).WhenInjectedInto<RobotAnimatorUpdater>();

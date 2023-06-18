@@ -8,11 +8,15 @@ namespace controller
     {
         [SerializeField] BlinkOnHit blinkOnHit;
         [SerializeField] private SpriteRenderer robotSR;
+        /// <summary>
+        /// install the sprite renderer for Blink on Hit Class
+        ///  create and install blink for hit from prefab
+        /// </summary>
         public override void InstallBindings()
         {
-            //install the sprite renderer for Blink on Hit Class
+          
             Container.Bind<SpriteRenderer>().FromInstance(robotSR).WhenInjectedInto<BlinkOnHit>();
-            // install the blink on hit from the
+          
             Container.Bind<IBlinkOnHit>().To<BlinkOnHit>().FromComponentInNewPrefab(blinkOnHit).AsSingle();
 
         }

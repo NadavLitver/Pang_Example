@@ -1,19 +1,20 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using Zenject;
+
 namespace view
 {
-    public class UIHandler : MonoBehaviour,IUIHandler// the UI handler is responsible for updating ui elements
+    public class UIHandler : MonoBehaviour, IUIHandler// the UI handler is responsible for updating ui elements
     {
-        [SerializeField] private TextMeshProUGUI scoreText;
-        [SerializeField] private TextMeshProUGUI healthText;
-        [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private TextMeshProUGUI countDownText;
-        [SerializeField] private TextMeshProUGUI endingText;
-        [SerializeField] private TextMeshProUGUI startText;
+        [Inject(Id = "ScoreText")] private readonly TextMeshProUGUI scoreText;
+        [Inject(Id = "HealthText")] private readonly TextMeshProUGUI healthText;
+        [Inject(Id = "LevelText")] private readonly TextMeshProUGUI levelText;
+        [Inject(Id = "CountDownText")] private readonly TextMeshProUGUI countDownText;
+        [Inject(Id = "EndingText")] private readonly TextMeshProUGUI endingText;
+        [Inject(Id = "StartText")] private readonly TextMeshProUGUI startText;
+        [Inject(Id = "EndingPanel")] private readonly GameObject endingPanel;
 
-
-        [SerializeField] private GameObject endingPanel;
         public void UpdateScore(int score)
         {
             if (scoreText != null)

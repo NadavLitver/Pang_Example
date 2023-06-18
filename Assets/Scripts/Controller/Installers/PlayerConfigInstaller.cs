@@ -6,6 +6,9 @@ using Zenject;
 public class PlayerConfigInstaller : ScriptableObjectInstaller<PlayerConfigInstaller>
 {
     [SerializeField] PlayerConfig playerData;
+    /// <summary>
+    /// Install PlayerConfig SO from instance
+    /// </summary>
     public override void InstallBindings()
     {
         Container.Bind<PlayerConfig>().FromInstance(playerData);

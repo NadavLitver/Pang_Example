@@ -7,9 +7,12 @@ namespace controller
 
     public class BallsPoolHandlerInstaller : ScriptableObjectInstaller<BallsPoolHandlerInstaller>
     {
+        /// <summary>
+        /// create and install the ball Pool handler (handels data thats why "Using model"
+        /// </summary>
         public override void InstallBindings()
         {
-            //create and install the ball Pool handler (handels data thats why "Using model"
+          
 
             Container.Bind<IBallsPoolHandler>().To<BallsPoolHandler>().FromNew().AsSingle();
         }
