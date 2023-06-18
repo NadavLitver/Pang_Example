@@ -1,24 +1,22 @@
-using Codice.CM.Common;
 using model;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 
 namespace controller
 {
-    public class Ball : MonoBehaviour,IBall// ball handles movement and collision
+    public class Ball : MonoBehaviour, IBall// ball handles movement and collision
     {
         //events
         public UnityEvent OnPlayerHit { get; } = new UnityEvent();
         //controllers
         [Inject] private readonly IPlayerHPHandler playerHPHandler;
         [Inject] private readonly BallsConfig ballsConfig;
-        public Rigidbody2D Rb2d { get => rb2d;}
+        public Rigidbody2D Rb2d { get => rb2d; }
 
         public BallData ballData { get; set; }//individualData
         [SerializeField] Rigidbody2D rb2d;
-      
+
         private void Start()
         {
             OnPlayerHit.AddListener(playerHPHandler.PlayerHit);
@@ -86,7 +84,7 @@ namespace controller
             this.gameObject.SetActive(false);
         }
     }
-   
 
-    
+
+
 }
