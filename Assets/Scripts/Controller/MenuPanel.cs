@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using view;
 using Zenject;
@@ -38,6 +39,7 @@ namespace controller
             pauseButton.onClick.AddListener(TogglePauseMenu);
             startButton.onClick.AddListener(TogglePauseMenu);
             inputHandler.OnTapScreen.AddListener(CheckToUnpause);
+            resetButton.onClick.AddListener(ResetScene);
             TogglePauseMenu();
         }
 
@@ -75,6 +77,10 @@ namespace controller
 
 
             }
+        }
+        public void ResetScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//get current build index and load scene
         }
 
     }

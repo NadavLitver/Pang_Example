@@ -123,10 +123,6 @@ namespace controller
             score -= scoreToDeduct;//reduce score based on remaining health of player (more health = less score lost)
         }
 
-        public void ResetScene()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//get current build index and load scene
-        }
-
+    
     }
 }

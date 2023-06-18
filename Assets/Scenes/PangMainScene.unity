@@ -1888,7 +1888,7 @@ MonoBehaviour:
   width: 2400
   height: 1080
   onAwake: 1
-  onUpdate: 1
+  onUpdate: 0
   referenceMode: 1
 --- !u!114 &519420034
 MonoBehaviour:
@@ -3133,7 +3133,7 @@ MonoBehaviour:
   countDownText: {fileID: 1820687299}
   endingText: {fileID: 162721814}
   startText: {fileID: 797318681}
-  endingPanel: {fileID: 0}
+  endingPanel: {fileID: 1239454551}
 --- !u!1 &976809016
 GameObject:
   m_ObjectHideFlags: 0
@@ -11304,19 +11304,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2114336215}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: model.GameManager, Assembly-CSharp
-        m_MethodName: ResetScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2114336215
 MonoBehaviour:
   m_ObjectHideFlags: 0
