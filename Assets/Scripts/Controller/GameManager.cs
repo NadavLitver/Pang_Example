@@ -1,5 +1,3 @@
-
-using model;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -11,17 +9,18 @@ namespace controller
 
     public class GameManager : IGameManager// GameManager: Manages the game state, score
     {
+        //controllers
         private readonly ILevelManager levelManager;
         private readonly IUIHandler iUIHandler;
         private readonly IPlayerHPHandler playerHitHandler;
         private readonly ISoundManager soundManager;
-
-
+        //data
         private float score;
-        public UnityEvent OnLose { get; private set; }
         public float Score { get => score; }
+        //events
+        public UnityEvent OnLose { get; private set; }
 
-        
+
 
         [Inject]
         public GameManager(ILevelManager _levelManager, IUIHandler _IUIHandler, IPlayerHPHandler _playerHitHandler, ISoundManager _soundManager)
@@ -42,7 +41,7 @@ namespace controller
             InitUI();
             //set up Events
             InitEvents();
-      
+
         }
 
         private void InitUI()
@@ -78,52 +77,55 @@ namespace controller
             // On Finished All levels Call UI Handler
             levelManager.OnEnd.AddListener(iUIHandler.EnableEndingPanel);
 
-            
+
 
         }
 
-        public void CheckLose(int currentHealthPoints)
+        public void CheckLose(int currentHealthPoints)//check if player lost, if he did call "OnLost"
         {
             if (currentHealthPoints < 0)
             {
-                OnLose?.Invoke();
-                Time.timeScale = 0;
-                iUIHandler.EnableEndingPanel(false);
-
-                soundManager.Play(SoundManager.Sound.playerLost);
+                OnLost();
             }
         }
+
+        private void OnLost()//method executed when player loses
+        {
+            OnLose?.Invoke();//invoke event
+            Time.timeScale = 0;//stop the game using timescale
+            iUIHandler.EnableEndingPanel(false);// open a losing ui panel
+            soundManager.Play(SoundManager.Sound.playerLost);// play a losing sound
+        }
+
         public void UpdateScoreOnSplitBall(ILaserHandler laser, Rigidbody2D ballRB)
         {
-            score += 50 * ballRB.transform.localScale.x;
+            //increase score based on balls size (the smaller the bigger the score gain is)
+            score += 50 / ballRB.transform.localScale.x;
             //call on update ui
             iUIHandler.UpdateScore((int)score);
         }
         private void UpdateScoreOnLevelAdvance(int level)
         {
-            score += 100 * level;
+            score += 100 * level;//increase score based on level
 
             //call on update ui
             iUIHandler.UpdateScore((int)score);
             iUIHandler.UpdateLevel(level);
 
         }
-        private void UpdateHealthOnLevelAdvance(int level)
+        private void UpdateHealthOnLevelAdvance(int level)//increase health points by 1
         {
-            //increase health points by 1
             playerHitHandler.AddHp(1);
-      
-
         }
         public void ReduceScoreOnHit(int remainingHealth)
         {
             int scoreToDeduct = 100 / remainingHealth;
-            score -= scoreToDeduct;
+            score -= scoreToDeduct;//reduce score based on remaining health of player (more health = less score lost)
         }
-        
+
         public void ResetScene()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//get current build index and load scene
         }
 
     }

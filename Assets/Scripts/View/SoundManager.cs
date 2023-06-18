@@ -38,7 +38,7 @@ namespace view
        
         }
 
-        // Simple play once with many overloads for custom settings when playing the sound
+        // Simple play once with overloads for custom settings when playing the sound
         public void Play(Sound sound)
         {
             audioSource.volume = Mathf.Clamp01(GetVolumeOfClip(sound));
@@ -63,7 +63,7 @@ namespace view
                 return;
             audioSource.PlayOneShot(GetAudioClip(sound));
         }
-
+        //get audio clip based on enum
         private AudioClip GetAudioClip(Sound sound)
         {
             foreach (SoundAudioClip clip in soundData.clips)
@@ -75,7 +75,7 @@ namespace view
             }
             return null;
         }
-
+        // used to get volume of clip from SO if not using a overload that specifies a volume
         private float GetVolumeOfClip(Sound sound)
         {
             foreach (SoundAudioClip clip in soundData.clips)

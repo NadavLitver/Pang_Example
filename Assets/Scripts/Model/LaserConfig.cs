@@ -3,7 +3,7 @@ namespace model
 {
     [CreateAssetMenu(fileName = "LaserConfig", menuName = "Pang/Laser Config", order = 4)]
 
-    public class LaserConfig : ScriptableObject
+    public class LaserConfig : ScriptableObject//SO that holds laser data
     {
         [SerializeField] private float speed;
         [SerializeField] private float timeToLive;//time to live

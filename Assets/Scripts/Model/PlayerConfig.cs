@@ -3,7 +3,7 @@ namespace model
 {
     [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Pang/Player Config", order = 3)]
 
-    public class PlayerConfig : ScriptableObject
+    public class PlayerConfig : ScriptableObject//SO that holds player data
     {
         [SerializeField] private float shootCD;
         [SerializeField] private float hitCD;

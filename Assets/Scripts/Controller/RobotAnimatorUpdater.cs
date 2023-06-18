@@ -5,18 +5,21 @@ namespace controller
 {
     public class RobotAnimatorUpdater : MonoBehaviour , IRobotAnimatorUpdater// animator updater updates the robot animator and sprite renderer based on the controller input handler
     {
+        //controller
         [Inject] private readonly IInputHandler inputHandler;
         [Inject] private readonly IGameManager gameManager;
+
+        //Refrences to components
         [Inject] private readonly Animator animator;
         [Inject] private readonly SpriteRenderer robotSR;
         [Inject] private readonly Transform shootPoint;
+        public Transform ShootPoint => shootPoint;
 
         //hashes
         private int runningHash;
         private int shootingHash;
         private int deadHash;
 
-        public Transform ShootPoint => shootPoint;
 
         private void Start()
         {
@@ -30,7 +33,7 @@ namespace controller
         }
         private void Update()
         {
-            int horInput = inputHandler.GetHorInput();
+            int horInput = inputHandler.GetHorInput();//get input from input handler
             //set running based on input
             animator.SetBool(runningHash, horInput != 0);
             if (horInput != 0)

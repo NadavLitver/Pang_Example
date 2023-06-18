@@ -4,7 +4,7 @@ using Zenject;
 
 namespace model
 {
-    public class BallsPoolHandler : IBallsPoolHandler
+    public class BallsPoolHandler : IBallsPoolHandler//class resposible for holding current active balls
     {
         [Inject(Id = "BallPool")] private readonly IObjectPool ballPoolRef;
 

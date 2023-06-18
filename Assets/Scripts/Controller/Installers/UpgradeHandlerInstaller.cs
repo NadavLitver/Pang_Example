@@ -11,6 +11,10 @@ namespace controller
         [SerializeField] private Button healthButton;
         [SerializeField] private Button laserUpgradeButton;
         [SerializeField] private UpgradesConfig upgradeConfig;
+        /// <summary>
+        /// create and install the upgrade handler 
+        /// install its refrences, buttons,Gameobjects,SO's
+        /// </summary>
         public override void InstallBindings()
         {
             Container.Bind<GameObject>().FromInstance(upgradePanel).WhenInjectedInto<UpgradeHandler>();

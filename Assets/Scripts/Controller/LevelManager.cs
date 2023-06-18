@@ -15,16 +15,19 @@ namespace controller
         [Inject] private IUpgradeHandler upgradeHandler;
         [Inject] private ISoundManager soundManager;
 
-
+        //data
         private float delayBetweenLevels;
         public int LevelCount { get; private set; }
+        //events
         public UnityEvent<int> OnAdvanceLevel { get; private set; }
         public UnityEvent<bool> OnEnd { get; private set; }
 
         private void Awake()
         {
+            //init variables
             LevelCount = 1;
             delayBetweenLevels = 4.5f;
+            //init events
             OnAdvanceLevel = new UnityEvent<int>();
             OnEnd = new UnityEvent<bool>();
         }

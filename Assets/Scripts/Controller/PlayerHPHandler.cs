@@ -8,15 +8,16 @@ namespace controller
 {
     public class PlayerHPHandler : IPlayerHPHandler// manages manipluations on playerHP
     {
+        //controller
         private readonly PlayerConfig playerData;
         private readonly IBlinkOnHit blinkOnHit;
         private readonly ISoundManager soundManager;
+        //data
         private float lastHit;
         private int currentHealthPoints;
-        public UnityEvent<int> HealthReducedEvent { get; private set; }
-
         public int CurrentHealthPoints { get => currentHealthPoints; }
-
+        //events
+        public UnityEvent<int> HealthReducedEvent { get; private set; }
         public UnityEvent<int> HealthIncreasedEvent  { get; private set; }
 
         [Inject]

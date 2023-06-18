@@ -7,16 +7,17 @@ namespace controller
 {
     public class MenuPanel : IMenuPanel//the menu panel is responsible for handling the pause menu logic which is also the main menu
     {
+        //data
         private readonly GameObject pauseMenuUI;
         private readonly Button pauseButton;
         private readonly Button startButton;
         private readonly Button resetButton;
-
+        private bool isPaused;
+        private bool didResumeOnce;
+        //controllers
         private readonly IUIHandler iUIhandler;
         private readonly IInputHandler inputHandler;
 
-        private bool isPaused;
-        private bool didResumeOnce;
 
         [Inject]
         private MenuPanel(IUIHandler _iUIhandler,
@@ -40,7 +41,7 @@ namespace controller
             TogglePauseMenu();
         }
 
-        private void CheckToUnpause()
+        private void CheckToUnpause()//if player pressed somewhere that is not ui and game is paused, unpause
         {
             if (isPaused)
             {

@@ -56,7 +56,7 @@ namespace view
             endingPanel.SetActive(true);
         }
         public void CallCountdownRoutine(int level) => StartCoroutine(CountdownRoutine(level));
-        IEnumerator CountdownRoutine(int level)
+        IEnumerator CountdownRoutine(int level)//small routine to create a countdown between each level
         {
             yield return new WaitForSeconds(0.05f);
             countDownText.gameObject.SetActive(true);

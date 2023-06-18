@@ -18,9 +18,8 @@ namespace controller
         //data elements
         private readonly PlayerConfig playerData;
         private readonly IObjectPool laserPool;// not
-
-
         private float lastTimeShot;
+        //events
         public UnityEvent OnShot { get; private set; }
 
         [Inject]
@@ -33,8 +32,8 @@ namespace controller
             this.playerData = _playerData;
             this.laserPool = _laserPool;
 
-
-            inputHandler.OnTapScreen = new UnityEvent();
+            //Init and subscribe to events
+            inputHandler.OnTapScreen = new UnityEvent();//the constructor is being called before the input handler ( a mono ) awake is called so i initialized the event here, maybe a good reason to use cs actions instead
             inputHandler.OnTapScreen.AddListener(Shoot);
 
             OnShot = new UnityEvent();
@@ -43,7 +42,7 @@ namespace controller
 
         }
 
-        private void Shoot()
+        private void Shoot()// after player tapped screen check for cooldown of "Shoot" if the shoot is not on cooldown execute the shot
         {
             if (CheckShootCooldown())
             {

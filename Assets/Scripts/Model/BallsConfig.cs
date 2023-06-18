@@ -2,7 +2,7 @@ using UnityEngine;
 namespace model
 {
     [CreateAssetMenu(fileName = "BallsConfig", menuName = "Pang/Balls Config", order = 2)]
-    public class BallsConfig : ScriptableObject
+    public class BallsConfig : ScriptableObject//SO that holds ball data
     {
         [SerializeField] private float speed;
         [SerializeField] private float bounceForce;

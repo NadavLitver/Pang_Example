@@ -7,21 +7,23 @@ namespace controller
 
     public class LocoMotion : MonoBehaviour, ILocomotion//handles basic movement for the robot and collisions
     {
+        //controllers
         [Inject] IInputHandler inputHandler;
-
+        //data
         [Inject] PlayerConfig playerData;
         [Inject] Transform robot;
         private float dynamicSpeed;//didnt want to use SO speed because it changes during gameplay but doesnt save we resetting scene
 
         private void Start()
         {
-            dynamicSpeed = playerData.MoveSpeed;
+            dynamicSpeed = playerData.MoveSpeed;//init speed
         }
         private void Update()
         {
             if (inputHandler != null)
             {
-                int horInput = inputHandler.GetHorInput();
+                int horInput = inputHandler.GetHorInput();//get input from manager
+
                 //check collisions with walls
                 if (CheckCollisionOnLeft() && horInput == -1)
                     return;
@@ -37,13 +39,12 @@ namespace controller
             }
 
         }
-        public void SetSpeed(float _speed)
+        public void SetSpeed(float _speed)//get new speed
         {
             dynamicSpeed = _speed;
         }
         bool CheckCollisionOnRight()
         {
-            
             return Physics2D.Raycast(robot.position, Vector2.right, playerData.Width, playerData.CollisionLayer);
         }
         bool CheckCollisionOnLeft()

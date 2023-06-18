@@ -10,16 +10,19 @@ namespace controller
 {
     public class UpgradeHandler : IUpgradeHandler// The Upgrade handler is responsible for all logic correlated with the upgrade panel
     {
+        //controllers
+       
+        private readonly ILocomotion robotController;
+        private readonly ISoundManager soundManager;
+        private readonly IPlayerHPHandler playerHPHandler;
+        //data and refrences to components
         private readonly GameObject upgradePanel;
         private readonly Button speedButton;
         private readonly Button healthButton;
         private readonly Button laserUpgradeButton;
         private readonly UpgradesConfig upgradesData;
-        private readonly ILocomotion robotController;
-        private readonly ISoundManager soundManager;
-        private readonly IPlayerHPHandler playerHPHandler;
         private bool didChooseUpgrade;
-
+        //events
         public UnityEvent<int> OnHPUpgraded { get; private set; }
         public UnityEvent OnLasersUpgraded { get; private set; }
 
@@ -33,7 +36,7 @@ namespace controller
              UpgradesConfig _upgradesData,
              ILocomotion _robotController,
              IPlayerHPHandler _playerHPHandler,
-             ISoundManager _soundManager)//I dislike wrapping like this but there were alot of arguments
+             ISoundManager _soundManager)
         {//Init refrences after injection
             this.upgradePanel = upgradePanel;
             this.speedButton = _speedButton;
@@ -48,8 +51,10 @@ namespace controller
         }
         private void Initialize()//subscribe to events
         {
+            //init events
             OnHPUpgraded = new UnityEvent<int>();
             OnLasersUpgraded = new UnityEvent();
+            //subscrive to events. each upgrade option to its corresponding upgrade
             laserUpgradeButton.onClick.AddListener(UnSubscribeFromReturningLasers);
             speedButton.onClick.AddListener(UpgradeSpeed);
             healthButton.onClick.AddListener(UpgradeHP);
