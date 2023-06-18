@@ -1,12 +1,8 @@
 using model;
 using ModestTree;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 using view;
 using Zenject;
-using static UnityEditor.PlayerSettings;
 
 namespace controller
 {
@@ -66,7 +62,7 @@ namespace controller
         private void ReturnBallToPool(IBall ball) //  method for returning a ball to the pool(disabling it)
         {
             RemoveFromActiveBalls(ball);
-            
+
             ballPoolHandler.BallPoolRef.ReturnToPool((Ball)ball);
         }
 
@@ -107,7 +103,7 @@ namespace controller
         public void SplitBall(ILaserHandler laser, IBall ball)// split ball depending on scale
         {
             float currentBallScale = ball.Rb2d.gameObject.transform.localScale.x;// get current size
-            if(ball.ballData.SplitAmount != 0 && GetIndexOfSize(currentBallScale) != 0)//check ball isnt the smallest size and has split amount
+            if (ball.ballData.SplitAmount != 0 && GetIndexOfSize(currentBallScale) != 0)//check ball isnt the smallest size and has split amount
             {
                 Split(ball);// create two balls one size smaller
             }
@@ -126,12 +122,12 @@ namespace controller
             {
                 Vector2 dir = isRight ? Vector2.right : Vector2.left;//make sure balls wont go to same direction
                 isRight = !isRight;//flip for next loop
-                CreateBall(ball,dir);
+                CreateBall(ball, dir);
             }
-         
+
         }
 
-       
+
         public float GetSmallerSize(float size)
         {
             int index = GetIndexOfSize(size);
@@ -147,7 +143,7 @@ namespace controller
         }
         public int GetIndexOfSize(float size)
         {
-           return ballsData.BallSizes.IndexOf(size);
+            return ballsData.BallSizes.IndexOf(size);
         }
         public float GetSizeUsingIndex(int index)
         {
@@ -162,6 +158,6 @@ namespace controller
             }
         }
 
-      
+
     }
-} 
+}
