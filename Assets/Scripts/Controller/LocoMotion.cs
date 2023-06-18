@@ -10,7 +10,7 @@ namespace controller
         [Inject] IInputHandler inputHandler;
 
         [Inject] PlayerConfig playerData;
-        [SerializeField] Transform robot;
+        [Inject] Transform robot;
         private float dynamicSpeed;//didnt want to use SO speed because it changes during gameplay but doesnt save we resetting scene
 
         private void Start()

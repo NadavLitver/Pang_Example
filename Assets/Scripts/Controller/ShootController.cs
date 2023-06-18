@@ -28,7 +28,6 @@ namespace controller
         [Inject]
         public ShootController(IInputHandler _inputHandler, IRobotAnimatorUpdater _robotAnimatorUpdater, ISoundManager _soundManager, PlayerConfig _playerData, [Inject(Id = "LaserPool")] IObjectPool _laserPool)
         {
-            Debug.Log("Shoot Controller Constructor Called");
             // Init Refrences
             this.inputHandler = _inputHandler;
             this.robotAnimatorUpdater = _robotAnimatorUpdater;

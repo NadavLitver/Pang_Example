@@ -5,11 +5,11 @@ namespace controller
 {
     public class RobotAnimatorUpdater : MonoBehaviour , IRobotAnimatorUpdater// animator updater updates the robot animator and sprite renderer based on the controller input handler
     {
-        [Inject] private IInputHandler inputHandler;
-        [SerializeField] private Animator animator;
-        [SerializeField] private SpriteRenderer robotSR;
-        [SerializeField] private Transform shootPoint;
-        [Inject] private IGameManager gameManager;
+        [Inject] private readonly IInputHandler inputHandler;
+        [Inject] private readonly IGameManager gameManager;
+        [Inject] private readonly Animator animator;
+        [Inject] private readonly SpriteRenderer robotSR;
+        [Inject] private readonly Transform shootPoint;
 
         //hashes
         private int runningHash;
@@ -20,12 +20,13 @@ namespace controller
 
         private void Start()
         {
-            //cache names to hashes
+            // subscribe to on lose
             gameManager.OnLose.AddListener(PlayDead);
+            //cache to hashes
             runningHash = Animator.StringToHash("Running");
             shootingHash = Animator.StringToHash("Shooting");
             deadHash = Animator.StringToHash("Dead");
-            if (animator == null) { animator = GetComponent<Animator>(); }
+          
         }
         private void Update()
         {

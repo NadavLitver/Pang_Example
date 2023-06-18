@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f6c3da5cb2bd942a3fc824fbf4de73, type: 3}
   m_Name: BallControllerInstaller
   m_EditorClassIdentifier: 
+  ballControllerPrefab: {fileID: 8395744891746184940, guid: d1b04d80ea9994347bc235c4c5dd10c9, type: 3}

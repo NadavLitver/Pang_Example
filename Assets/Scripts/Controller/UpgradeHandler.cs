@@ -58,13 +58,7 @@ namespace controller
 
         private void UnSubscribeFromReturningLasers()
         {
-            //foreach (var laser in laserPool.Pool)
-            //{
-            //    // get laser handler
-            //    LaserHandler currentLaserHandler = laser.GetComponent<LaserHandler>();
-            //    // remove listener so laser does not destroy upon hitting ball
-            //    currentLaserHandler.OnHitBall.RemoveListener(currentLaserHandler.ReturnSelfToPool);
-            //}
+         
             OnLasersUpgraded.Invoke();
             didChooseUpgrade = true;
         }

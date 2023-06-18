@@ -6,9 +6,11 @@ namespace controller
 
     public class InputHandlerInstaller : ScriptableObjectInstaller<InputHandlerInstaller>
     {
+        [SerializeField] private InputHandler inputHandlerPrefab;
+
         public override void InstallBindings()
         {
-            Container.Bind<IInputHandler>().To<InputHandler>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<IInputHandler>().To<InputHandler>().FromComponentInNewPrefab(inputHandlerPrefab).AsSingle().NonLazy();
         }
     }
 }

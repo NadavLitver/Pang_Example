@@ -27,7 +27,6 @@ namespace controller
             this.soundManager = _soundManager;
             this.playerData = _PlayerConfig;
 
-            Debug.Log("Player HP Handler Was Called");
             //Init Variables
             currentHealthPoints = playerData.StartingHP;
             HealthReducedEvent = new UnityEvent<int>();

@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21693063ba829ee49bfa6b1d9da04bb7, type: 3}
   m_Name: InputHandlerInstaller
   m_EditorClassIdentifier: 
+  inputHandlerPrefab: {fileID: 6626333030557341454, guid: f6cfd0f525d4e8c429c407c3545c8ff8, type: 3}

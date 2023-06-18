@@ -2,14 +2,16 @@ using UnityEngine;
 using Zenject;
 namespace controller
 {
-    [CreateAssetMenu(fileName = "LocomotionInstaller", menuName = "Installers/LocomotionInstaller", order = 5)]
-
-    public class LocomotionInstaller : ScriptableObjectInstaller<LocomotionInstaller>
+    
+    public class LocomotionInstaller : MonoInstaller
     {
-
+        [SerializeField] private LocoMotion locomotionPrefab;
+        [SerializeField] private Transform  locomotionTransform;
         public override void InstallBindings()
         {
-            Container.Bind<ILocomotion>().To<LocoMotion>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<Transform>().FromInstance(locomotionTransform).WhenInjectedInto<LocoMotion>();
+
+            Container.Bind<ILocomotion>().To<LocoMotion>().FromComponentInNewPrefab(locomotionPrefab).AsSingle().NonLazy();
 
         }
     }
