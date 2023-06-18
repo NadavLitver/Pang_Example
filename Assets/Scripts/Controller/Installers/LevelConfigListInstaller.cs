@@ -7,6 +7,9 @@ namespace controller
     public class LevelConfigListInstaller : ScriptableObjectInstaller<LevelConfigListInstaller>
     {
         [SerializeField] LevelConfigList LevelListData;
+        /// <summary>
+        /// create and install the levelconfiglist SO
+        /// </summary>
         public override void InstallBindings()
         {
             Container.Bind<LevelConfigList>().FromInstance(LevelListData);

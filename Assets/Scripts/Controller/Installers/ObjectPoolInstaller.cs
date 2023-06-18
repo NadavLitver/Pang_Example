@@ -14,15 +14,8 @@ namespace controller
         /// </summary>
         public override void InstallBindings()
         {
-
-
-         
-
-          
             Container.Bind<IObjectPool>().WithId("BallPool").To<BallPool>().AsSingle().WithArguments(prefabRefA,Container);
             Container.Bind<IObjectPool>().WithId("LaserPool").To<LaserPool>().AsSingle().WithArguments(prefabRefB, Container);
-
-        
         }
     }
 }

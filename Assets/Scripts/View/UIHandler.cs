@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -61,7 +60,7 @@ namespace view
             endingPanel.SetActive(true);
             OnEndingPanel.Invoke(true);
         }
-        public void CallCountdownRoutine(int level) => _= CountdownRoutine(level);
+        public void CallCountdownRoutine(int level) => _ = CountdownRoutine(level);
 
         private async UniTaskVoid CountdownRoutine(int level)
         {
