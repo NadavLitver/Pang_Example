@@ -1,39 +1,56 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using view;
 using Zenject;
 
 namespace controller
 {
-    public class MenuPanel : MonoBehaviour//the menu panel is responsible for handling the pause menu logic which is also the main menu
+    public class MenuPanel : IMenuPanel//the menu panel is responsible for handling the pause menu logic which is also the main menu
     {
-        public GameObject pauseMenuUI;
-        [SerializeField] private Button pauseButton;
-        [SerializeField] private Button startButton;
-        [SerializeField] private Button resetButton;
+        private readonly GameObject pauseMenuUI;
+        private readonly Button pauseButton;
+        private readonly Button startButton;
+        private readonly Button resetButton;
 
-        [Inject] private IUIHandler iUIhandler;
+        private readonly IUIHandler iUIhandler;
+        private readonly IInputHandler inputHandler;
 
         private bool isPaused;
         private bool didResumeOnce;
-        private void Start()
+
+        [Inject]
+        private MenuPanel(IUIHandler _iUIhandler,
+                          IInputHandler _inputHandler,
+                          GameObject _pauseMenuUI,
+                          [Inject(Id = "PauseButton")] Button _pauseButton,
+                          [Inject(Id = "StartButton")] Button _startButton,
+                          [Inject(Id = "ResetButton")] Button _resetButton)
+
         {
+            iUIhandler = _iUIhandler;
+            inputHandler = _inputHandler;
+            pauseMenuUI = _pauseMenuUI;
+            pauseButton = _pauseButton;
+            startButton = _startButton;
+            resetButton = _resetButton;
+
             pauseButton.onClick.AddListener(TogglePauseMenu);
             startButton.onClick.AddListener(TogglePauseMenu);
+            inputHandler.OnTapScreen.AddListener(CheckToUnpause);
             TogglePauseMenu();
         }
-        private void Update()
+
+        private void CheckToUnpause()
         {
-            // Check for a pause button press on mobile
-            if (((Input.GetMouseButtonDown(0) || (Input.touchCount > 0)) && !IsPointerOverUIObject() && isPaused))
+            if (isPaused)
             {
                 TogglePauseMenu();
             }
         }
 
-        private void TogglePauseMenu()
+
+
+        public void TogglePauseMenu()
         {
             isPaused = !isPaused;
 
@@ -41,8 +58,8 @@ namespace controller
             {
                 Time.timeScale = 0f; // Pause the game by setting time scale to 0
                 pauseMenuUI.SetActive(true);
-               
-                
+
+
             }
             else
             {
@@ -54,18 +71,10 @@ namespace controller
                     didResumeOnce = true;
                     resetButton.gameObject.SetActive(true);
                 }
-               
+
 
             }
         }
-        private bool IsPointerOverUIObject()
-        {
-            // Check if the current touch or mouse position is over a UI object
-            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-            return results.Count > 0;
-        }
+
     }
 }

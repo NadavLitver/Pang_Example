@@ -7,7 +7,7 @@ namespace controller
         UnityEvent OnLose { get; }
         float Score { get; }
         void CheckLose(int currentHealthPoints);
-        void UpdateScoreOnSplitBall();
+        void UpdateScoreOnSplitBall(ILaserHandler laser, Rigidbody2D rigidbody2D);
         void ResetScene();
         void ReduceScoreOnHit(int healthPoints);
         

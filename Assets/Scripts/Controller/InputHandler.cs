@@ -12,7 +12,7 @@ namespace controller
         private int horInput;
         public bool isLeftPressed;
         public bool isRightPressed;
-        public UnityEvent onShoot { get;set; }
+        public UnityEvent OnTapScreen { get;set; }
         [Inject(Id = ("Left"))] private IArrowButton leftArrowButton;
         [Inject(Id = ("Right"))] private IArrowButton rightArrowButton;
 
@@ -27,7 +27,7 @@ namespace controller
         {
             if (CheckTouch() && !IsPointerOverUIObject())
             {
-                onShoot.Invoke();
+                OnTapScreen.Invoke();
                 //SoundManager.Play(SoundManager.Sound.playerShoot);
 
                 Debug.Log("Shoot");

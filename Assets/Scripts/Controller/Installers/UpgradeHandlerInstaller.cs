@@ -13,10 +13,10 @@ namespace controller
         [SerializeField] private UpgradesConfig upgradeConfig;
         public override void InstallBindings()
         {
-            Container.Bind<GameObject>().FromInstance(upgradePanel);
-            Container.Bind<Button>().WithId("SpeedButton").FromInstance(speedButton);
-            Container.Bind<Button>().WithId("HealthButton").FromInstance(healthButton);
-            Container.Bind<Button>().WithId("LaserUpgradeButton").FromInstance(laserUpgradeButton);
+            Container.Bind<GameObject>().FromInstance(upgradePanel).WhenInjectedInto<UpgradeHandler>();
+            Container.Bind<Button>().WithId("SpeedButton").FromInstance(speedButton).WhenInjectedInto<UpgradeHandler>();
+            Container.Bind<Button>().WithId("HealthButton").FromInstance(healthButton).WhenInjectedInto<UpgradeHandler>();
+            Container.Bind<Button>().WithId("LaserUpgradeButton").FromInstance(laserUpgradeButton).WhenInjectedInto<UpgradeHandler>();
             Container.Bind<UpgradesConfig>().FromInstance(upgradeConfig);
 
             Container.Bind<IUpgradeHandler>().To<UpgradeHandler>().FromNew().AsSingle();

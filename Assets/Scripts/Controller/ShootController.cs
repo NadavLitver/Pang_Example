@@ -37,8 +37,8 @@ namespace controller
             this.laserPool = _laserPool;
 
 
-            inputHandler.onShoot = new UnityEvent();
-            inputHandler.onShoot.AddListener(Shoot);
+            inputHandler.OnTapScreen = new UnityEvent();
+            inputHandler.OnTapScreen.AddListener(Shoot);
 
             OnShot = new UnityEvent();
             OnShot.AddListener(robotAnimatorUpdater.PlayShooting);

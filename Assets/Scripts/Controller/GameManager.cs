@@ -93,9 +93,9 @@ namespace controller
                 soundManager.Play(SoundManager.Sound.playerLost);
             }
         }
-        public void UpdateScoreOnSplitBall()
+        public void UpdateScoreOnSplitBall(ILaserHandler laser, Rigidbody2D ballRB)
         {
-            score += 50;
+            score += 50 * ballRB.transform.localScale.x;
             //call on update ui
             iUIHandler.UpdateScore((int)score);
         }

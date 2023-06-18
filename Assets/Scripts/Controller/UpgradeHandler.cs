@@ -14,7 +14,6 @@ namespace controller
         private readonly Button speedButton;
         private readonly Button healthButton;
         private readonly Button laserUpgradeButton;
-        private readonly IObjectPool laserPool;
         private readonly UpgradesConfig upgradesData;
         private readonly ILocomotion robotController;
         private readonly ISoundManager soundManager;
@@ -31,7 +30,6 @@ namespace controller
              [Inject(Id = "SpeedButton")] Button _speedButton,
              [Inject(Id = "HealthButton")] Button _healthButton,
              [Inject(Id = "LaserUpgradeButton")] Button _laserUpgradeButton,
-             [Inject(Id = "LaserPool")] IObjectPool _laserPool,
              UpgradesConfig _upgradesData,
              ILocomotion _robotController,
              IPlayerHPHandler _playerHPHandler,
@@ -41,7 +39,6 @@ namespace controller
             this.speedButton = _speedButton;
             this.healthButton = _healthButton;
             this.laserUpgradeButton = _laserUpgradeButton;
-            this.laserPool = _laserPool;
             this.upgradesData = _upgradesData;
             this.robotController = _robotController;
             this.playerHPHandler = _playerHPHandler;
