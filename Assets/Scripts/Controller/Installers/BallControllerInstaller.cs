@@ -11,6 +11,7 @@ namespace controller
 
         public override void InstallBindings()
         {
+            // create(from prefab) and install the ball controller
             Container.Bind<IBallController>().To<BallController>().FromComponentInNewPrefab(ballControllerPrefab).AsSingle();
 
         }

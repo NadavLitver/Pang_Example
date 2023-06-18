@@ -28,12 +28,8 @@ namespace controller
             // Set ball position, velocity, and any other necessary properties
         }
 
-        public Vector2 RandomBallVelocity()
-        {
-            return GetRandomRightOrLeft() * ballsData.Speed;
-        }
 
-        public void CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)//overloaded so I can have more controll than just default
+        public void CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)//overloaded 
         {
             GameObject ball = ballDataHandler.BallPoolRef.GetFromPool();
             ball.transform.position = pos;
@@ -43,15 +39,19 @@ namespace controller
             ballDataHandler.ActiveBalls.Add(ballRB);
             // Set ball position, velocity, and any other necessary properties
         }
-        //  method for returning a ball to the pool(disabling it)
-        private void ReturnBallToPool(Rigidbody2D ball)
+       
+        private void ReturnBallToPool(Rigidbody2D ball) //  method for returning a ball to the pool(disabling it)
         {
             RemoveFromActiveBalls(ball);
 
             ballDataHandler.BallPoolRef.ReturnToPool(ball.gameObject);
         }
 
-        private void RemoveFromActiveBalls(Rigidbody2D ball)
+        public Vector2 RandomBallVelocity()// get a random velocity from a ball
+        {
+            return GetRandomRightOrLeft() * ballsData.Speed;
+        }
+        private void RemoveFromActiveBalls(Rigidbody2D ball)//Remove ball from the Active balls list
         {
             int index = ballDataHandler.ActiveBalls.IndexOf(ball);
 
@@ -113,7 +113,7 @@ namespace controller
             IterateOverBallsAndCheckCollision();
         }
 
-        private void IterateOverBallsAndCheckCollision()
+        private void IterateOverBallsAndCheckCollision()// loop over all active balls and check collision
         {
             foreach (var ball in ballDataHandler.ActiveBalls)//while a for loop might have been slightly faster the differences are negligible and a foreach loop is more readable and I don't need the index
             {
@@ -131,7 +131,7 @@ namespace controller
 
             return randomDirection;
         }
-        public void SplitBall(ILaserHandler laser, Rigidbody2D ball)
+        public void SplitBall(ILaserHandler laser, Rigidbody2D ball)// split ball depending on scale
         {
             float currentBallScale = ball.gameObject.transform.localScale.x;
             switch (currentBallScale)
@@ -157,11 +157,11 @@ namespace controller
             soundManager.Play(SoundManager.Sound.ballHit);
 
         }
-        public bool IsActiveBallsEmpty()
+        public bool IsActiveBallsEmpty()// check if there are any active balls left
         {
             return ballDataHandler.ActiveBalls.Count == 0;
         }
-        private void CreateTwoBalls(Rigidbody2D ball, float size)
+        private void CreateTwoBalls(Rigidbody2D ball, float size)// create to balls that go to different direction in the position of a given ball
         {
             CreateBall(ball.transform.position, Vector2.one * size, Vector2.right * ballsData.Speed);
             CreateBall(ball.transform.position, Vector2.one * size, Vector2.left * ballsData.Speed);
@@ -203,6 +203,6 @@ namespace controller
             }
         }
 
-       
+
     }
 }

@@ -2970,6 +2970,7 @@ GameObject:
   - component: {fileID: 891779914}
   - component: {fileID: 891779916}
   - component: {fileID: 891779915}
+  - component: {fileID: 891779917}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -2996,7 +2997,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5623c55b8f12076488d02630cf1e01c7, type: 2}
   - {fileID: 11400000, guid: 7336a2c269bdf9b41ab90df61af8e724, type: 2}
   - {fileID: 11400000, guid: 746f5aa999836664d90c2514117c91df, type: 2}
-  - {fileID: 11400000, guid: edf10e9dbe998da42b74939d2c0eb27f, type: 2}
   - {fileID: 11400000, guid: 2eb5c322a037d9d41bb1fa9a92a05344, type: 2}
   - {fileID: 11400000, guid: 9683a618b06a8f146857a940ea355bc2, type: 2}
   - {fileID: 11400000, guid: 5749de237cbcab24cb1e87aafe292d66, type: 2}
@@ -3007,6 +3007,9 @@ MonoBehaviour:
   - {fileID: 891779913}
   - {fileID: 891779912}
   - {fileID: 891779914}
+  - {fileID: 891779916}
+  - {fileID: 891779915}
+  - {fileID: 891779917}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -3116,6 +3119,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locomotionPrefab: {fileID: 463584619018723961, guid: 66479a1590d58454382b9956d5b5e8cf, type: 3}
   locomotionTransform: {fileID: 1534649823}
+--- !u!114 &891779917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891779906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2dc81b2cf1941469a5965d2bbb0daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkOnHit: {fileID: 2263692278599878375, guid: a5aec4c533a6fab4db8ddbb6044895db, type: 3}
+  robotSR: {fileID: 1534649824}
 --- !u!1 &976809016
 GameObject:
   m_ObjectHideFlags: 0
@@ -10414,7 +10431,6 @@ GameObject:
   - component: {fileID: 1534649824}
   - component: {fileID: 1534649825}
   - component: {fileID: 1534649827}
-  - component: {fileID: 1534649828}
   - component: {fileID: 1534649829}
   m_Layer: 6
   m_Name: CharacterGFX
@@ -10547,20 +10563,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1.75}
   m_Direction: 0
---- !u!114 &1534649828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534649822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b849a0dae3a2b9347b110a258f632849, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  robotSR: {fileID: 1534649824}
-  blinkColor: {r: 1, g: 1, b: 1, a: 0.25}
 --- !u!81 &1534649829
 AudioListener:
   m_ObjectHideFlags: 0

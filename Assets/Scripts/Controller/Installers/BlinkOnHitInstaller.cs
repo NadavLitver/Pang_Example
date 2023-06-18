@@ -3,13 +3,17 @@ using view;
 using Zenject;
 namespace controller
 {
-    [CreateAssetMenu(fileName = "BlinkOnHitInstaller", menuName = "Installers/BlinkOnHitInstaller", order = 21)]
 
-    public class BlinkOnHitInstaller : ScriptableObjectInstaller<BlinkOnHitInstaller>
+    public class BlinkOnHitInstaller : MonoInstaller
     {
+        [SerializeField] BlinkOnHit blinkOnHit;
+        [SerializeField] private SpriteRenderer robotSR;
         public override void InstallBindings()
         {
-            Container.Bind<IBlinkOnHit>().To<BlinkOnHit>().FromComponentInHierarchy().AsSingle();
+            //install the sprite renderer for Blink on Hit Class
+            Container.Bind<SpriteRenderer>().FromInstance(robotSR).WhenInjectedInto<BlinkOnHit>();
+            // install the blink on hit from the
+            Container.Bind<IBlinkOnHit>().To<BlinkOnHit>().FromComponentInNewPrefab(blinkOnHit).AsSingle();
 
         }
     }

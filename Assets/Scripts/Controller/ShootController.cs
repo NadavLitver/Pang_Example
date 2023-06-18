@@ -16,9 +16,7 @@ namespace controller
         private readonly ISoundManager soundManager;
 
         //data elements
-
         private readonly PlayerConfig playerData;
-
         private readonly IObjectPool laserPool;// not
 
 

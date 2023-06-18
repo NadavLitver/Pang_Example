@@ -7,6 +7,7 @@ namespace controller
     {
         public override void InstallBindings()
         {
+           // create and install the GameManager
 
             Container.Bind<IGameManager>().To<GameManager>().FromNew().AsSingle().NonLazy();
 

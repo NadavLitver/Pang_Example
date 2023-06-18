@@ -8,7 +8,8 @@ namespace controller
         [SerializeField] private LevelManager levelManager;
         public override void InstallBindings()
         {
-           
+            // create(from prefab) and install the Level Manager
+
             Container.Bind<ILevelManager>().To<LevelManager>().FromComponentInNewPrefab(levelManager).AsSingle();
 
         }

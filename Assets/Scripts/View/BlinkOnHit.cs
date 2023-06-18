@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
+
 namespace view
 {
     public class BlinkOnHit : MonoBehaviour,IBlinkOnHit// created only to make a small blinking effect when player is damaged
     {
-        [SerializeField] private SpriteRenderer robotSR;
-        [SerializeField] private Color blinkColor = new Color(1, 1, 1, 0.25f);
+        [Inject] private SpriteRenderer robotSR;
+        private Color blinkColor = new Color(1, 1, 1, 0.25f);
         private Color startingColor = Color.white;
       
 
