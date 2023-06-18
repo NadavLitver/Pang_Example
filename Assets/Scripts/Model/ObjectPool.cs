@@ -8,23 +8,25 @@ namespace model
 
     public class ObjectPool : IObjectPool
     {
-        [Inject] private readonly GameObject prefabRef;
-        [Inject] private readonly Context context;
+        private readonly GameObject prefabRef;
+        private readonly DiContainer container;
         private int poolSize = 30;
         private List<GameObject> pool = new List<GameObject>();
         public List<GameObject> Pool => pool;
 
-        
-        public ObjectPool()
+        [Inject]
+        public ObjectPool(GameObject _prefabRef,DiContainer _container)
         {
-            PopulatePool();
+           prefabRef = _prefabRef;
+            container = _container;
+           PopulatePool();
         }
         
         public void PopulatePool()
         {
             for (int i = 0; i < poolSize; i++)
             {
-                GameObject current = context.Container.InstantiatePrefab(prefabRef);
+                GameObject current = container.InstantiatePrefab(prefabRef);
                 current.name = prefabRef.name + i;
                 pool.Add(current);
                 current.SetActive(false);
@@ -42,7 +44,7 @@ namespace model
                 }
             }
 
-            GameObject current = context.Container.InstantiatePrefab(prefabRef);
+            GameObject current = container.InstantiatePrefab(prefabRef);
             current.name = prefabRef.name + "Extra";
             pool.Add(current);
             current.SetActive(true);
