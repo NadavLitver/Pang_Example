@@ -119,6 +119,9 @@ namespace controller
         }
         public void ReduceScoreOnHit(int remainingHealth)
         {
+            if (remainingHealth <= 0)
+                return;//make sure we dont divide by zero
+
             int scoreToDeduct = 100 / remainingHealth;
             score -= scoreToDeduct;//reduce score based on remaining health of player (more health = less score lost)
         }

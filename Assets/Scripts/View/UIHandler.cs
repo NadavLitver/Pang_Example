@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 namespace view
@@ -14,6 +15,8 @@ namespace view
         [Inject(Id = "EndingText")] private readonly TextMeshProUGUI endingText;
         [Inject(Id = "StartText")] private readonly TextMeshProUGUI startText;
         [Inject(Id = "EndingPanel")] private readonly GameObject endingPanel;
+
+        public UnityEvent<bool> OnEndingPanel { get; set; }
 
         public void UpdateScore(int score)
         {
@@ -54,6 +57,7 @@ namespace view
         {
             UpdateEnding(isWon);
             endingPanel.SetActive(true);
+            OnEndingPanel.Invoke(true);
         }
         public void CallCountdownRoutine(int level) => StartCoroutine(CountdownRoutine(level));
         IEnumerator CountdownRoutine(int level)//small routine to create a countdown between each level
