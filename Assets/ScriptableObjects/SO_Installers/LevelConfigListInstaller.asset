@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e622f06ebcd6313458362c08f4bee809, type: 3}
   m_Name: LevelConfigListInstaller
   m_EditorClassIdentifier: 
-  LevelListData: {fileID: 0}
+  LevelListData: {fileID: 11400000, guid: e4f46f3cc1a7146498e4c201df5f362a, type: 2}

@@ -1662,7 +1662,6 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
@@ -1737,25 +1736,6 @@ Transform:
   m_Father: {fileID: 2044090751}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6df67d805374e5840bb8c0143f56cabc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x: 16
-  y: 9
-  width: 2400
-  height: 1080
-  onAwake: 1
-  onUpdate: 0
-  referenceMode: 1
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2849,6 +2829,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 75d0871d98101fe4883161cbc52bfca4, type: 2}
   - {fileID: 11400000, guid: 630c9848523e3284cba91bf2a36879ec, type: 2}
   - {fileID: 11400000, guid: 137f9641f5139b744890b97dccfef589, type: 2}
+  - {fileID: 11400000, guid: e77163b69e7581547bed80c1a0f0edfb, type: 2}
+  - {fileID: 11400000, guid: cc1fc55429647424bb4f4743482759ed, type: 2}
   _monoInstallers:
   - {fileID: 891779913}
   - {fileID: 891779912}
@@ -2978,7 +2960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2dc81b2cf1941469a5965d2bbb0daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkOnHit: {fileID: 2263692278599878375, guid: a5aec4c533a6fab4db8ddbb6044895db, type: 3}
   robotSR: {fileID: 1534649824}
 --- !u!114 &891779918
 MonoBehaviour:
@@ -2992,7 +2973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23058c544fb92c34fa44eb85e014ba7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiHandler: {fileID: 1162528898432295125, guid: 729c39b7a38a34543b41a52bc8c43f07, type: 3}
   scoreText: {fileID: 1188286689}
   healthText: {fileID: 851961483}
   levelText: {fileID: 1257413031}
