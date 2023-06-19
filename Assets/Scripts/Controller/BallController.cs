@@ -27,7 +27,7 @@ namespace controller
         //method for creating ball used when creating new balls 
         public IBall CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)
         {
-            Ball ball = ballPoolHandler.BallPoolRef.GetFromPool();
+            IBall ball = ballPoolHandler.BallPoolRef.GetFromPool();
             ball.Rb2d.transform.position = pos;
             ball.Rb2d.transform.localScale = scale;
             Rigidbody2D ballRB = ball.Rb2d;
@@ -39,7 +39,7 @@ namespace controller
         //overload method used when splitting balls
         public IBall CreateBall(IBall fatherBall, Vector2 dir)
         {
-            Ball ball = ballPoolHandler.BallPoolRef.GetFromPool();
+            IBall ball = ballPoolHandler.BallPoolRef.GetFromPool();
             ball.ballData = fatherBall.ballData.ChildData;
             ball.Rb2d.transform.position = fatherBall.Rb2d.transform.position;
             ball.Rb2d.transform.localScale = ball.ballData.Size * Vector2.one;
