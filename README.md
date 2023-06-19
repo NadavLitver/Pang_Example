@@ -1,2 +1,2 @@
 # Pang_Example
- Small pang game using MVC 
+ Small pang game using MVC And Dependency Injection
