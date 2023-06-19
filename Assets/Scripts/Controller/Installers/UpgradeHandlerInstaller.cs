@@ -21,7 +21,7 @@ namespace controller
             Container.Bind<Button>().WithId("SpeedButton").FromInstance(speedButton).WhenInjectedInto<UpgradeHandler>();
             Container.Bind<Button>().WithId("HealthButton").FromInstance(healthButton).WhenInjectedInto<UpgradeHandler>();
             Container.Bind<Button>().WithId("LaserUpgradeButton").FromInstance(laserUpgradeButton).WhenInjectedInto<UpgradeHandler>();
-            Container.Bind<UpgradesConfig>().FromInstance(upgradeConfig);
+            Container.Bind<IUpgradesConfig>().To<UpgradesConfig>().FromInstance(upgradeConfig);
 
             Container.Bind<IUpgradeHandler>().To<UpgradeHandler>().FromNew().AsSingle();
 

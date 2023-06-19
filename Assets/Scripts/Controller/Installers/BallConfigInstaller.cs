@@ -12,7 +12,7 @@ namespace controller
         /// </summary>
         public override void InstallBindings()
         {
-            Container.Bind<BallsConfig>().FromInstance(ballsConfig);
+            Container.Bind<IBallsConfig>().To<BallsConfig>().FromInstance(ballsConfig);
         }
     }
 }

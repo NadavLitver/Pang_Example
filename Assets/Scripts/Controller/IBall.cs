@@ -8,6 +8,6 @@ namespace controller
         Rigidbody2D Rb2d { get; }
         Action OnPlayerHit { get; set; }
         void ReturnSelfToPool();
-        BallData ballData { get; set; }
+        IBallData ballData { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace controller
     public class PlayerHPHandler : IPlayerHPHandler// manages manipluations on playerHP
     {
         //controller
-        private readonly PlayerConfig playerData;
+        private readonly IPlayerConfig playerData;
         private readonly IBlinkOnHit blinkOnHit;
         private readonly ISoundManager soundManager;
         //data
@@ -21,7 +21,7 @@ namespace controller
         public Action<int> HealthIncreasedEvent { get; set; }
 
         [Inject]
-        public PlayerHPHandler(IBlinkOnHit _blinkOnHit, ISoundManager _soundManager, PlayerConfig _PlayerConfig)
+        public PlayerHPHandler(IBlinkOnHit _blinkOnHit, ISoundManager _soundManager, IPlayerConfig _PlayerConfig)
         {
             // InitReferences
             this.blinkOnHit = _blinkOnHit;

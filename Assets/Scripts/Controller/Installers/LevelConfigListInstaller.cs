@@ -12,7 +12,7 @@ namespace controller
         /// </summary>
         public override void InstallBindings()
         {
-            Container.Bind<LevelConfigList>().FromInstance(LevelListData);
+            Container.Bind<ILevelConfigList>().To<LevelConfigList>().FromInstance(LevelListData);
 
         }
     }

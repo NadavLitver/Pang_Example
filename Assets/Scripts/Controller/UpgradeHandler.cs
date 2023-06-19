@@ -20,7 +20,7 @@ namespace controller
         private readonly Button speedButton;
         private readonly Button healthButton;
         private readonly Button laserUpgradeButton;
-        private readonly UpgradesConfig upgradesData;
+        private readonly IUpgradesConfig upgradesData;
         private bool didChooseUpgrade;
         //events
         public Action<int> OnHPUpgraded { get; set; }
@@ -33,7 +33,7 @@ namespace controller
              [Inject(Id = "SpeedButton")] Button _speedButton,
              [Inject(Id = "HealthButton")] Button _healthButton,
              [Inject(Id = "LaserUpgradeButton")] Button _laserUpgradeButton,
-             UpgradesConfig _upgradesData,
+             IUpgradesConfig _upgradesData,
              ILocomotion _robotController,
              IPlayerHPHandler _playerHPHandler,
              ISoundManager _soundManager)

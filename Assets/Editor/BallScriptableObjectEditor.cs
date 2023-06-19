@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 
 [CustomEditor(typeof(BallData))]
-public class BallScriptableObjectEditor : Editor
+public class BallScriptableObjectEditor : Editor//editor script I made cause I wanted the "BallData" class to only present possible viable sizes for choice
 {
     private SerializedProperty speedProperty;
     private SerializedProperty childData;

@@ -13,9 +13,9 @@ namespace controller
         //view
         private readonly ISoundManager soundManager;
         //data
-        private readonly BallsConfig ballsData;
+        private readonly IBallsConfig ballsData;
         [Inject]
-        public BallController(ISoundManager _soundManager, IBallsPoolHandler _ballDataHandler, BallsConfig _ballsData)
+        public BallController(ISoundManager _soundManager, IBallsPoolHandler _ballDataHandler, IBallsConfig _ballsData)
         {
             this.soundManager = _soundManager;
             this.ballPoolHandler = _ballDataHandler;

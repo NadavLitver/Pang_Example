@@ -10,7 +10,7 @@ namespace controller
     public class LevelManager : ILevelManager// LevelGenerator: Generates and manages the arrangement of game objects within each level.
     {
         //data
-        [Inject] LevelConfigList levels;
+        [Inject] ILevelConfigList levels;
         //controllers
         [Inject] private IBallController ballsController;
         [Inject] private IUpgradeHandler upgradeHandler;
@@ -23,7 +23,7 @@ namespace controller
         public Action<int> OnAdvanceLevel { get; set; }
         public Action<bool> OnEnd { get; set; }
         [Inject]
-        public LevelManager(IBallController _ballsController, IUpgradeHandler _upgradeHandler, ISoundManager _soundManager, LevelConfigList _levels)
+        public LevelManager(IBallController _ballsController, IUpgradeHandler _upgradeHandler, ISoundManager _soundManager, ILevelConfigList _levels)
         {
             ballsController = _ballsController;
             upgradeHandler = _upgradeHandler;
@@ -40,7 +40,7 @@ namespace controller
         private async UniTask LevelsRoutine()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(.15));
-            foreach (LevelConfig level in levels.LevelConfigs)
+            foreach (ILevelConfig level in levels.LevelConfigs)
             {
                 // update level index
                 LevelCount = level.LevelIndex;

@@ -17,14 +17,14 @@ namespace controller
         private readonly ISoundManager soundManager;
 
         //data elements
-        private readonly PlayerConfig playerData;
+        private readonly IPlayerConfig playerData;
         private readonly IObjectPool<LaserHandler> laserPool;
         private float lastTimeShot;
         //events
         public Action OnShot { get; set; }
 
         [Inject]
-        public ShootController(IInputHandler _inputHandler, IRobotAnimatorUpdater _robotAnimatorUpdater, ISoundManager _soundManager, PlayerConfig _playerData, IObjectPool<LaserHandler> _laserPool)
+        public ShootController(IInputHandler _inputHandler, IRobotAnimatorUpdater _robotAnimatorUpdater, ISoundManager _soundManager, IPlayerConfig _playerData, IObjectPool<LaserHandler> _laserPool)
         {
             // Init Refrences
             this.inputHandler = _inputHandler;

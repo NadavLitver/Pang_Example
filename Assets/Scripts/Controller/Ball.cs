@@ -11,10 +11,10 @@ namespace controller
         public Action OnPlayerHit { get; set; }
         //controllers
         [Inject] private readonly IPlayerHPHandler playerHPHandler;
-        [Inject] private readonly BallsConfig ballsConfig;
+        [Inject] private readonly IBallsConfig ballsConfig;
         public Rigidbody2D Rb2d { get => rb2d; }
 
-        public BallData ballData { get; set; }//individualData
+        public IBallData ballData { get; set; }//individualData
         [SerializeField] Rigidbody2D rb2d;
 
         private void Start()
