@@ -1,9 +1,9 @@
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 namespace controller
 {
     public interface IShootController
     {
-        UnityEvent OnShot { get; }
+        Action OnShot { get; set; }
     }
 }

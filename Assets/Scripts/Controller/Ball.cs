@@ -1,6 +1,6 @@
 using model;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 using Zenject;
 
 namespace controller
@@ -8,7 +8,7 @@ namespace controller
     public class Ball : MonoBehaviour, IBall// ball handles movement and collision
     {
         //events
-        public UnityEvent OnPlayerHit { get; } = new UnityEvent();
+        public Action OnPlayerHit { get; set; }
         //controllers
         [Inject] private readonly IPlayerHPHandler playerHPHandler;
         [Inject] private readonly BallsConfig ballsConfig;
@@ -19,7 +19,7 @@ namespace controller
 
         private void Start()
         {
-            OnPlayerHit.AddListener(playerHPHandler.PlayerHit);
+            OnPlayerHit += playerHPHandler.PlayerHit;
 
         }
 

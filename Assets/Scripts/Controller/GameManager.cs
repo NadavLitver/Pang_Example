@@ -1,6 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using view;
 using Zenject;
 
@@ -18,7 +17,7 @@ namespace controller
         private float score;
         public float Score { get => score; }
         //events
-        public UnityEvent OnLose { get; } = new UnityEvent();
+        public Action OnLose { get; set; }
 
 
 
@@ -32,7 +31,7 @@ namespace controller
             this.playerHitHandler = _playerHitHandler;
             this.soundManager = _soundManager;
 
-          
+
             //make sure timescale is one
             Time.timeScale = 1;
             // init variables
@@ -59,23 +58,23 @@ namespace controller
             //Subscribe to events ->
 
             //call on update score when advancing a level
-            levelManager.OnAdvanceLevel.AddListener(UpdateScoreOnLevelAdvance);
+            levelManager.OnAdvanceLevel += UpdateScoreOnLevelAdvance;
             //call on update health when advancing a level
-            levelManager.OnAdvanceLevel.AddListener(UpdateHealthOnLevelAdvance);
+            levelManager.OnAdvanceLevel += UpdateHealthOnLevelAdvance;
             //update level in ui when advancing a level
-            levelManager.OnAdvanceLevel.AddListener(iUIHandler.UpdateLevel);
+            levelManager.OnAdvanceLevel += iUIHandler.UpdateLevel;
             //Call the 3 2 1 countdown on screen
-            levelManager.OnAdvanceLevel.AddListener(iUIHandler.CallCountdownRoutine);
+            levelManager.OnAdvanceLevel += iUIHandler.CallCountdownRoutine;
             //update health in ui when hit
-            playerHitHandler.HealthReducedEvent.AddListener(iUIHandler.UpdateHealth);
+            playerHitHandler.HealthReducedEvent += iUIHandler.UpdateHealth;
             //deduct score when hit
-            playerHitHandler.HealthReducedEvent.AddListener(ReduceScoreOnHit);
+            playerHitHandler.HealthReducedEvent += ReduceScoreOnHit;
             //chech if lost when hit
-            playerHitHandler.HealthReducedEvent.AddListener(CheckLose);
+            playerHitHandler.HealthReducedEvent += CheckLose;
             //update health in ui when gained HP
-            playerHitHandler.HealthIncreasedEvent.AddListener(iUIHandler.UpdateHealth);
+            playerHitHandler.HealthIncreasedEvent += iUIHandler.UpdateHealth;
             // On Finished All levels Call UI Handler
-            levelManager.OnEnd.AddListener(iUIHandler.EnableEndingPanel);
+            levelManager.OnEnd += iUIHandler.EnableEndingPanel;
 
 
 
@@ -126,6 +125,6 @@ namespace controller
             score -= scoreToDeduct;//reduce score based on remaining health of player (more health = less score lost)
         }
 
-    
+
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,7 +13,7 @@ namespace controller
         private int horInput;
         public bool isLeftPressed;
         public bool isRightPressed;
-        public UnityEvent OnTapScreen { get; set; } = new UnityEvent();
+        public Action OnTapScreen { get; set; }
         [Inject(Id = ("Left"))] private IArrowButton leftArrowButton;
         [Inject(Id = ("Right"))] private IArrowButton rightArrowButton;
 

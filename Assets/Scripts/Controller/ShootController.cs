@@ -1,4 +1,5 @@
 using model;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using view;
@@ -20,7 +21,7 @@ namespace controller
         private readonly IObjectPool<LaserHandler> laserPool;
         private float lastTimeShot;
         //events
-        public UnityEvent OnShot { get; } = new UnityEvent();
+        public Action OnShot { get; set; }
 
         [Inject]
         public ShootController(IInputHandler _inputHandler, IRobotAnimatorUpdater _robotAnimatorUpdater, ISoundManager _soundManager, PlayerConfig _playerData, IObjectPool<LaserHandler> _laserPool)
@@ -34,8 +35,8 @@ namespace controller
 
             //subscribe to events
            
-            inputHandler.OnTapScreen.AddListener(Shoot);
-            OnShot.AddListener(robotAnimatorUpdater.PlayShooting);
+            inputHandler.OnTapScreen += Shoot;
+            OnShot += robotAnimatorUpdater.PlayShooting;
 
 
         }

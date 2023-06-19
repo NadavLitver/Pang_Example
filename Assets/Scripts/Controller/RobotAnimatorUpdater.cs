@@ -28,7 +28,7 @@ namespace controller
             this.shootPoint = shootPoint;
 
             // subscribe to on lose
-            gameManager.OnLose.AddListener(PlayDead);
+            gameManager.OnLose += PlayDead;
             //cache to hashes
             runningHash = Animator.StringToHash("Running");
             shootingHash = Animator.StringToHash("Shooting");

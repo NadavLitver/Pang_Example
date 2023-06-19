@@ -1,12 +1,13 @@
-using UnityEngine.Events;
-using UnityEngine;
-using controller;
 using model;
-
-public interface IBall
+using System;
+using UnityEngine;
+namespace controller
 {
-    Rigidbody2D Rb2d { get; }
-    UnityEvent OnPlayerHit { get; }
-    void ReturnSelfToPool();
-    BallData ballData { get; set; }
+    public interface IBall
+    {
+        Rigidbody2D Rb2d { get; }
+        Action OnPlayerHit { get; set; }
+        void ReturnSelfToPool();
+        BallData ballData { get; set; }
+    }
 }

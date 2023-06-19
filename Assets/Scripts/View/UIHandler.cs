@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using Zenject;
 
 namespace view
@@ -17,7 +16,7 @@ namespace view
         [Inject(Id = "StartText")] private readonly TextMeshProUGUI startText;
         [Inject(Id = "EndingPanel")] private readonly GameObject endingPanel;
 
-        public UnityEvent<bool> OnEndingPanel { get; } = new UnityEvent<bool>();
+        public Action<bool> OnEndingPanel { get; set; }
 
         public void UpdateScore(int score)
         {

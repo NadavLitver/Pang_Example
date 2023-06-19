@@ -1,6 +1,6 @@
 using model;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 using view;
 using Zenject;
 
@@ -17,8 +17,8 @@ namespace controller
         private int currentHealthPoints;
         public int CurrentHealthPoints { get => currentHealthPoints; }
         //events
-        public UnityEvent<int> HealthReducedEvent { get; } = new UnityEvent<int>();
-        public UnityEvent<int> HealthIncreasedEvent  { get; } = new UnityEvent<int>();
+        public Action<int> HealthReducedEvent { get; set; }
+        public Action<int> HealthIncreasedEvent { get; set; }
 
         [Inject]
         public PlayerHPHandler(IBlinkOnHit _blinkOnHit, ISoundManager _soundManager, PlayerConfig _PlayerConfig)
@@ -32,7 +32,7 @@ namespace controller
             currentHealthPoints = playerData.StartingHP;  
 
             //subscribe to event for blinking when getting hit
-            HealthReducedEvent.AddListener(blinkOnHit.CallBlinkRoutine);
+            HealthReducedEvent +=blinkOnHit.CallBlinkRoutine;
          
         }
         private bool CheckHitCooldown()//Check if getting hit is on cooldown

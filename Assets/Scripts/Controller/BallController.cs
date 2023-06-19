@@ -3,7 +3,6 @@ using ModestTree;
 using UnityEngine;
 using view;
 using Zenject;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 namespace controller
 {
@@ -24,7 +23,7 @@ namespace controller
         }
 
 
-      
+
         //method for creating ball used when creating new balls 
         public IBall CreateBall(Vector2 pos, Vector2 scale, Vector2 velocity)
         {
@@ -56,7 +55,7 @@ namespace controller
             ballPoolHandler.BallPoolRef.ReturnToPool((Ball)ball);
         }
 
-       
+
         public Vector2 RandomBallVelocity(float speed)// get a random velocity from a ball with speed overload
         {
             return GetRandomRightOrLeft() * speed;

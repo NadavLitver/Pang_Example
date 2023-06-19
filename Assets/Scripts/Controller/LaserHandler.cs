@@ -1,6 +1,6 @@
 using model;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 using Zenject;
 
 namespace controller
@@ -16,20 +16,20 @@ namespace controller
         [Inject] IGameManager gameManager;
         [Inject] IUpgradeHandler upgradeHandler;
         //events
-        public UnityEvent<ILaserHandler, IBall> OnHitBall { get; } = new UnityEvent<ILaserHandler, IBall>();  
+        public Action<ILaserHandler, IBall> OnHitBall { get; set; }
         private void Awake()
         {
-         
+
             //add listeners
-            OnHitBall.AddListener(ballController.SplitBall);
-            OnHitBall.AddListener(ReturnSelfToPool);
-            OnHitBall.AddListener(gameManager.UpdateScoreOnSplitBall);
+            OnHitBall += ballController.SplitBall;
+            OnHitBall += ReturnSelfToPool;
+            OnHitBall += gameManager.UpdateScoreOnSplitBall;
             // subscribe to upgrade handlers laser upgrade
-            upgradeHandler.OnLasersUpgraded.AddListener(UnSubscribeFromReturningToPool);
+            upgradeHandler.OnLasersUpgraded += UnSubscribeFromReturningToPool;
         }
         private void UnSubscribeFromReturningToPool()
         {
-            OnHitBall.RemoveListener(ReturnSelfToPool);
+            OnHitBall -= (ReturnSelfToPool);
         }
         public void ReturnSelfToPool()//returning too object pool by set game object off
         {

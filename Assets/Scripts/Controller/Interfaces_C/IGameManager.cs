@@ -1,10 +1,9 @@
-using UnityEngine;
-using UnityEngine.Events;
+using System;
 namespace controller
 {
     public interface IGameManager
     {
-        UnityEvent OnLose { get; }
+        Action OnLose { get; set; }
         float Score { get; }
         void CheckLose(int currentHealthPoints);
         void UpdateScoreOnSplitBall(ILaserHandler laser, IBall ball);

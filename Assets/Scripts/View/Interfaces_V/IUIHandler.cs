@@ -1,4 +1,4 @@
-using UnityEngine.Events;
+using System;
 
 namespace view
 {
@@ -11,7 +11,7 @@ namespace view
         void UpdateStartText();
         void EnableEndingPanel(bool isWon);
         void CallCountdownRoutine(int level);
-        public UnityEvent<bool> OnEndingPanel { get; }
+        public Action<bool> OnEndingPanel { get; set; }
     }
 
 }

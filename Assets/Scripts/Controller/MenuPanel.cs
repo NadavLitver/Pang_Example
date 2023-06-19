@@ -1,10 +1,8 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using view;
 using Zenject;
-using Zenject.Asteroids;
 
 namespace controller
 {
@@ -40,9 +38,9 @@ namespace controller
 
             pauseButton.onClick.AddListener(TogglePauseMenu);
             startButton.onClick.AddListener(TogglePauseMenu);
-            inputHandler.OnTapScreen.AddListener(CheckToUnpause);
+            inputHandler.OnTapScreen += CheckToUnpause;
             resetButton.onClick.AddListener(ResetScene);
-            iUIhandler.OnEndingPanel.AddListener(TurnOnOffResetButton);
+            iUIhandler.OnEndingPanel += TurnOnOffResetButton;
 
             TogglePauseMenu();
         }
@@ -70,7 +68,7 @@ namespace controller
                 {
                     TurnOnOffResetButton(true);
                 }
-              
+
 
             }
             else
@@ -82,14 +80,14 @@ namespace controller
                 {
                     iUIhandler.UpdateStartText();
                     didResumeOnce = true;
-                    
+
                 }
 
 
             }
         }
-        public void TurnOnOffResetButton(bool isOn)=> resetButton.gameObject.SetActive(isOn);//made this method just for the event
-       
+        public void TurnOnOffResetButton(bool isOn) => resetButton.gameObject.SetActive(isOn);//made this method just for the event
+
         public void ResetScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//get current build index and load scene

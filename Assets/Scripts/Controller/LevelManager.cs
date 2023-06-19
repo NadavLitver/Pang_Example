@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using model;
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 using view;
 using Zenject;
 
@@ -21,8 +20,8 @@ namespace controller
         private float delayBetweenLevels;
         public int LevelCount { get; private set; }
         //events
-        public UnityEvent<int> OnAdvanceLevel { get; } = new UnityEvent<int>();
-        public UnityEvent<bool> OnEnd { get; } = new UnityEvent<bool>();
+        public Action<int> OnAdvanceLevel { get; set; }
+        public Action<bool> OnEnd { get; set; }
         [Inject]
         public LevelManager(IBallController _ballsController, IUpgradeHandler _upgradeHandler, ISoundManager _soundManager, LevelConfigList _levels)
         {

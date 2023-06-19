@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using model;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using view;
 using Zenject;
@@ -23,8 +23,8 @@ namespace controller
         private readonly UpgradesConfig upgradesData;
         private bool didChooseUpgrade;
         //events
-        public UnityEvent<int> OnHPUpgraded { get;} = new UnityEvent<int>();
-        public UnityEvent OnLasersUpgraded { get; } = new UnityEvent();
+        public Action<int> OnHPUpgraded { get; set; }
+        public Action OnLasersUpgraded { get; set; }
 
 
         [Inject]
@@ -56,7 +56,7 @@ namespace controller
             laserUpgradeButton.onClick.AddListener(UnSubscribeFromReturningLasers);
             speedButton.onClick.AddListener(UpgradeSpeed);
             healthButton.onClick.AddListener(UpgradeHP);
-            OnHPUpgraded.AddListener(playerHPHandler.AddHp);
+            OnHPUpgraded += playerHPHandler.AddHp;
         }
 
         private void UnSubscribeFromReturningLasers()

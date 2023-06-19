@@ -1,14 +1,14 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
-using UnityEngine.Events;
+using System;
 
 namespace controller
 {
     public interface IUpgradeHandler
     {
         UniTask UpgradeRoutine();
-        UnityEvent<int> OnHPUpgraded { get; }
-        public UnityEvent OnLasersUpgraded { get;  }
+        Action<int> OnHPUpgraded { get; set; }
+        Action OnLasersUpgraded { get; set; }
 
     }
 }

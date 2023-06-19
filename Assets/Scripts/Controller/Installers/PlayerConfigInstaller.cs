@@ -11,6 +11,6 @@ public class PlayerConfigInstaller : ScriptableObjectInstaller<PlayerConfigInsta
     /// </summary>
     public override void InstallBindings()
     {
-        Container.Bind<PlayerConfig>().FromInstance(playerData);
+        Container.Bind<IPlayerConfig>().To<PlayerConfig>().FromInstance(playerData);
     }
 }

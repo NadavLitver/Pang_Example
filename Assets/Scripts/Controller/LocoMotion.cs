@@ -10,11 +10,11 @@ namespace controller
         //controllers
         [Inject] IInputHandler inputHandler;
         //data
-        [Inject] PlayerConfig playerData;
+        [Inject] IPlayerConfig playerData;
         [Inject] Transform robot;
         private float dynamicSpeed;//didnt want to use SO speed because it changes during gameplay but doesnt save we resetting scene
 
-        public LocoMotion(IInputHandler inputHandler, PlayerConfig playerData, Transform robot)
+        public LocoMotion(IInputHandler inputHandler, IPlayerConfig playerData, Transform robot)
         {
             this.inputHandler = inputHandler;
             this.playerData = playerData;

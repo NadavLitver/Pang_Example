@@ -1,12 +1,11 @@
-using UnityEngine.Events;
-
+using System;
 namespace controller
 {
     public interface ILevelManager
     {
         int LevelCount { get; }
-        UnityEvent<bool> OnEnd { get; }
+        Action<bool> OnEnd { get; set; }
 
-        UnityEvent<int> OnAdvanceLevel { get; }
+        Action<int> OnAdvanceLevel { get; set; }
     }
 }
