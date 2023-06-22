@@ -10,11 +10,11 @@ namespace controller
     public class ShootController : IShootController// shootController handles all logic that involves shooting the lasers
     {
         //controller elements
-        private readonly IInputHandler inputHandler;
         private readonly IRobotAnimatorUpdater robotAnimatorUpdater;
 
         //view elements
         private readonly ISoundManager soundManager;
+        private readonly IInputHandler inputHandler;
 
         //data elements
         private readonly IPlayerConfig playerData;

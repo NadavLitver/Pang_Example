@@ -1,5 +1,6 @@
 using UnityEngine;
 using model;
+using view;
 using Zenject;
 
 namespace controller
@@ -7,7 +8,7 @@ namespace controller
 
     public class LocoMotion : ILocomotion, ITickable//handles basic movement for the robot and collisions
     {
-        //controllers
+        //view
         [Inject] IInputHandler inputHandler;
         //data
         [Inject] IPlayerConfig playerData;

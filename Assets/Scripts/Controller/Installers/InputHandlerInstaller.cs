@@ -1,5 +1,6 @@
 using UnityEngine;
 using Zenject;
+using view;
 namespace controller
 {
     [CreateAssetMenu(fileName = "InputHandlerInstaller", menuName = "Installers/InputHandlerInstaller", order = 6)]

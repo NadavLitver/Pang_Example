@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace controller
+namespace view
 {
 
     public class InputHandler : IInputHandler, ITickable// stores the information about player horizontal movement, if there was more complex movement such as jumping the input would also be here

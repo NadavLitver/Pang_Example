@@ -1,12 +1,14 @@
 using UnityEngine;
 using Zenject;
+using view;
 
 namespace controller
 {
     public class RobotAnimatorUpdater : IRobotAnimatorUpdater,ITickable// animator updater updates the robot animator and sprite renderer based on the controller input handler
     {
-        //controller
+        //view
         [Inject] private readonly IInputHandler inputHandler;
+        //controller
         [Inject] private readonly IGameManager gameManager;
 
         //Refrences to components

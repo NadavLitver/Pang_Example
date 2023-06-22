@@ -17,6 +17,7 @@ namespace controller
         private bool didResumeOnce;
         //controllers
         private readonly IUIHandler iUIhandler;
+        //view
         private readonly IInputHandler inputHandler;
 
 

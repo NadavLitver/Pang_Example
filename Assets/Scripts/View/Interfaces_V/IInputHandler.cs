@@ -1,5 +1,5 @@
 using System;
-namespace controller
+namespace view
 {
     public interface IInputHandler
     {

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: IndividualBallConfig_StandardTiny
   m_EditorClassIdentifier: 
   speed: 3
-  ChildSpeed: 3
-  size: 3
+  splitAmount: 0
+  size: 0.35
+  childData: {fileID: 0}
