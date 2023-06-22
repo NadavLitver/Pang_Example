@@ -7,7 +7,7 @@ using Zenject;
 namespace view
 {
 
-    public class InputHandler : IInputHandler, ITickable// stores the information about player horizontal movement, if there was more complex movement such as jumping the input would also be here
+    public class InputHandler : IInputHandler, ITickable// Handles Input Detection
     {
         private int horInput;
         public bool isLeftPressed;
